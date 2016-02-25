@@ -20,19 +20,19 @@ import java.sql.SQLException;
  */
 public class BaseDatos {
     private ArrayList<Regata> BD;
+    private Connection cn;
     
     public BaseDatos(){
         ///////
     }
     
     public void initBD(){
-        BD = new ArrayList<Regata>();
+        BD = new ArrayList<>();
         ConectaBD db = new ConectaBD();
-        
+        System.out.println("Conectados");
         String sql = "select * from racestatus";
         try {
-            Connection cn = db.getConnection();
-            
+            cn = db.getConnection();
             PreparedStatement st1 = cn.prepareStatement(sql);
             ResultSet rs = st1.executeQuery();
             while (rs.next()) {
@@ -53,6 +53,20 @@ public class BaseDatos {
     
     public ArrayList<Regata> getBD(){
         return BD;
+    }
+    
+    public void Update(int id, String col, Object value){
+        try {
+            String sql = "UPDATE racestatus " + "SET " + col + " = '" + value + "' WHERE id =" + id + ";";
+            System.out.println(sql);
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        
     }
     
 }
