@@ -22,7 +22,7 @@ public class BaseDatos {
     private ArrayList<Regata> BD;
     
     public BaseDatos(){
-        
+        ///////
     }
     
     public void initBD(){
