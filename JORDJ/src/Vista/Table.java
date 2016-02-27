@@ -19,7 +19,7 @@ import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.event.*;
+
 import java.text.SimpleDateFormat;
 import javax.swing.Timer;
 import java.awt.event.*;
@@ -42,7 +42,6 @@ public final class Table extends JPanel{
     { 
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
         c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
-        
         return c; 
     } 
 
@@ -60,6 +59,7 @@ public final class Table extends JPanel{
         return new GroupableTableHeader(columnModel);
       };
     };
+    
     MyRenderer r = new MyRenderer();
     r.setHorizontalAlignment(JLabel.CENTER);
     table.setDefaultRenderer(Object.class, r);
@@ -108,22 +108,26 @@ public final class Table extends JPanel{
     table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
     
 }
+    
     public boolean correctValue(int c, String val){
-        switch(c){               
-            case 3:
-            case 4:
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                    try {
+        if(!val.equals("")){
+            switch(c){               
+                case 3:
+                case 4:
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
 
-                            Date date = formatter.parse(val);
-                            return true;
+                                Date date = formatter.parse(val);
+                                return true;
 
-                    } catch (Exception e) {
-                           return false;
-                    }
-            default:
-            return true;
+                        } catch (Exception e) {
+                               return false;
+                        }
+                default:
+                return true;
+            }
         }
+        else return true;
     }
     
     
@@ -171,7 +175,7 @@ public final class Table extends JPanel{
         }
     }    
     
-    private static void createAndShowGUI() {
+    public static void createAndShowGUI() {
 
     //Create and set up the window.
     JFrame frame = new JFrame("Race Status");
@@ -182,13 +186,12 @@ public final class Table extends JPanel{
     Table newContentPane = new Table();
     newContentPane.setOpaque(true); //content panes must be opaque
     frame.setContentPane(newContentPane);
-
     //Display the window.
     frame.pack();
     frame.setVisible(true);
   }
-   
     
+   
 
   public static void main(String[] args) {
     //Schedule a job for the event-dispatching thread:
