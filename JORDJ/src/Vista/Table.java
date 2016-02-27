@@ -31,10 +31,10 @@ import java.awt.Font;
  */
 public final class Table extends JPanel{
     
-    Timer displayTimer;
-    TableModelListener tml;
-        
-    public String[] COLUMNA = {"id", "Class", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committe", "RaceStatus", "Signal", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS/DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","Wind Dir75", "WindSpeed75","WindDir100", "WindSpeed100"};
+    Timer displayTimer;        
+    private String[] COLUMNA = {"id", "Class", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committe", "RaceStatus", "Signal", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS/DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","Wind Dir75", "WindSpeed75","WindDir100", "WindSpeed100"};
+    private String [] titulos ={"Id", "Class", "Race", "Scheduled Date", "Real Date", "Entries", "Area", "Committe", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
+    
     
     public class MyRenderer extends DefaultTableCellRenderer { 
         @Override
@@ -55,7 +55,11 @@ public final class Table extends JPanel{
     public Table() {
     super(new GridLayout(1, 0));
     DataTable();
-    JTable table = new JTable(modelo);
+    JTable table = new JTable(modelo){
+      protected JTableHeader createDefaultTableHeader() {
+        return new GroupableTableHeader(columnModel);
+      };
+    };
     MyRenderer r = new MyRenderer();
     r.setHorizontalAlignment(JLabel.CENTER);
     table.setDefaultRenderer(Object.class, r);
@@ -139,7 +143,7 @@ public final class Table extends JPanel{
     }
     
     public final void DataTable(){
-        String [] titulos ={"Id", "Class", "Race", "Scheduled Date", "Real Date", "Entries", "Area", "Committe", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
+        //String [] titulos ={"Id", "Class", "Race", "Scheduled Date", "Real Date", "Entries", "Area", "Committe", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
         modelo = new DefaultTableModel(null, titulos);
         
         String [] fila = new String[titulos.length];
