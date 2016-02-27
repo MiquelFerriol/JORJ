@@ -27,7 +27,7 @@ import javax.swing.table.*;
  *  or more of the other columns must decrease. Because of this the resize mode
  *  of RESIZE_ALL_COLUMNS will work the best.
  */
-public class TableColumnAdjuster implements PropertyChangeListener, TableModelListener
+public final class TableColumnAdjuster implements PropertyChangeListener, TableModelListener
 {
 	private JTable table;
 	private int spacing;
@@ -35,7 +35,7 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
 	private boolean isColumnDataIncluded;
 	private boolean isOnlyAdjustLarger;
 	private boolean isDynamicAdjustment;
-	private Map<TableColumn, Integer> columnSizes = new HashMap<TableColumn, Integer>();
+	private Map<TableColumn, Integer> columnSizes = new HashMap<>();
 
 	/*
 	 *  Specify the table and use default spacing

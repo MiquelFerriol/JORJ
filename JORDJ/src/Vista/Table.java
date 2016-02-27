@@ -5,34 +5,21 @@
  */
 package Vista;
 
-import BaseDatos.BaseDatos;
-import Estructuras.Regata;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.util.*;
-import javax.swing.table.DefaultTableModel;
 import BaseDatos.BaseDatos;
 import Estructuras.Regata;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.*;
 import java.awt.Component;
-import javax.swing.SwingConstants;
 import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.*;
-import javax.swing.table.TableModel;
 import java.text.SimpleDateFormat;
 import javax.swing.Timer;
 import java.awt.event.*;
@@ -42,7 +29,7 @@ import java.awt.Font;
  *
  * @author Miquel Ferriol
  */
-public class Table extends JPanel{
+public final class Table extends JPanel{
     
     Timer displayTimer;
     TableModelListener tml;
@@ -50,6 +37,7 @@ public class Table extends JPanel{
     public String[] COLUMNA = {"id", "Class", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committe", "RaceStatus", "Signal", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS/DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","Wind Dir75", "WindSpeed75","WindDir100", "WindSpeed100"};
     
     public class MyRenderer extends DefaultTableCellRenderer { 
+        @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
@@ -77,19 +65,19 @@ public class Table extends JPanel{
     
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     
-    ActionListener listener = new ActionListener(){
-        public void actionPerformed(ActionEvent event){
-          printTable();
-          displayTimer.restart();
-        }
+    ActionListener listener = (ActionEvent event) -> {
+        printTable();
+        displayTimer.restart();
     };
     
     table.getDefaultEditor(String.class).addCellEditorListener(
                 new CellEditorListener() {
+                    @Override
                     public void editingCanceled(ChangeEvent e) {
                         System.out.println("editingCanceled");
                     }
 
+                    @Override
                     public void editingStopped(ChangeEvent e) {
                         System.out.println("editingStopped: apply additional action");
                         System.out.println(table.getSelectedColumn());
@@ -100,7 +88,7 @@ public class Table extends JPanel{
                         if(correctValue(column, data.toString())){
                                 BD.Update(row+1, COLUMNA[column], data);
                             }
-                        else if (data.toString() != ""){
+                        else if (!"".equals(data.toString())){
                             modelo.setValueAt("", row, column);
                         }
                     }
@@ -112,6 +100,9 @@ public class Table extends JPanel{
     tca.adjustColumns();
     
     table.setRowHeight(30);
+    
+    table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
+    
 }
     public boolean correctValue(int c, String val){
         switch(c){               
@@ -198,10 +189,8 @@ public class Table extends JPanel{
   public static void main(String[] args) {
     //Schedule a job for the event-dispatching thread:
     //creating and showing this application's GUI.
-    javax.swing.SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
+    javax.swing.SwingUtilities.invokeLater(() -> {
         createAndShowGUI();
-        }
     });
   }
     
