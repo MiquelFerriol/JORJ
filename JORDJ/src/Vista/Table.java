@@ -33,12 +33,19 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
+import java.text.SimpleDateFormat;
+import javax.swing.Timer;
+import java.awt.event.*;
 
 /**
  *
  * @author Miquel Ferriol
  */
 public class Table extends JPanel{
+    
+    Timer displayTimer;
+    TableModelListener tml;
+        
     public String[] COLUMNA = {"id", "Class", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committe", "RaceStatus", "Signal", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS/DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","Wind Dir75", "WindSpeed75","WindDir100", "WindSpeed100"};
     
     public class MyRenderer extends DefaultTableCellRenderer { 
@@ -54,32 +61,13 @@ public class Table extends JPanel{
     BaseDatos BD;
     
     
-    public class SimpleTableDemo  implements TableModelListener {
-
-    public SimpleTableDemo(JTable table) {
-        table.getModel().addTableModelListener(this);
-    }
-
-    public void tableChanged(TableModelEvent e) {
-        int row = e.getFirstRow();
-        int column = e.getColumn();
-        TableModel model = (TableModel)e.getSource();
-        String columnName = model.getColumnName(column);
-        Object data = model.getValueAt(row, column);
-        
-        System.out.println("id: " + (row+1) + " columna: " + COLUMNA[column] + " " + (column+1) + " " + data);
-        BD.Update(row+1, COLUMNA[column], data);
-    }
-}
     public Table() {
     super(new GridLayout(1, 0));
-    cargarCliente();
+    DataTable();
     JTable table = new JTable(modelo);
     MyRenderer r = new MyRenderer();
     r.setHorizontalAlignment(JLabel.CENTER);
     table.setDefaultRenderer(Object.class, r);
-
-    SimpleTableDemo p = new SimpleTableDemo(table);
     //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 
     //Create the scroll pane and add the table to it.
@@ -87,32 +75,100 @@ public class Table extends JPanel{
 
     //Add the scroll pane to this panel.
     add(scrollPane);
+    ActionListener listener = new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+          printTable();
+          displayTimer.restart();
+        }
+    };
+    
+    table.getDefaultEditor(String.class).addCellEditorListener(
+                new CellEditorListener() {
+                    public void editingCanceled(ChangeEvent e) {
+                        System.out.println("editingCanceled");
+                    }
+
+                    public void editingStopped(ChangeEvent e) {
+                        System.out.println("editingStopped: apply additional action");
+                        System.out.println(table.getSelectedColumn());
+                        int column = table.getSelectedColumn();
+                        int row = table.getSelectedRow();
+                        Object data = modelo.getValueAt(row, column);
+
+                        if(correctValue(column, data.toString())){
+                                BD.Update(row+1, COLUMNA[column], data);
+                            }
+                        else if (data.toString() != ""){
+                            modelo.setValueAt("", row, column);
+                        }
+                    }
+                });
+    displayTimer = new Timer(4000, listener);
+    displayTimer.start();
     
 }
+    public boolean correctValue(int c, String val){
+        switch(c){               
+            case 3:
+            case 4:
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    try {
+
+                            Date date = formatter.parse(val);
+                            return true;
+
+                    } catch (Exception e) {
+                           return false;
+                    }
+            default:
+            return true;
+        }
+    }
     
-    public final void cargarCliente(){
+    
+    public void printTable(){
+        BD.initBD();
+        for(int i = 0; i < BD.getBD().size(); ++i ){
+            Regata r = BD.getBD().get(i);
+            modelo.setValueAt(r.getId(),i,0);
+            modelo.setValueAt(r.getClas(),i,1);
+            modelo.setValueAt(r.getRace(),i,2);
+            modelo.setValueAt(r.getScheduledDate(),i,3);
+            modelo.setValueAt(r.getRealDate(),i,4);
+            modelo.setValueAt(r.getEntries(),i,5);
+            modelo.setValueAt(r.getArea(),i,6);
+        }
+        CheckGrid();
+    }
+    
+    public final void DataTable(){
         String [] titulos ={"Id", "Class", "Race", "Scheduled Date", "Real Date", "Entries", "Area", "Committe", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
         modelo = new DefaultTableModel(null, titulos);
         
         String [] fila = new String[titulos.length];
         BD = new BaseDatos();
         BD.initBD();
-        
         int size = BD.getBD().size();
         
         for(int i = 0; i < size; ++i){
-            Regata r = BD.getBD().get(i);
-            fila[0] = ((Integer)r.getId()).toString();
-            fila[1] = r.getClas();
-            fila[2] = ((Integer)r.getRace()).toString();
-            fila[3] = r.getScheduledDate().toString();
-            fila[4] = r.getRealDate().toString();
-            fila[5] = ((Integer)r.getEntries()).toString();
-            fila[6] = r.getArea();
             modelo.addRow(fila);
-            System.out.println(r.getId() + " " + r.getClas() + " " + r.getRace() + " " + r.getScheduledDate() + " " + r.getRealDate() + " " + r.getEntries() + " " + r.getArea());
+            //System.out.println(r.getId() + " " + r.getClas() + " " + r.getRace() + " " + r.getScheduledDate() + " " + r.getRealDate() + " " + r.getEntries() + " " + r.getArea());
         }
+        printTable();
+        //CheckGrid();
 }
+    public void CheckGrid(){
+        int rows = modelo.getRowCount();
+        int col = modelo.getColumnCount();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < col; j++) {
+                Object ob = modelo.getValueAt(i, j);
+                if (ob  == null || ob.toString().equals("-1") || ob.toString().isEmpty()) {
+                    modelo.setValueAt("", i, j);
+                }
+            }
+        }
+    }    
     
     private static void createAndShowGUI() {
 
@@ -131,6 +187,7 @@ public class Table extends JPanel{
     frame.setVisible(true);
   }
    
+    
 
   public static void main(String[] args) {
     //Schedule a job for the event-dispatching thread:
@@ -138,7 +195,7 @@ public class Table extends JPanel{
     javax.swing.SwingUtilities.invokeLater(new Runnable() {
       public void run() {
         createAndShowGUI();
-      }
+        }
     });
   }
     

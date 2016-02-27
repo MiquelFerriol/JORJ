@@ -21,14 +21,14 @@ import java.sql.SQLException;
 public class BaseDatos {
     private ArrayList<Regata> BD;
     private Connection cn;
+    ConectaBD db;
     
     public BaseDatos(){
-        ///////
+        db = new ConectaBD();
     }
     
     public void initBD(){
         BD = new ArrayList<>();
-        ConectaBD db = new ConectaBD();
         System.out.println("Conectados");
         String sql = "select * from racestatus";
         try {
@@ -40,8 +40,8 @@ public class BaseDatos {
                 r.setId(rs.getInt(1));
                 r.setClas(rs.getString(2));
                 r.setRace(rs.getInt(3));
-                r.setScheduledDate(rs.getDate(4));
-                r.setRealDate(rs.getDate(5));
+                r.setScheduledDate(rs.getString(4));
+                r.setRealDate(rs.getString(5));
                 r.setEntries(rs.getInt(6));
                 r.setArea(rs.getString(7));
                 BD.add(r);
@@ -63,6 +63,16 @@ public class BaseDatos {
             st.executeUpdate();
             
         } catch (SQLException e) {
+            try {
+            String sql = "UPDATE racestatus " + "SET " + col + " = -1 WHERE id =" + id + ";";
+            System.out.println(sql);
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.executeUpdate();
+            
+            } catch (SQLException q) {
+            
+                System.out.println("Error: " + q.getMessage());
+            }
             System.out.println("Error: " + e.getMessage());
         }
         

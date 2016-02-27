@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -25,6 +27,7 @@ public class JORDJ {
     public static void main(String[] args) {
         BaseDatos BD = new BaseDatos();
         BD.initBD();
+        
         int size = BD.getBD().size();
         for(int i = 0; i < size; ++i){
         Regata r = BD.getBD().get(i);

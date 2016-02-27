@@ -5,6 +5,7 @@
  */
 package Estructuras;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,8 +16,8 @@ public class Regata {
     private int id;
     private String Class;
     private int Race;
-    private Date ScheduledDate;
-    private Date RealDate;
+    private String ScheduledDate;
+    private String RealDate;
     private int Entries;
     private String Area;
 
@@ -68,28 +69,29 @@ public class Regata {
     /**
      * @return the ScheduledDate
      */
-    public Date getScheduledDate() {
+    public String getScheduledDate() {
         return ScheduledDate;
     }
 
     /**
      * @param ScheduledDate the ScheduledDate to set
      */
-    public void setScheduledDate(Date ScheduledDate) {
+    public void setScheduledDate(String ScheduledDate) {
         this.ScheduledDate = ScheduledDate;
     }
 
     /**
      * @return the RealDate
      */
-    public Date getRealDate() {
+    public String getRealDate() {
         return RealDate;
     }
 
     /**
      * @param RealDate the RealDate to set
      */
-    public void setRealDate(Date RealDate) {
+    public void setRealDate(String RealDate) {
+        
         this.RealDate = RealDate;
     }
 
