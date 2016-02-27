@@ -36,6 +36,7 @@ import javax.swing.table.TableModel;
 import java.text.SimpleDateFormat;
 import javax.swing.Timer;
 import java.awt.event.*;
+import java.awt.Font;
 
 /**
  *
@@ -52,6 +53,8 @@ public class Table extends JPanel{
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
+        c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
+        
         return c; 
     } 
 
@@ -69,12 +72,11 @@ public class Table extends JPanel{
     r.setHorizontalAlignment(JLabel.CENTER);
     table.setDefaultRenderer(Object.class, r);
     //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-
-    //Create the scroll pane and add the table to it.
-    JScrollPane scrollPane = new JScrollPane(table);
-
     //Add the scroll pane to this panel.
-    add(scrollPane);
+    add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+    
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    
     ActionListener listener = new ActionListener(){
         public void actionPerformed(ActionEvent event){
           printTable();
@@ -106,6 +108,10 @@ public class Table extends JPanel{
     displayTimer = new Timer(4000, listener);
     displayTimer.start();
     
+    TableColumnAdjuster tca = new TableColumnAdjuster(table);
+    tca.adjustColumns();
+    
+    table.setRowHeight(30);
 }
     public boolean correctValue(int c, String val){
         switch(c){               

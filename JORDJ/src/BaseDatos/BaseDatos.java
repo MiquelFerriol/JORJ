@@ -46,6 +46,7 @@ public class BaseDatos {
                 r.setArea(rs.getString(7));
                 BD.add(r);
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -56,18 +57,20 @@ public class BaseDatos {
     }
     
     public void Update(int id, String col, Object value){
+        cn = db.getConnection();
         try {
-            String sql = "UPDATE racestatus " + "SET " + col + " = '" + value + "' WHERE id =" + id + ";";
+            String sql = "UPDATE racestatus " + "SET " + col + " = '" + value + "' WHERE id = " + id + ";";
             System.out.println(sql);
             PreparedStatement st = cn.prepareStatement(sql);
             st.executeUpdate();
-            
+            cn.close();
         } catch (SQLException e) {
             try {
-            String sql = "UPDATE racestatus " + "SET " + col + " = -1 WHERE id =" + id + ";";
+            String sql = "UPDATE racestatus " + "SET " + col + " = -1 WHERE id = " + id + ";";
             System.out.println(sql);
             PreparedStatement st = cn.prepareStatement(sql);
             st.executeUpdate();
+            cn.close();
             
             } catch (SQLException q) {
             
