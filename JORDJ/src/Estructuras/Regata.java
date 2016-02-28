@@ -20,6 +20,37 @@ public class Regata {
     private String RealDate;
     private int Entries;
     private String Area;
+    private String Committee;
+    private String RaceStatus;
+    private String Signal;
+    private String Time;
+    private String ScheduledTime;
+    private String StartingTime;
+    private String BoatsStarted;
+    private String PreparatorySignal;
+    private String OCS;
+    private String AP;
+    private String GR;
+    private String FinishTime;
+    private String RaceTime;
+    private String BoatsFinished;
+    private String LastSignal;
+    private String LastSignalTime;
+    private String Results;
+    private String Course;
+    private String Distance1stLeg;
+    private String Bearing1stLeg;
+    private String LegChanges;
+    private String WindDir;
+    private String WindSpeed;
+    private String WindDir25;
+    private String WindSpeed25;
+    private String WindDir50;
+    private String WindSpeed50;
+    private String WindDir75;
+    private String WindSpeed75;
+    private String WindDir100;
+    private String WindSpeed100;
 
     public Regata(){
     }
