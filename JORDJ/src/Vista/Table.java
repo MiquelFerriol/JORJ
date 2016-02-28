@@ -133,10 +133,10 @@ public final class Table extends JPanel{
                                 Date date = timerformat.parse(val);
                                 return true;
 
+                        
                         } catch (Exception e) {
                                return false;
                         }
-                        
                 case 12:
                 case 18:
                 case 19:
@@ -231,9 +231,14 @@ public final class Table extends JPanel{
                 }
                 
             }
-            if(((Integer)modelo.getValueAt(i, 12) != -1) && ((Integer)modelo.getValueAt(i, 18) != -1) ){
-                
-                modelo.setValueAt(i, i, 19);
+            if((modelo.getValueAt(i, 12) != "-1") && (modelo.getValueAt(i, 18) != "-1") ){
+                SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm:ss");
+                try{
+                    Date date1 = timerformat.parse(modelo.getValueAt(i, 12).toString());
+                    Date date2 = timerformat.parse(modelo.getValueAt(i, 18).toString());
+                    modelo.setValueAt(date1.getTime()-date2.getTime(), i, 19);
+                } catch (Exception e) {
+                }
             }
         }
     }    
