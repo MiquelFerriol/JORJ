@@ -45,6 +45,7 @@ public class BaseDatos {
                 r.setEntries(rs.getInt(6));
                 r.setArea(rs.getString(7));
                 r.setCommittee(rs.getString(8));
+                r.setRaceStatus(rs.getString(9));
                 BD.add(r);
             }
             cn.close();
