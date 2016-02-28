@@ -226,7 +226,7 @@ public final class Table extends JPanel{
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < col; j++) {
                 Object ob = modelo.getValueAt(i, j);
-                System.out.println(ob);
+                //System.out.println(ob);
                 if (ob  == null ) {
                        if(j == 12 && i == 0) System.out.println("BORRAMOS" + (ob  == null));
                 }
