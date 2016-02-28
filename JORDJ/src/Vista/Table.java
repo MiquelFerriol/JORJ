@@ -182,24 +182,24 @@ public final class Table extends JPanel{
             modelo.setValueAt(r.getFinishTime(),i,18);
             modelo.setValueAt(r.getRaceTime(),i,19);
             modelo.setValueAt(r.getBoatsFinished(),i,20);
-            modelo.setValueAt(r.getCourse(),i,21);
-            modelo.setValueAt(r.getDistance1stLeg(),i,22);
-            modelo.setValueAt(r.getBearing1stLeg(),i,23);
-            modelo.setValueAt(r.getLegChanges(),i,24);
-            modelo.setValueAt(r.getWindDir(),i,25);
-            modelo.setValueAt(r.getWindSpeed(),i,26);
-            modelo.setValueAt(r.getWindDir25(),i,27);
-            modelo.setValueAt(r.getWindSpeed25(),i,28);
-            modelo.setValueAt(r.getWindDir50(),i,29);
-            modelo.setValueAt(r.getWindSpeed50(),i,30);
-            modelo.setValueAt(r.getWindDir75(),i,31);
-            modelo.setValueAt(r.getWindSpeed75(),i,32);
-            modelo.setValueAt(r.getWindDir100(),i,33);
-            modelo.setValueAt(r.getWindSpeed100(),i,10);
-            
-            
-            
-            
+            modelo.setValueAt(r.getLastSignal(), i, 21);
+            modelo.setValueAt(r.getLastSignalTime(), i, 22);
+            modelo.setValueAt(r.getResults(), i, 23);
+            modelo.setValueAt(r.getCourse(),i,24);
+            modelo.setValueAt(r.getDistance1stLeg(),i,25);
+            modelo.setValueAt(r.getBearing1stLeg(),i,26);
+            modelo.setValueAt(r.getLegChanges(),i,27);
+            modelo.setValueAt(r.getWindDir(),i,28);
+            modelo.setValueAt(r.getWindSpeed(),i,29);
+            modelo.setValueAt(r.getWindDir25(),i,30);
+            modelo.setValueAt(r.getWindSpeed25(),i,31);
+            modelo.setValueAt(r.getWindDir50(),i,32);
+            modelo.setValueAt(r.getWindSpeed50(),i,33);
+            modelo.setValueAt(r.getWindDir75(),i,34);
+            modelo.setValueAt(r.getWindSpeed75(),i,35);
+            modelo.setValueAt(r.getWindDir100(),i,36);
+            modelo.setValueAt(r.getWindSpeed100(),i,37);
+                      
         }
         CheckGrid();
     }
@@ -229,6 +229,11 @@ public final class Table extends JPanel{
                 if (ob  == null || ob.toString().equals("-1") || ob.toString().isEmpty()) {
                     modelo.setValueAt("", i, j);
                 }
+                
+            }
+            if(((Integer)modelo.getValueAt(i, 12) != -1) && ((Integer)modelo.getValueAt(i, 18) != -1) ){
+                
+                modelo.setValueAt(i, i, 19);
             }
         }
     }    
