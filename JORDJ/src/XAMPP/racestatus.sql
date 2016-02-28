@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-02-2016 a las 18:14:48
+-- Tiempo de generación: 28-02-2016 a las 20:22:09
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.2
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `racestatus`
+-- Base de datos: `olimp`
 --
 
 -- --------------------------------------------------------
@@ -30,8 +30,8 @@ CREATE TABLE `racestatus` (
   `id` int(11) NOT NULL,
   `Class` varchar(15) DEFAULT NULL,
   `Race` int(11) DEFAULT NULL,
-  `ScheduledDate` date DEFAULT NULL,
-  `RealDate` date DEFAULT NULL,
+  `ScheduledDate` varchar(40) DEFAULT NULL,
+  `RealDate` varchar(40) DEFAULT NULL,
   `Entries` int(11) DEFAULT NULL,
   `Area` varchar(15) DEFAULT NULL,
   `Committee` varchar(15) DEFAULT NULL,
@@ -72,9 +72,9 @@ CREATE TABLE `racestatus` (
 --
 
 INSERT INTO `racestatus` (`id`, `Class`, `Race`, `ScheduledDate`, `RealDate`, `Entries`, `Area`, `Committee`, `RaceStatus`, `Signal`, `Time`, `ScheduledTime`, `StartingTime`, `BoatsStarted`, `PreparatorySignal`, `OCS/DSQ`, `AP`, `GR`, `FinishTime`, `RaceTime`, `BoatsFinished`, `LastSignal`, `LastSignalTime`, `Results`, `Course`, `Distance1stLeg`, `Bearing1stLeg`, `LegChanges`, `WindDir`, `WindSpeed`, `WindDir25`, `WindSpeed25`, `WindDir50`, `WindSpeed50`, `WindDir75`, `WindSpeed75`, `WindDir100`, `WindSpeed100`) VALUES
-(1, 'RS:X N', 1, '2016-02-17', '2016-02-11', 5, 'Pao', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'RS:X M', 8, '2016-02-05', '2016-02-11', 5, 'Aero', NULL, NULL, NULL, '08:24:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'RS:X M', 2, '2016-02-22', '2016-02-06', 5, 'Copa Cabana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'QWEFQW', 666, '06/12/1995', '06/12/1995', 2, 'Canto', NULL, '', NULL, '-00:00:01', '-00:00:01', '-00:00:01', -1, '', NULL, -1, -1, '-00:00:01', '-00:00:01', -1, '', '-00:00:01', '', '', -1, -1, '', -1, -1, -1, -1, -1, -1, NULL, -1, -1, -1),
+(2, 'QWEFQ', 55, '06/12/1997', '06/12/1995', 2, 'Aero', NULL, '', NULL, '-00:00:01', '-00:00:01', '-00:00:01', -1, '', NULL, -1, -1, '-00:00:01', '-00:00:01', -1, '', '-00:00:01', '', '', -1, -1, '', -1, -1, -1, -1, -1, -1, NULL, -1, -1, -1),
+(3, 'QWEFQ', 5, '', '06/12/1995', -1, 'hola', NULL, '', NULL, '-00:00:01', '-00:00:01', '-00:00:01', -1, '', NULL, -1, -1, '-00:00:01', '-00:00:01', -1, '', '-00:00:01', '', '', -1, -1, '', -1, -1, -1, -1, -1, -1, NULL, -1, -1, -1);
 
 --
 -- Índices para tablas volcadas
