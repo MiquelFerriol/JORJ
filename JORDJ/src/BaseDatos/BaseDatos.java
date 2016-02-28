@@ -44,6 +44,7 @@ public class BaseDatos {
                 r.setRealDate(rs.getString(5));
                 r.setEntries(rs.getInt(6));
                 r.setArea(rs.getString(7));
+                r.setCommittee(rs.getString(8));
                 BD.add(r);
             }
             cn.close();

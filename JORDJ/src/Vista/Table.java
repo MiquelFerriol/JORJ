@@ -130,12 +130,13 @@ public final class Table extends JPanel{
                     SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm");
                         try {
 
-                                timerformat.parse(val).getTime();
+                                Date date = timerformat.parse(val);
                                 return true;
 
                         } catch (Exception e) {
                                return false;
                         }
+                        
                 case 12:
                 case 18:
                 case 19:
