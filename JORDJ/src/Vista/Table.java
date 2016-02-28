@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.Timer;
 import java.awt.event.*;
 import java.awt.Font;
+import java.sql.Time;
 
 /**
  *
@@ -118,6 +119,30 @@ public final class Table extends JPanel{
                         try {
 
                                 Date date = formatter.parse(val);
+                                return true;
+
+                        } catch (Exception e) {
+                               return false;
+                        }
+                case 10:
+                case 11:
+                case 22:
+                    SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm");
+                        try {
+
+                                timerformat.parse(val).getTime();
+                                return true;
+
+                        } catch (Exception e) {
+                               return false;
+                        }
+                case 12:
+                case 18:
+                case 19:
+                    SimpleDateFormat timerformat1 = new SimpleDateFormat("HH:mm:ss");
+                        try {
+
+                                timerformat1.parse(val).getTime();
                                 return true;
 
                         } catch (Exception e) {
