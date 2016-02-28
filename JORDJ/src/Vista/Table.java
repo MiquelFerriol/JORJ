@@ -25,6 +25,7 @@ import javax.swing.Timer;
 import java.awt.event.*;
 import java.awt.Font;
 import java.sql.Time;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -199,7 +200,6 @@ public final class Table extends JPanel{
             modelo.setValueAt(r.getWindSpeed75(),i,35);
             modelo.setValueAt(r.getWindDir100(),i,36);
             modelo.setValueAt(r.getWindSpeed100(),i,37);
-                      
         }
         CheckGrid();
     }
@@ -226,9 +226,11 @@ public final class Table extends JPanel{
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < col; j++) {
                 Object ob = modelo.getValueAt(i, j);
-                if (ob  == null || ob.toString().equals("-1") || ob.toString().isEmpty()) {
-                    modelo.setValueAt("", i, j);
+                System.out.println(ob);
+                if (ob  == null ) {
+                       if(j == 12 && i == 0) System.out.println("BORRAMOS" + (ob  == null));
                 }
+                else if(ob.toString().equals("-1") || ob.toString().equals("-1.0") || ob.toString().isEmpty()) modelo.setValueAt("", i, j);
                 
             }
             if((modelo.getValueAt(i, 12) != "-1") && (modelo.getValueAt(i, 18) != "-1") ){
@@ -236,12 +238,22 @@ public final class Table extends JPanel{
                 try{
                     Date date1 = timerformat.parse(modelo.getValueAt(i, 12).toString());
                     Date date2 = timerformat.parse(modelo.getValueAt(i, 18).toString());
-                    modelo.setValueAt(date1.getTime()-date2.getTime(), i, 19);
+                    Date date = new Date();
+                    long millis = date2.getTime()-date1.getTime();
+                    String hms = String.format("%02d:%02d:%02d", 
+                    TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) -  
+                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
+                    TimeUnit.MILLISECONDS.toSeconds(millis) - 
+                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));   
+                    modelo.setValueAt(hms, i, 19);
+                    BD.Update(i, COLUMNA[19], hms);
                 } catch (Exception e) {
                 }
             }
         }
-    }    
+    }
+    
     
     public static void createAndShowGUI() {
 
