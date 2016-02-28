@@ -168,6 +168,38 @@ public final class Table extends JPanel{
             modelo.setValueAt(r.getRealDate(),i,4);
             modelo.setValueAt(r.getEntries(),i,5);
             modelo.setValueAt(r.getArea(),i,6);
+            modelo.setValueAt(r.getCommittee(),i,7);
+            modelo.setValueAt(r.getRaceStatus(),i,8);
+            modelo.setValueAt(r.getSignal(),i,9);
+            modelo.setValueAt(r.getTime(),i,10);
+            modelo.setValueAt(r.getScheduledTime(),i,11);
+            modelo.setValueAt(r.getStartingTime(),i,12);
+            modelo.setValueAt(r.getBoatsStarted(),i,13);
+            modelo.setValueAt(r.getPreparatorySignal(),i,14);
+            modelo.setValueAt(r.getOCS_DSQ(),i,15);
+            modelo.setValueAt(r.getAP(),i,16);
+            modelo.setValueAt(r.getGR(),i,17);
+            modelo.setValueAt(r.getFinishTime(),i,18);
+            modelo.setValueAt(r.getRaceTime(),i,19);
+            modelo.setValueAt(r.getBoatsFinished(),i,20);
+            modelo.setValueAt(r.getCourse(),i,21);
+            modelo.setValueAt(r.getDistance1stLeg(),i,22);
+            modelo.setValueAt(r.getBearing1stLeg(),i,23);
+            modelo.setValueAt(r.getLegChanges(),i,24);
+            modelo.setValueAt(r.getWindDir(),i,25);
+            modelo.setValueAt(r.getWindSpeed(),i,26);
+            modelo.setValueAt(r.getWindDir25(),i,27);
+            modelo.setValueAt(r.getWindSpeed25(),i,28);
+            modelo.setValueAt(r.getWindDir50(),i,29);
+            modelo.setValueAt(r.getWindSpeed50(),i,30);
+            modelo.setValueAt(r.getWindDir75(),i,31);
+            modelo.setValueAt(r.getWindSpeed75(),i,32);
+            modelo.setValueAt(r.getWindDir100(),i,33);
+            modelo.setValueAt(r.getWindSpeed100(),i,10);
+            
+            
+            
+            
         }
         CheckGrid();
     }
