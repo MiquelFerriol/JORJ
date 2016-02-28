@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 public final class Table extends JPanel{
     
     Timer displayTimer;        
-    private String[] COLUMNA = {"id", "Class", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signal", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS/DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","Wind Dir75", "WindSpeed75","WindDir100", "WindSpeed100"};
+    private String[] COLUMNA = {"id", "Class", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signal", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS/DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","WindDir75", "WindSpeed75","WindDir100", "WindSpeed100"};
     private String [] titulos ={"Id", "Class", "Race", "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
     
     
@@ -246,8 +246,10 @@ public final class Table extends JPanel{
                     TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
                     TimeUnit.MILLISECONDS.toSeconds(millis) - 
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));   
-                    modelo.setValueAt(hms, i, 19);
-                    BD.Update(i, COLUMNA[19], hms);
+                    if(!hms.equals(modelo.getValueAt(i, 19).toString())){
+                        modelo.setValueAt(hms, i, 19);
+                        BD.Update(i, COLUMNA[19], hms);
+                    }
                 } catch (Exception e) {
                 }
             }
