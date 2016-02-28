@@ -46,6 +46,36 @@ public class BaseDatos {
                 r.setArea(rs.getString(7));
                 r.setCommittee(rs.getString(8));
                 r.setRaceStatus(rs.getString(9));
+                r.setSignal(rs.getString(10));
+                r.setTime(rs.getString(11));
+                r.setScheduledTime(rs.getString(12));
+                r.setStartingTime(rs.getString(13));
+                r.setBoatsStarted(rs.getInt(14));
+                r.setPreparatorySignal(rs.getString(15));
+                r.setOCS_DSQ(rs.getInt(16));
+                r.setAP(rs.getInt(17));
+                r.setGR(rs.getInt(18));
+                r.setFinishTime(rs.getString(19));
+                r.setRaceTime(rs.getString(20));
+                r.setBoatsFinished(rs.getInt(21));
+                r.setLastSignal(rs.getString(22));
+                r.setLastSignalTime(rs.getString(23));
+                r.setResults(rs.getString(24));
+                r.setCourse(rs.getString(25));
+                r.setDistance1stLeg(rs.getFloat(26));
+                r.setBearing1stLeg(rs.getInt(27));
+                r.setLegChanges(rs.getString(28));
+                r.setWindDir(rs.getInt(29));
+                r.setWindSpeed(rs.getInt(30));
+                r.setWindDir25(rs.getInt(31));
+                r.setWindSpeed25(rs.getInt(32));
+                r.setWindDir50(rs.getInt(33));
+                r.setWindSpeed50(rs.getInt(34));
+                r.setWindDir75(rs.getInt(35));
+                r.setWindSpeed75(rs.getInt(36));
+                r.setWindDir100(rs.getInt(37));
+                r.setWindSpeed100(rs.getInt(38));
+                
                 BD.add(r);
             }
             cn.close();
