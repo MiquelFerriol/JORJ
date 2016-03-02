@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Imgenes.*;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.util.*;
 import BaseDatos.BaseDatos;
 import Estructuras.Regata;
+import java.awt.Color;
 import javax.swing.table.*;
 import java.awt.Component;
 import javax.swing.*;
@@ -28,12 +29,16 @@ import java.awt.Font;
 import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 import javax.swing.table.*;
 
 /**
  *
  * @author Miquel Ferriol
  */
+
+
 public final class Table extends JPanel{
     
     Timer displayTimer;        
@@ -45,11 +50,124 @@ public final class Table extends JPanel{
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
-        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-        c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
-        return c; 
+        if(column == 9 || column == 14 || column == 27){
+            try{
+                String s =  modelo.getValueAt(row, column).toString();
+                if(s.equals("OTHER")){
+                    s = "UNIFORM";
+                }
+                ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                JLabel lbl = new JLabel();
+                lbl.setHorizontalAlignment(JLabel.CENTER);
+                lbl.setVerticalAlignment(JLabel.CENTER);
+                lbl.setIcon(icon);
+                lbl.setIcon(icon);
+                return lbl;
+            }
+            catch(Exception e){
+                JLabel lbl = new JLabel();
+                return lbl;
+            }
+        }
+        else if(column == 8){
+            try{
+                String s =  modelo.getValueAt(row, column).toString();
+                JLabel lbl = new JLabel();
+                ImageIcon icon; 
+                if(s.equals("SCHEDULED")){
+                    s = "YELLOW";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                    lbl.setText("SCHEDULED");
+                    
+                }
+                else if(s.equals("POSTPONDMENT")){
+                    s = "AP";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else if(s.equals("ON SEQUENCE")){
+                    s = "ORANGE";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else if (s.equals("FINISHED")){
+                    s = "BLUE"; 
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else if (s.equals("ABANDON")){
+                    s = "NOVEMBER";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else if (s.equals("SAILING")){
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else if (s.equals("ON TIME")){
+                    s = "WHITE";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                    lbl.setText("ON TIME");
+                }
+                else{
+                    lbl.setText(s);
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + "WHITE" + ".JPG"));
+                }
+                lbl.setHorizontalAlignment(JLabel.CENTER);
+                lbl.setVerticalAlignment(JLabel.CENTER);
+                lbl.setIcon(icon);
+                lbl.setHorizontalTextPosition(JLabel.CENTER);
+                lbl.setVerticalTextPosition(JLabel.CENTER);
+                lbl.setIcon(icon);
+                return lbl;
+            }
+            catch(Exception e){
+                JLabel lbl = new JLabel();
+                System.out.println(e.getMessage());
+                return lbl;
+            }
+        }
+        else if (column == 6){
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
+            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
+            try{
+                Color col;
+                String s = modelo.getValueAt(row, column).toString();
+                switch(s){
+                    case "Päo Açucar":
+                        col = Color.red;
+                        break;
+                    case "Escola Naval":
+                        col = Color.green;
+                        break;
+                    case "Ponte":
+                        col = Color.yellow;
+                        break;
+                    case "Copacabana":
+                        col = Color.orange;
+                        break;
+                    case "Niteroi":
+                        col = Color.cyan;
+                        break;    
+                    case "Pai":
+                        col = Color.pink;
+                        break;    
+                    case "Aeroport":
+                        col = Color.gray;
+                        break;
+                    default:
+                        col = Color.WHITE;
+                }
+                c.setBackground(col);
+                return c;
+            }
+            catch(Exception e){
+                return c;
+            }
+        }
+        else {
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
+            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
+            c.setBackground(Color.white);
+            return c;
+        }
     } 
-
+        
     }
     
     DefaultTableModel modelo;
@@ -112,7 +230,7 @@ public final class Table extends JPanel{
     TableColumnAdjuster tca = new TableColumnAdjuster(table);
     tca.adjustColumns();
     
-    table.setRowHeight(30);
+    table.setRowHeight(50);
     
     table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
     
@@ -203,9 +321,7 @@ public final class Table extends JPanel{
             modelo.setValueAt(r.getRace(),i,2);
             modelo.setValueAt(r.getScheduledDate(),i,3);
             modelo.setValueAt(r.getRealDate(),i,4);
-            //modelo.setValueAt(r.getEntries(),i,5);
-            ImageIcon img = new ImageIcon(Diapositiva1.JPG);
-            modelo.setValueAt(img,i,5);
+            modelo.setValueAt(r.getEntries(),i,5);
             modelo.setValueAt(r.getArea(),i,6);
             modelo.setValueAt(r.getCommittee(),i,7);
             modelo.setValueAt(r.getRaceStatus(),i,8);

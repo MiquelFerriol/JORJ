@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 29-02-2016 a las 00:03:59
--- Versión del servidor: 10.1.10-MariaDB
--- Versión de PHP: 7.0.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Base de datos: `olimp`
 --
@@ -41,7 +23,7 @@ CREATE TABLE `racestatus` (
   `ScheduledTime` varchar(15) DEFAULT NULL,
   `StartingTime` varchar(15) DEFAULT NULL,
   `BoatsStarted` int(11) DEFAULT '-1',
-  `PreparatorySignal` varchar(10) DEFAULT NULL,
+  `PreparatorySignal` varchar(20) DEFAULT NULL,
   `OCS_DSQ` int(11) DEFAULT '-1',
   `AP` int(11) DEFAULT '-1',
   `GR` int(11) DEFAULT '-1',
@@ -72,9 +54,13 @@ CREATE TABLE `racestatus` (
 --
 
 INSERT INTO `racestatus` (`id`, `Class`, `Race`, `ScheduledDate`, `RealDate`, `Entries`, `Area`, `Committee`, `RaceStatus`, `Signall`, `Time`, `ScheduledTime`, `StartingTime`, `BoatsStarted`, `PreparatorySignal`, `OCS_DSQ`, `AP`, `GR`, `FinishTime`, `RaceTime`, `BoatsFinished`, `LastSignal`, `LastSignalTime`, `Results`, `Course`, `Distance1stLeg`, `Bearing1stLeg`, `LegChanges`, `WindDir`, `WindSpeed`, `WindDir25`, `WindSpeed25`, `WindDir50`, `WindSpeed50`, `WindDir75`, `WindSpeed75`, `WindDir100`, `WindSpeed100`) VALUES
-(1, 'hello', 1, '02/03/2016', '02/02/2016', 5, 'SaoPaulo', 'Pene', 'OK', 'hola', '12:00', '12:00', '12:00:43', 5, '888', 5, 2, 2, '12:18:55', '00:19:55', 2, '2', '12:00', '2', '2', 2, 2, '2', 2, 2, 2, 2, 2, 2, 2, 2, 2, 270),
-(2, 'its me', 5, NULL, NULL, -1, NULL, NULL, NULL, 'asjdfhl', NULL, NULL, NULL, -1, NULL, -1, -1, -1, '', NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(3, 'miquel marica', 2, '', NULL, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
+(1, 'RS:X M', 1, '02/03/2016', '02/02/2016', 185, 'Päo Açucar', 'Christoph', 'SCHEDULED', 'DELTA', '12:00', '12:00', '', 5, 'PAPA', 5, 2, 2, '13:00:00', '', 2, '2', '12:00', '2', '2', 2, 2, 'c', 2, 2, 2, 2, 2, 2, 2, 2, 2, 270),
+(2, 'RS:X W', 5, NULL, NULL, 453, 'Escola Naval', 'Maria', 'POSTPONDMENT', 'N+A', NULL, NULL, NULL, -1, 'INDIA - 30.1', -1, -1, -1, '', NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(3, 'LASER STD', 2, '', NULL, 896, 'Ponte', 'Stogg', 'ON SEQUENCE', 'lima', NULL, NULL, NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(4, 'LASER RAD', 6, NULL, NULL, 654, 'Copacabana', 'Luiggi', 'SAILING', 'Ap', NULL, NULL, NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(5, '470 M', 9, NULL, NULL, 378, 'Niteroi', 'Sulis', 'ON TIME', 'n+a', NULL, NULL, NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(6, '470 W', 15, NULL, NULL, 455, 'Pai', 'John', 'ABANDON', 'delta', NULL, NULL, NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(7, 'FINN', 2, NULL, NULL, 989, 'Aeroport', 'Christoph', 'FINISHED', 'lima', NULL, NULL, NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
 
 --
 -- Índices para tablas volcadas
