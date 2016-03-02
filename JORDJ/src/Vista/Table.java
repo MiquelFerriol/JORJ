@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Imgenes.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,6 +27,8 @@ import java.awt.event.*;
 import java.awt.Font;
 import java.sql.Time;
 import java.util.concurrent.TimeUnit;
+import javax.swing.*;
+import javax.swing.table.*;
 
 /**
  *
@@ -65,8 +68,7 @@ public final class Table extends JPanel{
     MyRenderer r = new MyRenderer();
     r.setHorizontalAlignment(JLabel.CENTER);
     table.setDefaultRenderer(Object.class, r);
-    //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-    //Add the scroll pane to this panel.
+    
     add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
     
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -97,6 +99,11 @@ public final class Table extends JPanel{
                         else if (!"".equals(data.toString())){
                             modelo.setValueAt("", row, column);
                         }
+                        
+                        if(column == 12 || column == 18){
+                                finishTime(row,column);
+                        }
+                        
                     }
                 });
     displayTimer = new Timer(4000, listener);
@@ -110,6 +117,35 @@ public final class Table extends JPanel{
     table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
     
 }
+    
+    private void finishTime(int row, int column){
+        if((modelo.getValueAt(row, 12) != "") && (modelo.getValueAt(row, 18) != "") ){
+            SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm:ss");
+            try{
+                    Date date1 = timerformat.parse(modelo.getValueAt(row, 12).toString());
+                    Date date2 = timerformat.parse(modelo.getValueAt(row, 18).toString());
+                    Date date = new Date();
+                    long millis = date2.getTime()-date1.getTime();
+                    String hms = String.format("%02d:%02d:%02d", 
+                    TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) -  
+                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
+                    TimeUnit.MILLISECONDS.toSeconds(millis) - 
+                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                    System.out.println(modelo.getValueAt(row, 19).toString());
+                    if(!hms.equals(modelo.getValueAt(row, 19).toString())){
+                        modelo.setValueAt(hms, row, 19);
+                        BD.Update(row+1, COLUMNA[19], hms);
+                    System.out.println("ASDSA" + modelo.getValueAt(row, 19).toString());
+                }
+            } catch (Exception es) {
+            }
+        }
+        else{
+            modelo.setValueAt("", row, 19);
+            BD.Update(row+1, COLUMNA[19], "");
+        }
+    }
     
     public boolean correctValue(int c, String val){
         if(!val.equals("")){
@@ -167,7 +203,9 @@ public final class Table extends JPanel{
             modelo.setValueAt(r.getRace(),i,2);
             modelo.setValueAt(r.getScheduledDate(),i,3);
             modelo.setValueAt(r.getRealDate(),i,4);
-            modelo.setValueAt(r.getEntries(),i,5);
+            //modelo.setValueAt(r.getEntries(),i,5);
+            ImageIcon img = new ImageIcon(Diapositiva1.JPG);
+            modelo.setValueAt(img,i,5);
             modelo.setValueAt(r.getArea(),i,6);
             modelo.setValueAt(r.getCommittee(),i,7);
             modelo.setValueAt(r.getRaceStatus(),i,8);
@@ -232,28 +270,6 @@ public final class Table extends JPanel{
                 }
                 else if(ob.toString().equals("-1") || ob.toString().equals("-1.0") || ob.toString().isEmpty()) modelo.setValueAt("", i, j);
                 
-            }
-            if((modelo.getValueAt(i, 12) != "-1") && (modelo.getValueAt(i, 18) != "-1") ){
-                SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm:ss");
-                try{
-                    Date date1 = timerformat.parse(modelo.getValueAt(i, 12).toString());
-                    Date date2 = timerformat.parse(modelo.getValueAt(i, 18).toString());
-                    Date date = new Date();
-                    long millis = date2.getTime()-date1.getTime();
-                    String hms = String.format("%02d:%02d:%02d", 
-                    TimeUnit.MILLISECONDS.toHours(millis),
-                    TimeUnit.MILLISECONDS.toMinutes(millis) -  
-                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
-                    TimeUnit.MILLISECONDS.toSeconds(millis) - 
-                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-                    System.out.println(modelo.getValueAt(i, 19).toString());
-                    if(!hms.equals(modelo.getValueAt(i, 19).toString())){
-                        modelo.setValueAt(hms, i, 19);
-                        BD.Update(i, COLUMNA[19], hms);
-                    System.out.println("ASDSA" + modelo.getValueAt(i, 19).toString());
-                    }
-                } catch (Exception e) {
-                }
             }
         }
     }
