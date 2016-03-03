@@ -32,6 +32,12 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import javax.swing.table.*;
+import java.awt.Graphics2D;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import javax.swing.*;
 
 /**
  *
@@ -160,6 +166,34 @@ public final class Table extends JPanel{
                 return c;
             }
         }
+        /*if(column == 28){
+            try{
+                
+            int g = Integer.parseInt(modelo.getValueAt(row, 29).toString());
+            System.out.println("Graus: " + g );
+            int s = Integer.parseInt(modelo.getValueAt(row, 30).toString());
+            JLabel lbl = new JLabel();
+            ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/Viento/0.png"));
+            int w = icon.getIconWidth();
+            int h = icon.getIconHeight();
+            int type = BufferedImage.TYPE_INT_RGB;  // other options, see api
+            BufferedImage image = new BufferedImage(h, w, type);
+            Graphics2D g2 = image.createGraphics();
+            g2.rotate(Math.toRadians(90+g), w/2.0, h/2.0);
+            g2.drawImage(icon.getImage(), 0,0,Color.WHITE, lbl);
+            
+            g2.dispose();
+            icon = new ImageIcon(image);
+            lbl.setIcon(icon);
+            lbl.setHorizontalAlignment(JLabel.CENTER);
+            lbl.setVerticalAlignment(JLabel.CENTER);
+            return lbl;
+            }
+            catch(Exception e){
+                JLabel lbl = new JLabel();
+                return lbl;
+            }
+        }*/
         else {
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
             c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
@@ -175,65 +209,66 @@ public final class Table extends JPanel{
     
     
     public Table() {
-    super(new GridLayout(1, 0));
-    DataTable();
-    JTable table = new JTable(modelo){
-      protected JTableHeader createDefaultTableHeader() {
-        return new GroupableTableHeader(columnModel);
-      };
-    };
-    
-    MyRenderer r = new MyRenderer();
-    r.setHorizontalAlignment(JLabel.CENTER);
-    table.setDefaultRenderer(Object.class, r);
-    
-    add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-    
-    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-    
-    ActionListener listener = (ActionEvent event) -> {
-        printTable();
-        displayTimer.restart();
-    };
-    
-    table.getDefaultEditor(String.class).addCellEditorListener(
-                new CellEditorListener() {
-                    @Override
-                    public void editingCanceled(ChangeEvent e) {
-                        System.out.println("editingCanceled");
+        super(new GridLayout(1, 0));
+        DataTable();
+        JTable table = new JTable(modelo){
+          protected JTableHeader createDefaultTableHeader() {
+            return new GroupableTableHeader(columnModel);
+          };
+        };
+
+        MyRenderer r = new MyRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, r);
+
+        add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        ActionListener listener = (ActionEvent event) -> {
+            printTable();
+            displayTimer.restart();
+        };
+
+        table.getDefaultEditor(String.class).addCellEditorListener(
+            new CellEditorListener() {
+                @Override
+                public void editingCanceled(ChangeEvent e) {
+                    System.out.println("editingCanceled");
+                }
+
+                @Override
+                public void editingStopped(ChangeEvent e) {
+                    System.out.println("editingStopped: apply additional action");
+                    System.out.println(table.getSelectedColumn());
+                    int column = table.getSelectedColumn();
+                    int row = table.getSelectedRow();
+                    Object data = modelo.getValueAt(row, column);
+
+                    if(correctValue(column, data.toString())){
+                            BD.Update(row+1, COLUMNA[column], data);
+                        }
+                    else if (!"".equals(data.toString())){
+                        modelo.setValueAt("", row, column);
                     }
 
-                    @Override
-                    public void editingStopped(ChangeEvent e) {
-                        System.out.println("editingStopped: apply additional action");
-                        System.out.println(table.getSelectedColumn());
-                        int column = table.getSelectedColumn();
-                        int row = table.getSelectedRow();
-                        Object data = modelo.getValueAt(row, column);
-
-                        if(correctValue(column, data.toString())){
-                                BD.Update(row+1, COLUMNA[column], data);
-                            }
-                        else if (!"".equals(data.toString())){
-                            modelo.setValueAt("", row, column);
-                        }
-                        
-                        if(column == 12 || column == 18){
-                                finishTime(row,column);
-                        }
-                        
+                    if(column == 12 || column == 18){
+                            finishTime(row,column);
                     }
-                });
-    displayTimer = new Timer(4000, listener);
-    displayTimer.start();
-    
-    TableColumnAdjuster tca = new TableColumnAdjuster(table);
-    tca.adjustColumns();
-    
-    table.setRowHeight(50);
-    
-    table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
-    
+
+                }
+            }
+        );
+        
+        displayTimer = new Timer(4000, listener);
+        displayTimer.start();
+
+        TableColumnAdjuster tca = new TableColumnAdjuster(table);
+        tca.adjustColumns();
+
+        table.setRowHeight(50);
+
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
 }
     
     private void finishTime(int row, int column){
@@ -271,38 +306,31 @@ public final class Table extends JPanel{
                 case 3:
                 case 4:
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-
-                                Date date = formatter.parse(val);
-                                return true;
-
-                        } catch (Exception e) {
-                               return false;
-                        }
+                    try {
+                        Date date = formatter.parse(val);
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
                 case 10:
                 case 11:
                 case 22:
                     SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm");
                         try {
-
-                                Date date = timerformat.parse(val);
-                                return true;
-
-                        
+                            Date date = timerformat.parse(val);
+                            return true;
                         } catch (Exception e) {
-                               return false;
+                            return false;
                         }
                 case 12:
                 case 18:
                 case 19:
                     SimpleDateFormat timerformat1 = new SimpleDateFormat("HH:mm:ss");
                         try {
-
-                                timerformat1.parse(val).getTime();
-                                return true;
-
+                            timerformat1.parse(val).getTime();
+                            return true;
                         } catch (Exception e) {
-                               return false;
+                            return false;
                         }
                 default:
                 return true;
@@ -314,6 +342,7 @@ public final class Table extends JPanel{
     
     public void printTable(){
         BD.initBD();
+        
         for(int i = 0; i < BD.getBD().size(); ++i ){
             Regata r = BD.getBD().get(i);
             modelo.setValueAt(r.getId(),i,0);
@@ -359,30 +388,30 @@ public final class Table extends JPanel{
     }
     
     public final void DataTable(){
-        //String [] titulos ={"Id", "Class", "Race", "Scheduled Date", "Real Date", "Entries", "Area", "Committe", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
+        
         modelo = new DefaultTableModel(null, titulos);
         
         String [] fila = new String[titulos.length];
+        
         BD = new BaseDatos();
         BD.initBD();
         int size = BD.getBD().size();
         
         for(int i = 0; i < size; ++i){
             modelo.addRow(fila);
-            //System.out.println(r.getId() + " " + r.getClas() + " " + r.getRace() + " " + r.getScheduledDate() + " " + r.getRealDate() + " " + r.getEntries() + " " + r.getArea());
         }
+        
         printTable();
-        //CheckGrid();
-}
+    }
+    
     public void CheckGrid(){
         int rows = modelo.getRowCount();
         int col = modelo.getColumnCount();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < col; j++) {
                 Object ob = modelo.getValueAt(i, j);
-                //System.out.println(ob);
                 if (ob  == null ) {
-                       if(j == 12 && i == 0) System.out.println("BORRAMOS" + (ob  == null));
+                    if(j == 12 && i == 0) System.out.println("BORRAMOS" + (ob  == null));
                 }
                 else if(ob.toString().equals("-1") || ob.toString().equals("-1.0") || ob.toString().isEmpty()) modelo.setValueAt("", i, j);
                 
@@ -393,16 +422,14 @@ public final class Table extends JPanel{
     
     public static void createAndShowGUI() {
 
-    //Create and set up the window.
     JFrame frame = new JFrame("Race Status");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setExtendedState(JFrame.MAXIMIZED_HORIZ);
-    //frame.set
-    //Create and set up the content pane.
+
     Table newContentPane = new Table();
     newContentPane.setOpaque(true); //content panes must be opaque
     frame.setContentPane(newContentPane);
-    //Display the window.
+
     frame.pack();
     frame.setVisible(true);
   }
@@ -410,8 +437,6 @@ public final class Table extends JPanel{
    
 
   public static void main(String[] args) {
-    //Schedule a job for the event-dispatching thread:
-    //creating and showing this application's GUI.
     javax.swing.SwingUtilities.invokeLater(() -> {
                 createAndShowGUI();
                 
