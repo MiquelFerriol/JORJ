@@ -9,113 +9,147 @@ package Vista;
  *
  * @author Miquel Ferriol
  */
-import java.util.*;
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import javax.swing.plaf.basic.*;
-  
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JComponent;
+import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.plaf.basic.BasicTableHeaderUI;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+
 public class GroupableTableHeaderUI extends BasicTableHeaderUI {
-   
-  public void paint(Graphics g, JComponent c) {
-    Rectangle clipBounds = g.getClipBounds();
-    if (header.getColumnModel() == null) return;
-    ((GroupableTableHeader)header).setColumnMargin();
-    int column = 0;
-    Dimension size = header.getSize();
-    Rectangle cellRect  = new Rectangle(0, 0, size.width, size.height);
-    Hashtable h = new Hashtable();
-    int columnMargin = header.getColumnModel().getColumnMargin();
-     
-    Enumeration enumerereration = header.getColumnModel().getColumns();
-    while (enumerereration.hasMoreElements()) {
-      cellRect.height = size.height;
-      cellRect.y      = 0;
-      TableColumn aColumn = (TableColumn)enumerereration.nextElement();
-      Enumeration cGroups = ((GroupableTableHeader)header).getColumnGroups(aColumn);
-      if (cGroups != null) {
-        int groupHeight = 0;
-        while (cGroups.hasMoreElements()) {
-          ColumnGroup cGroup = (ColumnGroup)cGroups.nextElement();
-          Rectangle groupRect = (Rectangle)h.get(cGroup);
-          if (groupRect == null) {
-            groupRect = new Rectangle(cellRect);
-            Dimension d = cGroup.getSize(header.getTable());
-            groupRect.width  = d.width;
-            groupRect.height = d.height;   
-            h.put(cGroup, groupRect);
-          }
-          paintCell(g, groupRect, cGroup);
-          groupHeight += groupRect.height;
-          cellRect.height = size.height - groupHeight;
-          cellRect.y      = groupHeight;
+
+    protected GroupableTableHeader getHeader() {
+        return (GroupableTableHeader) header;
+    }
+
+    @Override
+    public void paint(Graphics g, JComponent c) {
+        Rectangle clipBounds = g.getClipBounds();
+        if (header.getColumnModel().getColumnCount() == 0) {
+            return;
         }
-      }     
-      cellRect.width = aColumn.getWidth() + columnMargin;
-      if (cellRect.intersects(clipBounds)) {
-        paintCell(g, cellRect, column);
-      }
-      cellRect.x += cellRect.width;
-      column++;
-    }
-  }
-  
-  private void paintCell(Graphics g, Rectangle cellRect, int columnIndex) {
-    TableColumn aColumn = header.getColumnModel().getColumn(columnIndex);
-    TableCellRenderer renderer = aColumn.getHeaderRenderer();
-    Component component = renderer.getTableCellRendererComponent(
-      header.getTable(), aColumn.getHeaderValue(),false, false, -1, columnIndex);
-    rendererPane.add(component);
-    rendererPane.paintComponent(g, component, header, cellRect.x, cellRect.y,
-                                cellRect.width, cellRect.height, true);
-  }
-  
-  private void paintCell(Graphics g, Rectangle cellRect,ColumnGroup cGroup) {
-    TableCellRenderer renderer = cGroup.getHeaderRenderer();
-    Component component = renderer.getTableCellRendererComponent(
-      header.getTable(), cGroup.getHeaderValue(),false, false, -1, -1);
-    rendererPane.add(component);
-    rendererPane.paintComponent(g, component, header, cellRect.x, cellRect.y,
-                                cellRect.width, cellRect.height, true);
-  }
-  
-  private int getHeaderHeight() {
-    int height = 0;
-    TableColumnModel columnModel = header.getColumnModel();
-    for(int column = 0; column < columnModel.getColumnCount(); column++) {
-      TableColumn aColumn = columnModel.getColumn(column);
-      TableCellRenderer renderer = aColumn.getHeaderRenderer();
-      Component comp = renderer.getTableCellRendererComponent(
-        header.getTable(), aColumn.getHeaderValue(), false, false,-1, column);
-      int cHeight = comp.getPreferredSize().height;
-      Enumeration enumerer = ((GroupableTableHeader)header).getColumnGroups(aColumn);     
-      if (enumerer != null) {
-        while (enumerer.hasMoreElements()) {
-          ColumnGroup cGroup = (ColumnGroup)enumerer.nextElement();
-          cHeight += cGroup.getSize(header.getTable()).height;
+        int column = 0;
+        Dimension size = header.getSize();
+        Rectangle cellRect = new Rectangle(0, 0, size.width, size.height);
+        Map<ColumnGroup, Rectangle> groupSizeMap = new HashMap<ColumnGroup, Rectangle>();
+
+        for (Enumeration<TableColumn> enumeration = header.getColumnModel().getColumns(); enumeration.hasMoreElements();) {
+            cellRect.height = size.height;
+            cellRect.y = 0;
+            TableColumn aColumn = enumeration.nextElement();
+            List<ColumnGroup> groups = getHeader().getColumnGroups(aColumn);
+            int groupHeight = 0;
+            for (ColumnGroup group : groups) {
+                Rectangle groupRect = groupSizeMap.get(group);
+                if (groupRect == null) {
+                    groupRect = new Rectangle(cellRect);
+                    Dimension d = group.getSize(header.getTable());
+                    groupRect.width = d.width;
+                    groupRect.height = d.height;
+                    groupSizeMap.put(group, groupRect);
+                }
+                paintCell(g, groupRect, group);
+                groupHeight += groupRect.height;
+                cellRect.height = size.height - groupHeight;
+                cellRect.y = groupHeight;
+            }
+            cellRect.width = aColumn.getWidth();
+            if (cellRect.intersects(clipBounds)) {
+                paintCell(g, cellRect, column);
+            }
+            cellRect.x += cellRect.width;
+            column++;
         }
-      }
-      height = Math.max(height, cHeight);
     }
-    return height;
-  }
-  
-  private Dimension createHeaderSize(long width) {
-    TableColumnModel columnModel = header.getColumnModel();
-    width += columnModel.getColumnMargin() * columnModel.getColumnCount();
-    if (width > Integer.MAX_VALUE) {
-      width = Integer.MAX_VALUE;
+
+    private void paintCell(Graphics g, Rectangle cellRect, int columnIndex) {
+        TableColumn aColumn = header.getColumnModel().getColumn(columnIndex);
+        TableCellRenderer renderer = aColumn.getHeaderRenderer();
+        if (renderer == null) {
+
+            // original
+            renderer = getHeader().getDefaultRenderer();
+
+            // modified
+            renderer = new DefaultTableCellRenderer() {
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+                    FilterHeader header = new FilterHeader( table, value, column);
+                    return header;
+                }
+
+            };
+        }
+        Component c = renderer.getTableCellRendererComponent(header.getTable(), aColumn.getHeaderValue(), false, false,
+                -1, columnIndex);
+
+        c.setBackground(UIManager.getColor("control"));
+
+        rendererPane.paintComponent(g, c, header, cellRect.x, cellRect.y, cellRect.width, cellRect.height, true);
     }
-    return new Dimension((int)width, getHeaderHeight());
-  }
-  
-  public Dimension getPreferredSize(JComponent c) {
-    long width = 0;
-    Enumeration enumerereration = header.getColumnModel().getColumns();
-    while (enumerereration.hasMoreElements()) {
-      TableColumn aColumn = (TableColumn)enumerereration.nextElement();
-      width = width + aColumn.getPreferredWidth();
+
+    private void paintCell(Graphics g, Rectangle cellRect, ColumnGroup cGroup) {
+        TableCellRenderer renderer = cGroup.getHeaderRenderer();
+        if (renderer == null) {
+            renderer = getHeader().getDefaultRenderer();
+        }
+
+        Component component = renderer.getTableCellRendererComponent(header.getTable(), cGroup.getHeaderValue(), false,
+                false, -1, -1);
+        rendererPane
+                .paintComponent(g, component, header, cellRect.x, cellRect.y, cellRect.width, cellRect.height, true);
     }
-    return createHeaderSize(width);
-  }
+
+    private int getHeaderHeight() {
+        int headerHeight = 0;
+        TableColumnModel columnModel = header.getColumnModel();
+        for (int column = 0; column < columnModel.getColumnCount(); column++) {
+            TableColumn aColumn = columnModel.getColumn(column);
+            TableCellRenderer renderer = aColumn.getHeaderRenderer();
+            if (renderer == null) {
+                renderer = getHeader().getDefaultRenderer();
+            }
+
+            Component comp = renderer.getTableCellRendererComponent(header.getTable(), aColumn.getHeaderValue(), false,
+                    false, -1, column);
+            int cHeight = comp.getPreferredSize().height;
+            List<ColumnGroup> groups = getHeader().getColumnGroups(aColumn);
+            for (ColumnGroup group : groups) {
+                cHeight += group.getSize(header.getTable()).height;
+            }
+            headerHeight = Math.max(headerHeight, cHeight);
+        }
+        return headerHeight;
+    }
+
+    @Override
+    public Dimension getPreferredSize(JComponent c) {
+        int width = 0;
+        for (Enumeration<TableColumn> enumeration = header.getColumnModel().getColumns(); enumeration.hasMoreElements();) {
+            TableColumn aColumn = enumeration.nextElement();
+            width += aColumn.getPreferredWidth();
+        }
+        return createHeaderSize(width);
+    }
+
+    private Dimension createHeaderSize(int width) {
+        TableColumnModel columnModel = header.getColumnModel();
+        width += columnModel.getColumnMargin() * columnModel.getColumnCount();
+        if (width > Integer.MAX_VALUE) {
+            width = Integer.MAX_VALUE;
+        }
+        return new Dimension(width, getHeaderHeight());
+    }
+
 }

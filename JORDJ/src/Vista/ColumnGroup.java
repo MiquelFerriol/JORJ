@@ -5,123 +5,116 @@
  */
 package Vista;
 
-import java.util.*;
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.table.*;
-  
-   
 /**
-  * ColumnGroup
-  *
-  * @version 1.0 10/20/98
-  * @author Nobuo Tamemasa
-  */
-  
+ *
+ * @author Miquel Ferriol
+ */
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+
 public class ColumnGroup {
-  protected TableCellRenderer renderer;
-  protected Vector v;
-  protected String text;
-  protected int margin=0;
-  
-  public ColumnGroup(String text) {
-    this(null,text);
-  }
-  
-  public ColumnGroup(TableCellRenderer renderer,String text) {
-    if (renderer == null) {
-      this.renderer = new DefaultTableCellRenderer() {
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                         boolean isSelected, boolean hasFocus, int row, int column) {
-          JTableHeader header = table.getTableHeader();
-          if (header != null) {
-            setForeground(header.getForeground());
-            setBackground(header.getBackground());
-            setFont(header.getFont());
-          }
-          setHorizontalAlignment(JLabel.CENTER);
-          setText((value == null) ? "" : value.toString());
-          setBorder(UIManager.getBorder("TableHeader.cellBorder"));
-          return this;
+
+    protected TableCellRenderer renderer;
+
+    protected List<TableColumn> columns;
+    protected List<ColumnGroup> groups;
+
+    protected String text;
+    protected int margin = 0;
+
+    public ColumnGroup(String text) {
+        this(text, null);
+    }
+
+    public ColumnGroup(String text, TableCellRenderer renderer) {
+        this.text = text;
+        this.renderer = renderer;
+        this.columns = new ArrayList<TableColumn>();
+        this.groups = new ArrayList<ColumnGroup>();
+    }
+
+    public void add(TableColumn column) {
+        columns.add(column);
+    }
+
+    public void add(ColumnGroup group) {
+        groups.add(group);
+    }
+
+    /**
+     * @param column
+     *            TableColumn
+     */
+    public List<ColumnGroup> getColumnGroups(TableColumn column) {
+        if (!contains(column)) {
+            return Collections.emptyList();
         }
-      };
-    } else {
-      this.renderer = renderer;
+        List<ColumnGroup> result = new ArrayList<ColumnGroup>();
+        result.add(this);
+        if (columns.contains(column)) {
+            return result;
+        }
+        for (ColumnGroup columnGroup : groups) {
+            result.addAll(columnGroup.getColumnGroups(column));
+        }
+        return result;
     }
-    this.text = text;
-    v = new Vector();
-  }
-  
-    
-  /**
-   * @param obj    TableColumn or ColumnGroup
-   */
-  public void add(Object obj) {
-    if (obj == null) { return; }
-    v.addElement(obj);
-  }
-  
-   
-  /**
-   * @param c    TableColumn
-   * @param v    ColumnGroups
-   */
-  public Vector getColumnGroups(TableColumn c, Vector g) {
-    g.addElement(this);
-    if (v.contains(c)) return g;   
-    Enumeration enumer = v.elements();
-    while (enumer.hasMoreElements()) {
-      Object obj = enumer.nextElement();
-      if (obj instanceof ColumnGroup) {
-        Vector groups =
-          (Vector)((ColumnGroup)obj).getColumnGroups(c,(Vector)g.clone());
-        if (groups != null) return groups;
-      }
+
+    private boolean contains(TableColumn column) {
+        if (columns.contains(column)) {
+            return true;
+        }
+        for (ColumnGroup group : groups) {
+            if (group.contains(column)) {
+                return true;
+            }
+        }
+        return false;
     }
-    return null;
-  }
-     
-  public TableCellRenderer getHeaderRenderer() {
-    return renderer;
-  }
-     
-  public void setHeaderRenderer(TableCellRenderer renderer) {
-    if (renderer != null) {
-      this.renderer = renderer;
+
+    public TableCellRenderer getHeaderRenderer() {
+        return renderer;
     }
-  }
-     
-  public Object getHeaderValue() {
-    return text;
-  }
-   
-  public Dimension getSize(JTable table) {
-    Component comp = renderer.getTableCellRendererComponent(
-        table, getHeaderValue(), false, false,-1, -1);
-    int height = comp.getPreferredSize().height;
-    int width  = 0;
-    Enumeration enumer = v.elements();
-    while (enumer.hasMoreElements()) {
-      Object obj = enumer.nextElement();
-      if (obj instanceof TableColumn) {
-        TableColumn aColumn = (TableColumn)obj;
-        width += aColumn.getWidth();
-        width += margin;
-      } else {
-        width += ((ColumnGroup)obj).getSize(table).width;
-      }
+
+    public void setHeaderRenderer(TableCellRenderer renderer) {
+        this.renderer = renderer;
     }
-    return new Dimension(width, height);
-  }
-  
-  public void setColumnMargin(int margin) {
-    this.margin = margin;
-    Enumeration enumer = v.elements();
-    while (enumer.hasMoreElements()) {
-      Object obj = enumer.nextElement();
-      if (obj instanceof ColumnGroup) {
-        ((ColumnGroup)obj).setColumnMargin(margin);
-      }
+
+    public String getHeaderValue() {
+        return text;
     }
-  }
+
+    public Dimension getSize(JTable table) {
+        TableCellRenderer renderer = this.renderer;
+        if (renderer == null) {
+            renderer = table.getTableHeader().getDefaultRenderer();
+        }
+        Component comp = renderer.getTableCellRendererComponent(table, getHeaderValue() == null || getHeaderValue().trim().isEmpty() ? " "
+                : getHeaderValue(), false, false, -1, -1);
+        int height = comp.getPreferredSize().height;
+        int width = 0;
+        for (ColumnGroup columnGroup : groups) {
+            width += columnGroup.getSize(table).width;
+        }
+        for (TableColumn tableColumn : columns) {
+            width += tableColumn.getWidth();
+            width += margin;
+        }
+        return new Dimension(width, height);
+    }
+
+    public void setColumnMargin(int margin) {
+        this.margin = margin;
+        for (ColumnGroup columnGroup : groups) {
+            columnGroup.setColumnMargin(margin);
+        }
+    }
+
 }

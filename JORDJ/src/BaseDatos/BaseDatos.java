@@ -114,4 +114,19 @@ public class BaseDatos {
         
     }
     
+    public void Insert(){
+        cn = db.getConnection();
+        try {
+            
+        for(int i = 9; i <= 121; ++i){
+            String sql = "INSERT INTO `racestatus` (`id`, `Class`, `Race`, `ScheduledDate`, `RealDate`, `Entries`, `Area`, `Committee`, `RaceStatus`, `Signall`, `Time`, `ScheduledTime`, `StartingTime`, `BoatsStarted`, `PreparatorySignal`, `OCS_DSQ`, `AP`, `GR`, `FinishTime`, `RaceTime`, `BoatsFinished`, `LastSignal`, `LastSignalTime`, `Results`, `Course`, `Distance1stLeg`, `Bearing1stLeg`, `LegChanges`, `WindDir`, `WindSpeed`, `WindDir25`, `WindSpeed25`, `WindDir50`, `WindSpeed50`, `WindDir75`, `WindSpeed75`, `WindDir100`, `WindSpeed100`) VALUES (" + i + ", NULL, '-1', NULL, NULL, '-1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '-1', NULL, '-1', '-1', '-1', NULL, NULL, '-1', NULL, NULL, NULL, NULL, '-1', '-1', NULL, '-1', '-1', '-1', '-1', '-1', '-1', '-1', '-1', '-1', '-1');";
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.executeUpdate();
+        }
+            cn.close();
+        } catch (SQLException e) {
+            
+        }
+    }
+    
 }

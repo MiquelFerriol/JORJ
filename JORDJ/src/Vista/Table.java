@@ -38,6 +38,13 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.swing.*;
+import java.awt.Component;
+import java.awt.Color;
+import javax.swing.*;
+import javax.swing.plaf.UIResource;
+import javax.swing.border.Border;
+import javax.swing.table.*;
+import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 /**
  *
@@ -45,14 +52,15 @@ import javax.swing.*;
  */
 
 
-public final class Table extends JPanel{
+public final class Table extends JFrame{
     
-    Timer displayTimer;        
+    private Timer displayTimer;        
     private String[] COLUMNA = {"id", "Class", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","WindDir75", "WindSpeed75","WindDir100", "WindSpeed100"};
     private String [] titulos ={"Id", "Class", "Race", "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
+    private DefaultTableModel modelo;
+    private BaseDatos BD;
     
-    
-    public class MyRenderer extends DefaultTableCellRenderer { 
+    public class TableRenderer extends DefaultTableCellRenderer { 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
@@ -124,7 +132,7 @@ public final class Table extends JPanel{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
                 return lbl;
             }
         }
@@ -204,26 +212,65 @@ public final class Table extends JPanel{
         
     }
     
-    DefaultTableModel modelo;
-    BaseDatos BD;
-    
+    public class HeaderRenderer extends DefaultTableCellRenderer { 
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
+    { 
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
+            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
+            try{
+                Color col;
+                switch(column){
+                    case 1:
+                        col = Color.red;
+                        break;
+                    case 2:
+                        col = Color.green;
+                        break;
+                    case 3:
+                        col = Color.yellow;
+                        break;
+                    case 4:
+                        col = Color.orange;
+                        break;
+                    case 5:
+                        col = Color.cyan;
+                        break;    
+                    case 6:
+                        col = Color.pink;
+                        break;    
+                    case 7:
+                        col = Color.gray;
+                        break;
+                    default:
+                        col = Color.WHITE;
+                }
+                c.setBackground(col);
+                return c;
+            }
+            catch(Exception e){
+                return c;
+            }
+        }       
+    }    
     
     public Table() {
-        super(new GridLayout(1, 0));
+        super("");
         DataTable();
         JTable table = new JTable(modelo){
           protected JTableHeader createDefaultTableHeader() {
-            return new GroupableTableHeader(columnModel);
-          };
+              return new GroupableTableHeader(columnModel);
+          }
         };
 
-        MyRenderer r = new MyRenderer();
+        TableRenderer r = new TableRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, r);
 
-        add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-
+        //add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        setExtendedState( getExtendedState()|JFrame.MAXIMIZED_BOTH );
 
         ActionListener listener = (ActionEvent event) -> {
             printTable();
@@ -234,13 +281,13 @@ public final class Table extends JPanel{
             new CellEditorListener() {
                 @Override
                 public void editingCanceled(ChangeEvent e) {
-                    System.out.println("editingCanceled");
+                    //System.out.println("editingCanceled");
                 }
 
                 @Override
                 public void editingStopped(ChangeEvent e) {
-                    System.out.println("editingStopped: apply additional action");
-                    System.out.println(table.getSelectedColumn());
+                    //System.out.println("editingStopped: apply additional action");
+                    //System.out.println(table.getSelectedColumn());
                     int column = table.getSelectedColumn();
                     int row = table.getSelectedRow();
                     Object data = modelo.getValueAt(row, column);
@@ -270,24 +317,82 @@ public final class Table extends JPanel{
 
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
         
-    /*TableColumnModel cm = table.getColumnModel();
-    ColumnGroup g_name = new ColumnGroup("Name");
-    g_name.add(cm.getColumn(1));
-    g_name.add(cm.getColumn(2));
-    ColumnGroup g_lang = new ColumnGroup("Language");
-    g_lang.add(cm.getColumn(3));
-    ColumnGroup g_other = new ColumnGroup("Others");
-    g_other.add(cm.getColumn(4));
-    g_other.add(cm.getColumn(5));
-    g_lang.add(g_other);
+        initHeader(table);
+    
+        add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
-    GroupableTableHeader header = (GroupableTableHeader)table.getTableHeader();
-    header.addColumnGroup(g_name);
-    header.addColumnGroup(g_lang);
-    JScrollPane scroll = new JScrollPane( table );
-        add(scroll);
-    setSize( 400, 120 );*/
-}
+        pack();
+        setVisible(true);
+    }
+    
+    private void initHeader(JTable table){
+        TableColumnModel cm = table.getColumnModel();
+        ColumnGroup g_StartsAbandoned = new ColumnGroup("Starts Abandoned");
+        g_StartsAbandoned.add(cm.getColumn(16));
+        g_StartsAbandoned.add(cm.getColumn(17));
+
+
+        ColumnGroup g_Races = new ColumnGroup("RACES");
+        g_Races.add(cm.getColumn(1));
+        g_Races.add(cm.getColumn(2));
+        g_Races.add(cm.getColumn(3));
+        g_Races.add(cm.getColumn(4));
+        g_Races.add(cm.getColumn(5));
+        g_Races.add(cm.getColumn(6));
+        g_Races.add(cm.getColumn(7));
+
+        ColumnGroup g_AshoreSignal = new ColumnGroup("Ashore Signals");
+        g_AshoreSignal.add(cm.getColumn(9));
+        g_AshoreSignal.add(cm.getColumn(10));
+
+        ColumnGroup g_Start = new ColumnGroup("START");
+        g_Start.add(cm.getColumn(11));
+        g_Start.add(cm.getColumn(12));
+        g_Start.add(cm.getColumn(13));
+        g_Start.add(cm.getColumn(14));
+        g_Start.add(cm.getColumn(15));
+        g_Start.add(g_AshoreSignal);
+        g_Start.add(g_StartsAbandoned);
+
+        ColumnGroup g_Finish = new ColumnGroup("FINISH");
+        g_Finish.add(cm.getColumn(18));
+        g_Finish.add(cm.getColumn(19));
+        g_Finish.add(cm.getColumn(20));
+
+        ColumnGroup g_DayEnd = new ColumnGroup("DAY END");
+        g_DayEnd.add(cm.getColumn(21));
+        g_DayEnd.add(cm.getColumn(22));
+        g_DayEnd.add(cm.getColumn(23));
+
+        ColumnGroup g_Course = new ColumnGroup("COURSE");
+        g_Course.add(cm.getColumn(24));
+        g_Course.add(cm.getColumn(25));
+        g_Course.add(cm.getColumn(26));
+        g_Course.add(cm.getColumn(27));
+        g_Course.add(cm.getColumn(28));
+        g_Course.add(cm.getColumn(29));
+
+        ColumnGroup g_SailingConditions = new ColumnGroup("SAILING CONDITIONS");
+        g_SailingConditions.add(cm.getColumn(30));
+        g_SailingConditions.add(cm.getColumn(31));
+        g_SailingConditions.add(cm.getColumn(32));
+        g_SailingConditions.add(cm.getColumn(33));
+        g_SailingConditions.add(cm.getColumn(34));
+        g_SailingConditions.add(cm.getColumn(35));    
+        g_SailingConditions.add(cm.getColumn(36));
+        g_SailingConditions.add(cm.getColumn(37));
+
+        GroupableTableHeader header = (GroupableTableHeader)table.getTableHeader();
+        header.addColumnGroup(g_Races);
+        header.addColumnGroup(g_Start);
+        header.addColumnGroup(g_AshoreSignal);
+        header.addColumnGroup(g_Finish);
+        header.addColumnGroup(g_DayEnd);
+        header.addColumnGroup(g_Course);
+        header.addColumnGroup(g_SailingConditions);
+        
+        header.setFont(new Font("Arial", Font.BOLD ,15));
+    }
     
     private void finishTime(int row, int column){
         if((modelo.getValueAt(row, 12) != "") && (modelo.getValueAt(row, 18) != "") ){
@@ -303,11 +408,11 @@ public final class Table extends JPanel{
                     TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
                     TimeUnit.MILLISECONDS.toSeconds(millis) - 
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-                    System.out.println(modelo.getValueAt(row, 19).toString());
+                    //System.out.println(modelo.getValueAt(row, 19).toString());
                     if(!hms.equals(modelo.getValueAt(row, 19).toString())){
                         modelo.setValueAt(hms, row, 19);
                         BD.Update(row+1, COLUMNA[19], hms);
-                    System.out.println("ASDSA" + modelo.getValueAt(row, 19).toString());
+                    //System.out.println("ASDSA" + modelo.getValueAt(row, 19).toString());
                 }
             } catch (Exception es) {
             }
@@ -407,8 +512,8 @@ public final class Table extends JPanel{
     
     public final void DataTable(){
         
-        modelo = new DefaultTableModel(null, titulos);
-        
+        modelo = new DefaultTableModel();
+        modelo.setDataVector(new Object[][]{}, titulos);
         String [] fila = new String[titulos.length];
         
         BD = new BaseDatos();
@@ -438,25 +543,9 @@ public final class Table extends JPanel{
     }
     
     
-    public static void createAndShowGUI() {
-
-    JFrame frame = new JFrame("Race Status");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setExtendedState(JFrame.MAXIMIZED_HORIZ);
-
-    Table newContentPane = new Table();
-    newContentPane.setOpaque(true); //content panes must be opaque
-    frame.setContentPane(newContentPane);
-
-    frame.pack();
-    frame.setVisible(true);
-  }
-    
-   
-
   public static void main(String[] args) {
     javax.swing.SwingUtilities.invokeLater(() -> {
-                createAndShowGUI();
+        Table table = new Table();
                 
     });
   }
