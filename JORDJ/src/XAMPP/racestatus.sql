@@ -1,3 +1,21 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-03-2016 a las 20:45:01
+-- Versión del servidor: 10.1.10-MariaDB
+-- Versión de PHP: 7.0.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de datos: `olimp`
 --
@@ -54,19 +72,19 @@ CREATE TABLE `racestatus` (
 --
 
 INSERT INTO `racestatus` (`id`, `Class`, `Race`, `ScheduledDate`, `RealDate`, `Entries`, `Area`, `Committee`, `RaceStatus`, `Signall`, `Time`, `ScheduledTime`, `StartingTime`, `BoatsStarted`, `PreparatorySignal`, `OCS_DSQ`, `AP`, `GR`, `FinishTime`, `RaceTime`, `BoatsFinished`, `LastSignal`, `LastSignalTime`, `Results`, `Course`, `Distance1stLeg`, `Bearing1stLeg`, `LegChanges`, `WindDir`, `WindSpeed`, `WindDir25`, `WindSpeed25`, `WindDir50`, `WindSpeed50`, `WindDir75`, `WindSpeed75`, `WindDir100`, `WindSpeed100`) VALUES
-(1, 'RS:X M', 1, '08/08/2016', '', -1, 'Päo Açucar', 'Christoph', 'SCHEDULED', 'DELTA', '', '13:00', '', 5, 'PAPA', 5, 2, 2, '13:00:00', '', 2, '2', '12:00', '2', '2', 2, 2, 'c', 2, 90, 2, 2, 2, 2, 2, 2, 2, 270),
-(2, 'RS:X M', 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', 'POSTPONDMENT', 'N+A', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, '', NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, 5, 5, -1, -1, -1, -1, -1, -1, -1),
-(3, 'RS:X M', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', 'ON SEQUENCE', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(4, 'RS:X M', 4, '09/08/2016', NULL, -1, 'Escola Naval', 'Luiggi', 'SAILING', 'Ap', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(5, 'RS:X M', 5, '09/08/2016', NULL, -1, 'Escola Naval', 'Sulis', 'ON TIME', 'n+a', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(6, 'RS:X M', 6, '09/08/2016', NULL, -1, 'Escola Naval', 'John', 'ABANDON', 'delta', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(7, 'RS:X M', 7, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'FINISHED', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(8, 'RS:X M', 8, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'POSTPONDMENT', 'DELTA', NULL, '13:00', NULL, -1, 'PAPA', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(9, 'RS:X M', 9, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'FINISHED', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(10, 'RS:X M', 10, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'SCHEDULED', 'lima', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(11, 'RS:X M', 11, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'POSTPONDMENT', 'n+a', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(12, 'RS:X M', 12, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'FINISHED', 'DELTA', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(13, 'RS:X M', -1, '14/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'ABANDON', 'lima', NULL, '13:00', NULL, -1, 'PAPA', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(1, 'RS:X M', 1, '08/08/2016', '', -1, 'Päo Açucar', 'Christoph', 'SCHEDULED', 'DELTA', '', '13:00', '', -1, 'PAPA', -1, -1, -1, '', '', -1, '', '', 'PUBLISHED', '', -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(2, 'RS:X M', 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', 'POSTPONDMENT', 'N+A', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, '', NULL, -1, NULL, NULL, 'RECEIVED', NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(3, 'RS:X M', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', 'ON SEQUENCE', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'REVIEWING', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(4, 'RS:X M', 4, '09/08/2016', NULL, -1, 'Escola Naval', 'Luiggi', 'SAILING', 'Ap', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'INCIDENCE', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(5, 'RS:X M', 5, '09/08/2016', NULL, -1, 'Escola Naval', 'Sulis', 'ON TIME', 'n+a', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(6, 'RS:X M', 6, '09/08/2016', NULL, -1, 'Escola Naval', 'John', 'ABANDON', 'delta', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(7, 'RS:X M', 7, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'FINISHED', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'INCIDENCE', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(8, 'RS:X M', 8, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'POSTPONDMENT', 'DELTA', NULL, '13:00', NULL, -1, 'PAPA', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'REVIEWING', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(9, 'RS:X M', 9, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'FINISHED', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(10, 'RS:X M', 10, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'SCHEDULED', 'lima', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(11, 'RS:X M', 11, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'POSTPONDMENT', 'n+a', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'REVIEWING', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(12, 'RS:X M', 12, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'FINISHED', 'DELTA', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'RECEIVED', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(13, 'RS:X M', -1, '14/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'ABANDON', 'lima', NULL, '13:00', NULL, -1, 'PAPA', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'RECEIVED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
 (14, 'RS:X W', 1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'SAILING', 'n+a', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
 (15, 'RS:X W', 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'ON SEQUENCE', 'DELTA', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
 (16, 'RS:X W', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'SEQUENCE', 'n+a', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),

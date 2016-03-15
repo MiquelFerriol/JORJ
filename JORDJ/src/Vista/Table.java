@@ -89,9 +89,9 @@ public final class Table extends JFrame{
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
                 if(s.equals("SCHEDULED")){
-                    s = "YELLOW";
+                    s = "SCHEDULED";
                     icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
-                    lbl.setText("SCHEDULED");
+                    //lbl.setText("SCHEDULED");
                     
                 }
                 else if(s.equals("POSTPONDMENT")){
@@ -114,9 +114,9 @@ public final class Table extends JFrame{
                     icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
                 }
                 else if (s.equals("ON TIME")){
-                    s = "WHITE";
+                    s = "ONTIME";
                     icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
-                    lbl.setText("ON TIME");
+                    //lbl.setText("ON TIME");
                 }
                 else{
                     lbl.setText(s);
@@ -130,6 +130,49 @@ public final class Table extends JFrame{
                 lbl.setIcon(icon);
                 return lbl;
             }
+            
+            catch(Exception e){
+                JLabel lbl = new JLabel();
+                //System.out.println(e.getMessage());
+                return lbl;
+            }
+        }
+        else if(column == 23){
+            try{
+                String s =  modelo.getValueAt(row, column).toString();
+                JLabel lbl = new JLabel();
+                ImageIcon icon; 
+                if(s.equals("PUBLISHED")){
+                    s = "LIMA";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                    //lbl.setText("SCHEDULED");
+                    
+                }
+                else if(s.equals("RECEIVED")){
+                    s = "GREEN";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else if(s.equals("REVIEWING")){
+                    s = "YELLOW";
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else if (s.equals("INCIDENCE")){
+                    s = "RED"; 
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
+                }
+                else{
+                    lbl.setText(s);
+                    icon = new ImageIcon(getClass().getResource("Imagenes/" + "WHITE" + ".JPG"));
+                }
+                lbl.setHorizontalAlignment(JLabel.CENTER);
+                lbl.setVerticalAlignment(JLabel.CENTER);
+                lbl.setIcon(icon);
+                lbl.setHorizontalTextPosition(JLabel.CENTER);
+                lbl.setVerticalTextPosition(JLabel.CENTER);
+                lbl.setIcon(icon);
+                return lbl;
+            }
+            
             catch(Exception e){
                 JLabel lbl = new JLabel();
                 //System.out.println(e.getMessage());
@@ -202,6 +245,7 @@ public final class Table extends JFrame{
                 return lbl;
             }
         }*/
+        
         else {
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
             c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
