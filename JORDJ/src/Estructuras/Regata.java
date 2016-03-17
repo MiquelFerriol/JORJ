@@ -15,6 +15,7 @@ import java.util.Date;
 public class Regata {
     private int id;
     private String Class;
+    private String Group;
     private int Race;
     private String ScheduledDate;
     private String RealDate;
@@ -83,6 +84,14 @@ public class Regata {
         this.Class = Class;
     }
 
+    public String getGroup() {
+        return Group;
+    }
+
+    public void setGroup(String Group) {
+        this.Group = Group;
+    }
+    
     /**
      * @return the Race
      */
