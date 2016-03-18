@@ -20,6 +20,7 @@ import java.sql.SQLException;
  */
 public class BaseDatos {
     private ArrayList<Regata> BD;
+    private ArrayList<Cjt_Bolla> BDB;
     private Connection cn;
     ConectaBD db;
     
@@ -29,6 +30,7 @@ public class BaseDatos {
     
     public void initBD(){
         BD = new ArrayList<>();
+        BDB = new ArrayList<>();
         //System.out.println("Conectados");
         String sql = "select * from racestatus";
         try {
@@ -76,7 +78,32 @@ public class BaseDatos {
                 r.setWindSpeed75(rs.getInt(37));
                 r.setWindDir100(rs.getInt(38));
                 r.setWindSpeed100(rs.getInt(39));
-                
+                Bolla b1 = new Bolla(rs.getString(40));
+                Bolla b2 = new Bolla(rs.getString(41));
+                Bolla b3 = new Bolla(rs.getString(42));
+                Bolla b4 = new Bolla(rs.getString(43));
+                Bolla b5 = new Bolla(rs.getString(44));
+                Bolla b6 = new Bolla(rs.getString(45));
+                Bolla b7 = new Bolla(rs.getString(46));
+                Bolla b8 = new Bolla(rs.getString(47));
+                Bolla b9 = new Bolla(rs.getString(48));
+                Bolla b10 = new Bolla(rs.getString(49));
+                Bolla b11 = new Bolla(rs.getString(50));
+                Bolla b12 = new Bolla(rs.getString(51));
+                Cjt_Bolla c = new Cjt_Bolla();
+                c.add(b1);
+                c.add(b2);
+                c.add(b3);
+                c.add(b4);
+                c.add(b5);
+                c.add(b6);
+                c.add(b7);
+                c.add(b8);
+                c.add(b9);
+                c.add(b10);
+                c.add(b11);
+                c.add(b12);
+                BDB.add(c);
                 BD.add(r);
             }
             cn.close();
@@ -87,6 +114,10 @@ public class BaseDatos {
     
     public ArrayList<Regata> getBD(){
         return BD;
+    }
+
+    public ArrayList<Cjt_Bolla> getBDB() {
+        return BDB;
     }
     
     public void Update(int id, String col, Object value){

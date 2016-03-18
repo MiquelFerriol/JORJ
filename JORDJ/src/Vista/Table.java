@@ -966,6 +966,7 @@ public final class Table extends JFrame{
   public static void main(String[] args) {
     javax.swing.SwingUtilities.invokeLater(() -> {
         Table table = new Table();
+        //BollaTable bTable = new BollaTable();
                 
     });
   }
