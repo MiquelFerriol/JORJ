@@ -13,7 +13,7 @@ public class ConectaBD {
         Connection cn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            cn=DriverManager.getConnection("jdbc:mysql://10.101.9.112:3306/olimp", "admin", "admin");
+            cn=DriverManager.getConnection("jdbc:mysql://192.168.1.42:3306/olimp", "admin", "admin");
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }catch(Exception e1){

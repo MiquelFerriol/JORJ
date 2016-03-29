@@ -56,7 +56,7 @@ public final class Table extends JFrame{
     
     private Timer displayTimer;        
     private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","WindDir75", "WindSpeed75","WindDir100", "WindSpeed100"};
-    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges", "Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
+    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.", "WindSpeed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     
@@ -262,7 +262,6 @@ public final class Table extends JFrame{
                         icon = new ImageIcon(getClass().getResource("Imagenes/" + s + ".JPG"));
                         break;
                     default:
-                        lbl.setText(s);
                         icon = new ImageIcon(getClass().getResource("Imagenes/" + "WHITE" + ".JPG"));
                         break;
                 }
@@ -276,7 +275,7 @@ public final class Table extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                System.out.println(e.getMessage());
+                //System.out.println("COLUMN 28 " + e.getMessage());
                 return lbl;
             }
         } 
@@ -390,21 +389,21 @@ public final class Table extends JFrame{
                 return c;
             }
         }
-        /*else if(column == 28){
+        /*else if(column == 29){
             //System.out.println("KAPPA");
             try{
                 
-            int g = Integer.parseInt(modelo.getValueAt(row, 29).toString());
+            int g = Integer.parseInt(modelo.getValueAt(row, 30).toString());
             System.out.println("Graus: " + g );
-            int s = Integer.parseInt(modelo.getValueAt(row, 30).toString());
+            int s = Integer.parseInt(modelo.getValueAt(row, 31).toString());
             JLabel lbl = new JLabel();
-            ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/Viento/0.png"));
+            ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/1.jpg"));
             int w = icon.getIconWidth();
             int h = icon.getIconHeight();
-            int type = BufferedImage.TYPE_INT_RGB;  // other options, see api
+            int type = BufferedImage.OPAQUE;  // other options, see api
             BufferedImage image = new BufferedImage(h, w, type);
             Graphics2D g2 = image.createGraphics();
-            g2.rotate(Math.toRadians(90+g), w/2.0, h/2.0);
+            g2.rotate(Math.toRadians(g), w, h);
             g2.drawImage(icon.getImage(), 0,0,Color.WHITE, lbl);
             
             g2.dispose();
@@ -506,7 +505,7 @@ public final class Table extends JFrame{
                 @Override
                 public void editingStopped(ChangeEvent e) {
                     
-                    System.out.println("editingStopped: apply additional action");
+                    //.out.println("editingStopped: apply additional action");
                     //System.out.println(table.getSelectedColumn());
                     int column = table.getSelectedColumn();
                     int row = table.getSelectedRow();
@@ -514,7 +513,7 @@ public final class Table extends JFrame{
                     lastRow = row;
                     if(row != -1 && column != -1){
                         Object data = modelo.getValueAt(row, column);
-
+                        
                         if(correctValue(column, data.toString())){
                                 BD.Update(row+1, COLUMNA[column], data);
                             }
@@ -567,7 +566,7 @@ public final class Table extends JFrame{
     public void itemStateChanged(ItemEvent e, Desplegable d, int r, int c) {
         if ((e.getStateChange() == ItemEvent.SELECTED)) {
             int selection = d.getSelectedIndex();
-                System.out.println("CAMBIADO");
+                //.out.println("CAMBIADO");
             
         }
     }
@@ -583,8 +582,8 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 1)){
+            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            if((lastCol != col || lastRow != row) && (col == 1)){
                 BD.Update(row+1, COLUMNA[col], dClass.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -599,8 +598,8 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 6)){
+            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            if((lastCol != col || lastRow != row) && (col == 7)){
                 BD.Update(row+1, COLUMNA[col], dArea.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -615,8 +614,8 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 7)){
+            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            if((lastCol != col || lastRow != row) && (col == 8)){
                 BD.Update(row+1, COLUMNA[col], dCommittee.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -631,8 +630,8 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 8) ){
+            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            if((lastCol != col || lastRow != row) && (col == 9) ){
                 BD.Update(row+1, COLUMNA[col], dRaceStatus.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -647,8 +646,8 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 9)){
+            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            if((lastCol != col || lastRow != row) && (col == 10)){
                 BD.Update(row+1, COLUMNA[col], dSignal.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -663,11 +662,14 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 14)){
+            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            if((lastCol != col || lastRow != row) && (col == 15)){
                 BD.Update(row+1, COLUMNA[col], dPrepSig.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
+            }
+            else{
+                //System.out.println("ASDASDA");
             }
         });
         DefaultCellEditor dcePrepSig= new DefaultCellEditor(dPrepSig);
@@ -679,8 +681,8 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 21)){
+            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            if((lastCol != col || lastRow != row) && (col == 22)){
                 BD.Update(row+1, COLUMNA[col], dLastSig.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -696,7 +698,7 @@ public final class Table extends JFrame{
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
             System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 23)){
+            if((lastCol != col || lastRow != row) && (col == 24)){
                 BD.Update(row+1, COLUMNA[col], dResults.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -712,7 +714,7 @@ public final class Table extends JFrame{
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
             System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 2)){
+            if((lastCol != col || lastRow != row) && (col == 2)){
                 BD.Update(row+1, COLUMNA[col], dGroup.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -728,7 +730,7 @@ public final class Table extends JFrame{
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
             System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if(lastCol != col || lastRow != row && (col == 28)){
+            if((lastCol != col || lastRow != row) && (col == 28)){
                 BD.Update(row+1, COLUMNA[col], dChanges.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
@@ -816,6 +818,7 @@ public final class Table extends JFrame{
             SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm:ss");
             try{
                     Date date1 = timerformat.parse(modelo.getValueAt(row, 13).toString());
+                    System.out.println("DATA: " + modelo.getValueAt(row, 19).toString());
                     Date date2 = timerformat.parse(modelo.getValueAt(row, 19).toString());
                     Date date = new Date();
                     long millis = date2.getTime()-date1.getTime();
@@ -826,11 +829,8 @@ public final class Table extends JFrame{
                     TimeUnit.MILLISECONDS.toSeconds(millis) - 
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
                     //System.out.println(modelo.getValueAt(row, 19).toString());
-                    if(!hms.equals(modelo.getValueAt(row, 20).toString())){
                         modelo.setValueAt(hms, row, 20);
                         BD.Update(row+1, COLUMNA[20], hms);
-                    //System.out.println("ASDSA" + modelo.getValueAt(row, 19).toString());
-                }
             } catch (Exception es) {
                 System.out.println(es.getMessage());
                 es.printStackTrace();

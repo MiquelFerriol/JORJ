@@ -54,7 +54,7 @@ public class Bolla {
             }
             else{
                 ++cont;
-                System.out.println("ENTRO");
+                //System.out.println("ENTRO");
             }
             ++point;
         }

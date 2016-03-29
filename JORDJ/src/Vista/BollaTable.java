@@ -36,10 +36,11 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class BollaTable extends JFrame{
     
-    private String[] COLUMNA = {"Mark1","Mark2","Mark3","Mark4","Mark5","Mark6","Mark7","Mark8","Mark9","Mark10","Mark11","Mark12"};
+    private String[] COLUMNA = {"Id","Race","Race","Mark1","Mark2","Mark3","Mark4","Mark5","Mark6","Mark7","Mark8","Mark9","Mark10","Mark11","Mark12"};
     private String [] titulos ={"Id","Race","Race","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
     private DefaultTableModel modelo;
     private BaseDatos BD;
+    private Timer displayTimer;     
     
     public BollaTable() {
         super("");
@@ -60,7 +61,10 @@ public class BollaTable extends JFrame{
 
         ActionListener listener = (ActionEvent event) -> {
             printTable();
+            displayTimer.restart();
         };
+        displayTimer = new Timer(4000, listener);
+        displayTimer.start();
 
         bTable.getDefaultEditor(String.class).addCellEditorListener(
             new CellEditorListener() {
@@ -82,9 +86,11 @@ public class BollaTable extends JFrame{
                         Object data = modelo.getValueAt(row, column);
 
                         if(correctValue(column, data.toString())){
-                                BD.Update(row+1, COLUMNA[column%12], data);
+                            BD.Update(row+1, COLUMNA[(column-3)/7 + 3], createVal(row,column,data.toString()));
+                            System.out.println(createVal(row,column,data.toString())+ " " + COLUMNA[(column-3)/7 + 3]);
                         }
                         else if (!"".equals(data.toString())){
+                            System.out.println("INCORRECT");
                             modelo.setValueAt("", row, column);
                         }
                     }
@@ -108,41 +114,87 @@ public class BollaTable extends JFrame{
         setVisible(true);
     }
     
+    private String createVal(int r, int c, String data){
+        String s = "";
+            if((c-3)%7 == 0){
+                s = data +"-"+ modelo.getValueAt(r, c+1)+"-"+ modelo.getValueAt(r, c+2)+"-"+ modelo.getValueAt(r, c+3)+"-"+ modelo.getValueAt(r, c+4)+"-"+ modelo.getValueAt(r, c+5)+"-"+ modelo.getValueAt(r, c+6);
+            }
+            else if((c-3)%7 == 1){
+                s =  modelo.getValueAt(r, c-1)+"-"+data+"-"+ modelo.getValueAt(r, c+1)+"-"+ modelo.getValueAt(r, c+2)+"-"+ modelo.getValueAt(r, c+3)+"-"+ modelo.getValueAt(r, c+4)+"-"+ modelo.getValueAt(r, c+5);
+            }
+            else if((c-3)%7 == 2){
+                s =  modelo.getValueAt(r, c-2)+"-"+ modelo.getValueAt(r, c-1)+"-"+ data+"-"+ modelo.getValueAt(r, c+1)+"-"+ modelo.getValueAt(r, c+2)+"-"+ modelo.getValueAt(r, c+3)+"-"+ modelo.getValueAt(r, c+4);
+            }
+            else if((c-3)%7 == 3){
+                s =  modelo.getValueAt(r, c-3)+"-"+ modelo.getValueAt(r, c-2)+"-"+ modelo.getValueAt(r, c-1)+"-"+data+"-"+ modelo.getValueAt(r, c+1)+"-"+ modelo.getValueAt(r, c+2)+"-"+ modelo.getValueAt(r, c+3);
+            }
+            else if((c-3)%7 == 4){
+                s = modelo.getValueAt(r, c-4)+"-"+ modelo.getValueAt(r, c-3)+"-"+ modelo.getValueAt(r, c-2)+"-"+ modelo.getValueAt(r, c-1)+"-" +data +"-"+ modelo.getValueAt(r, c+1)+"-"+ modelo.getValueAt(r, c+2);
+            }
+            else if((c-3)%7 == 5){
+                s = modelo.getValueAt(r, c-5)+"-"+ modelo.getValueAt(r, c-4)+"-"+ modelo.getValueAt(r, c-3)+"-"+ modelo.getValueAt(r, c-2)+"-"+ modelo.getValueAt(r, c-1)+"-"+ data +"-"+ modelo.getValueAt(r, c+1);
+            }
+            else if((c-3)%7 == 6){
+                s = modelo.getValueAt(r, c-6)+"-"+ modelo.getValueAt(r, c-5)+"-"+ modelo.getValueAt(r, c-4)+"-"+ modelo.getValueAt(r, c-3)+"-"+ modelo.getValueAt(r, c-2)+"-"+ modelo.getValueAt(r, c-1)+"-"+ data;
+            }
+            else return s;
+        return s;
+    }
+    
+    
+    
+
     private boolean correctValue(int c, String val){
         if(!val.equals("")){
-            switch(c){               
-                case 4:
-                case 5:
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                    try {
-                        Date date = formatter.parse(val);
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                case 11:
-                case 12:
-                case 23:
-                    SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm");
-                        try {
-                            Date date = timerformat.parse(val);
-                            return true;
-                        } catch (Exception e) {
-                            return false;
-                        }
-                case 13:
-                case 19:
-                case 20:
-                    SimpleDateFormat timerformat1 = new SimpleDateFormat("HH:mm:ss");
-                        try {
-                            timerformat1.parse(val).getTime();
-                            return true;
-                        } catch (Exception e) {
-                            return false;
-                        }
-                default:
+            if((c-3)%7 == 0){
                 return true;
             }
+            else if((c-3)%7 == 1){
+                return val.contains("N") || val.contains("S");
+            }
+            else if((c-3)%7 == 2){
+                try{
+                    int aux = Integer.parseInt(val);
+                    return aux <= 360 && aux >= 0;// && Integer.parseInt(val) >= 0;
+                }
+                catch(Exception e){
+                    return false;
+                }
+            }
+            else if((c-3)%7 == 3){
+                try{
+                    Double aux = Double.parseDouble(val);
+                    return aux < 60 && aux >= 0;// && Integer.parseInt(val) >= 0;
+                }
+                catch(Exception e){
+                    return false;
+                }
+                
+            }
+            else if((c-3)%7 == 4){
+                return val.contains("E") || val.contains("W");
+            }
+            else if((c-3)%7 == 5){
+                try{
+                    int aux = Integer.parseInt(val);
+                    return aux <= 360 && aux >= 0;// && Integer.parseInt(val) >= 0;
+                }
+                catch(Exception e){
+                    return false;
+                }
+                
+            }
+            else if((c-3)%7 == 6){
+                try{
+                    Double aux = Double.parseDouble(val);
+                    return aux < 60 && aux >= 0;// && Integer.parseInt(val) >= 0;
+                }
+                catch(Exception e){
+                    return false;
+                }
+                
+            }
+            else return false;
         }
         else return true;
     }
@@ -315,7 +367,7 @@ public class BollaTable extends JFrame{
             Regata r = BD.getBD().get(i);
             modelo.setValueAt(r.getId(),i,0);
             modelo.setValueAt(r.getClas(),i,1);
-            System.out.println("RACE:" + r.getRace());
+            //System.out.println("RACE:" + r.getRace());
             modelo.setValueAt(r.getRace(), i, 2);
             for(int j = 0; j < 12; ++j){
                 modelo.setValueAt(cjt.getI(j).getName(),i,3+7*j);
