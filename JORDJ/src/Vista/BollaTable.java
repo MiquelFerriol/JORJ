@@ -29,7 +29,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.DefaultTableModel;
 import Estructuras.*;
 import javax.swing.table.DefaultTableCellRenderer;
-
+import javax.swing.ImageIcon;
 /**
  *
  * @author Miquel Ferriol
@@ -42,8 +42,10 @@ public class BollaTable extends JFrame{
     private BaseDatos BD;
     private Timer displayTimer;     
     
-    public BollaTable() {
+    public BollaTable(BaseDatos BD) {
         super("");
+        this.BD = BD;
+        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/SAILING.JPG")).getImage());
         DataTable();
         JTable bTable = new JTable(modelo){
           @Override
@@ -55,7 +57,7 @@ public class BollaTable extends JFrame{
         r.setHorizontalAlignment(JLabel.CENTER);
         bTable.setDefaultRenderer(Object.class, r);
         //add(new JScrollPane(bTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         bTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         setExtendedState( getExtendedState()|JFrame.MAXIMIZED_BOTH );
 
@@ -387,8 +389,6 @@ public class BollaTable extends JFrame{
         modelo = new DefaultTableModel();
         modelo.setDataVector(new Object[][]{}, titulos);
         String [] fila = new String[titulos.length];
-        
-        BD = new BaseDatos();
         BD.initBD();
         int size = BD.getBD().size();
         
@@ -413,11 +413,6 @@ public class BollaTable extends JFrame{
             }
         }
     }
-    
-    public static void main(String[] args) {
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        BollaTable bTable = new BollaTable();
-    });
-  }
-    
 }
+    
+

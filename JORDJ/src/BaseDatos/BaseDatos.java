@@ -23,8 +23,10 @@ public class BaseDatos {
     private ArrayList<Cjt_Bolla> BDB;
     private Connection cn;
     ConectaBD db;
+    String ip;
     
-    public BaseDatos(){
+    public BaseDatos(String ip){
+        this.ip = ip;
         db = new ConectaBD();
     }
     
@@ -34,7 +36,7 @@ public class BaseDatos {
         //System.out.println("Conectados");
         String sql = "select * from racestatus";
         try {
-            cn = db.getConnection();
+            cn = db.getConnection(ip);
             PreparedStatement st1 = cn.prepareStatement(sql);
             ResultSet rs = st1.executeQuery();
             while (rs.next()) {
@@ -121,8 +123,9 @@ public class BaseDatos {
     }
     
     public void Update(int id, String col, Object value){
-        cn = db.getConnection();
+        cn = db.getConnection(ip);
         try {
+            //String sql = "UPDATE usuario SET P_Nombre='"+txtNombres.getText()+"',S_Nombre=' "+txtSgnNombre.getText()+"',P_Apellido='"+txtApellidos.getText()+"',S_Apellido=' "+ txtSgnApellido.getText()+"',Telefono='"+txtTelefono.getText()+"'WHERE N_Documento='"+txtnDocumento"';";
             String sql = "UPDATE racestatus " + "SET " + col + " = '" + value + "' WHERE id = " + id + ";";
             System.out.println(sql);
             PreparedStatement st = cn.prepareStatement(sql);
@@ -147,7 +150,7 @@ public class BaseDatos {
     }
     
     public void Insert(){
-        cn = db.getConnection();
+        cn = db.getConnection(ip);
         try {
             
         for(int i = 9; i <= 121; ++i){
@@ -159,6 +162,24 @@ public class BaseDatos {
         } catch (SQLException e) {
             
         }
+    }
+    
+    public void UpdateBT(){
+        for(int i = 0; i <= 120; ++i){
+        cn = db.getConnection(ip);
+        try {
+            //String sql = "UPDATE usuario SET P_Nombre='"+txtNombres.getText()+"',S_Nombre=' "+txtSgnNombre.getText()+"',P_Apellido='"+txtApellidos.getText()+"',S_Apellido=' "+ txtSgnApellido.getText()+"',Telefono='"+txtTelefono.getText()+"'WHERE N_Documento='"+txtnDocumento"';";
+            
+                String sql = "UPDATE racestatus SET Mark1 = 'RP-N-41-23.567-E-180-23.567',Mark2 = 'RP-N-41-23.567-E-180-23.567',Mark3 = 'RP-N-41-23.567-E-180-23.567',Mark4 = 'RP-N-41-23.567-E-180-23.567',Mark5 = 'RP-N-41-23.567-E-180-23.567',Mark6 = 'RP-N-41-23.567-E-180-23.567',Mark7 = 'RP-N-41-23.567-E-180-23.567',Mark8 = 'RP-N-41-23.567-E-180-23.567',Mark9 = 'RP-N-41-23.567-E-180-23.567',Mark10 = 'RP-N-41-23.567-E-180-23.567',Mark11 = 'RP-N-41-23.567-E-180-23.567',Mark12 = 'RP-N-41-23.567-E-180-23.567' WHERE id = " + i + ";";
+                System.out.println(sql);
+                PreparedStatement st = cn.prepareStatement(sql);
+                st.executeUpdate();
+            cn.close();
+        } catch (SQLException e) {
+             e.printStackTrace();
+        }
+        
+            }
     }
     
 }

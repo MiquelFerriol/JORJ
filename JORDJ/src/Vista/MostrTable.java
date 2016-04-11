@@ -5,7 +5,6 @@
  */
 package Vista;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,13 +49,10 @@ import javax.swing.SwingUtilities;
  *
  * @author Miquel Ferriol
  */
-
-
-public final class Table extends JFrame{
-    
+public class MostrTable extends JFrame{
     private Timer displayTimer;        
-    private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","WindDir75", "WindSpeed75","WindDir100", "WindSpeed100"};
-    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.", "Wind Speed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
+    private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir","WindSpeed"};
+    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     private String IP;
@@ -473,7 +469,7 @@ public final class Table extends JFrame{
         }       
     }    
     
-    public Table(BaseDatos BD) {
+    public MostrTable(BaseDatos BD) {
         super("");
         this.BD = BD;
         setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
@@ -507,9 +503,6 @@ public final class Table extends JFrame{
 
                 @Override
                 public void editingStopped(ChangeEvent e) {
-                    
-                    //.out.println("editingStopped: apply additional action");
-                    //System.out.println(table.getSelectedColumn());
                     int column = table.getSelectedColumn();
                     int row = table.getSelectedRow();
                     lastCol = column;
@@ -532,7 +525,7 @@ public final class Table extends JFrame{
             }
         );
         
-        displayTimer = new Timer(4000, listener);
+        displayTimer = new Timer(1000, listener);
         displayTimer.start();
 
         TableColumnAdjuster tca = new TableColumnAdjuster(table);
@@ -542,7 +535,6 @@ public final class Table extends JFrame{
 
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
         
-        initDesplegable(table);
         initHeader(table);
     
         add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
@@ -550,200 +542,11 @@ public final class Table extends JFrame{
         pack();
         setVisible(true);
     }
-    
-    public class Desplegable extends JComboBox{
-        int col;
-        public Desplegable(int col, String[] DATA){
-            super(DATA);
-            super.setEditable(true);
-            this.col = col;
-            setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
-            setBackground(Color.white);
-        }
-        
-        public int getCol(){
-            return col;
-        }
-    }
-    
-    public void itemStateChanged(ItemEvent e, Desplegable d, int r, int c) {
-        if ((e.getStateChange() == ItemEvent.SELECTED)) {
-            int selection = d.getSelectedIndex();
-                //.out.println("CAMBIADO");
-            
-        }
-    }
     int lRow;
     boolean cont = false;
     int lastCol = -1;
     int lastRow = -1;
     
-    private void initDesplegable(JTable table){
-        Desplegable dClass = new Desplegable(1,new String[] {"RS:X M", "RS:X W","LASER STD","LASER RAD", "470 M", "470 W","FINN",	"49ER",	"FX ONE","NACRA"});
-        dClass.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 1)){
-                BD.Update(row+1, COLUMNA[col], dClass.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceClass= new DefaultCellEditor(dClass);
-        table.getColumnModel().getColumn(1).setCellEditor(dceClass);
-        
-        Desplegable dArea = new Desplegable(1,new String[] {"Päo Açucar", "Escola Naval","Niteroi","Ponte", "Copacabana", "Pai","Aeroport"});
-        dArea.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 7)){
-                BD.Update(row+1, COLUMNA[col], dArea.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceArea= new DefaultCellEditor(dArea);
-        table.getColumnModel().getColumn(7).setCellEditor(dceArea);
-        
-        Desplegable dCommittee = new Desplegable(1,new String[] {"Christoph", "Maria","Stogg","Luiggi", "Sulis", "John","Other"});
-        dCommittee.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 8)){
-                BD.Update(row+1, COLUMNA[col], dCommittee.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceCommittee= new DefaultCellEditor(dCommittee);
-        table.getColumnModel().getColumn(8).setCellEditor(dceCommittee);
-        
-        Desplegable dRaceStatus = new Desplegable(1,new String[] {"SCHEDULED", "POSTPONDMENT","ON SEQUENCE","SAILING", "FINISHED", "ABANDON","ON TIME"});
-        dRaceStatus.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 9) ){
-                BD.Update(row+1, COLUMNA[col], dRaceStatus.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceRaceStatus= new DefaultCellEditor(dRaceStatus);
-        table.getColumnModel().getColumn(9).setCellEditor(dceRaceStatus);
-        
-        Desplegable dSignal = new Desplegable(1,new String[] {"DELTA", "AP","AP+A","N+A", "LIMA"});
-        dSignal.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            //.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 10)){
-                BD.Update(row+1, COLUMNA[col], dSignal.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceSignal= new DefaultCellEditor(dSignal);
-        table.getColumnModel().getColumn(10).setCellEditor(dceSignal);
-        
-        Desplegable dPrepSig = new Desplegable(1,new String[] {"PAPA", "INDIA - 30.1","ZULU - 30.2","BLACK - 30.3", "OTHER"});
-        dPrepSig.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 15)){
-                BD.Update(row+1, COLUMNA[col], dPrepSig.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-            else{
-                //System.out.println("ASDASDA");
-            }
-        });
-        DefaultCellEditor dcePrepSig= new DefaultCellEditor(dPrepSig);
-        table.getColumnModel().getColumn(15).setCellEditor(dcePrepSig);
-        
-        Desplegable dLastSig = new Desplegable(1,new String[] {"LAST BOAT", "FINISH CLOSED","AP+A","N+A", "ONB PUBLICATION"});
-        dLastSig.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 22)){
-                BD.Update(row+1, COLUMNA[col], dLastSig.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceLastSig= new DefaultCellEditor(dLastSig);
-        table.getColumnModel().getColumn(22).setCellEditor(dceLastSig);
-        
-        Desplegable dResults = new Desplegable(1,new String[] {"RECEIVED", "REVIEWING","PUBLISHED"});
-        dResults.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 24)){
-                BD.Update(row+1, COLUMNA[col], dResults.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceResults= new DefaultCellEditor(dResults);
-        table.getColumnModel().getColumn(24).setCellEditor(dceResults);
-        
-        Desplegable dGroup = new Desplegable(1,new String[] {"Yellow Q-series", "Blue Q-series","Red Q-series","Yellow F-series","Blue F-series","Red F-series","Gold","Silver","Bronze","Fleet","Medal Race"});
-        dGroup.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 2)){
-                BD.Update(row+1, COLUMNA[col], dGroup.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceGroup= new DefaultCellEditor(dGroup);
-        table.getColumnModel().getColumn(2).setCellEditor(dceGroup);
-        
-        Desplegable dChanges = new Desplegable(1,new String[] {"Starboard", "Port","Increased","Decreased","Stb. Incr.","Prt. Incr.","Stb. Decr.","Prt. Decr."});
-        dChanges.addItemListener ((ItemEvent itemEvent) -> {
-            int state1 = itemEvent.getStateChange();
-            TableModel model = table.getModel();
-            int col = table.getSelectedColumn();
-            int row = table.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
-            if((lastCol != col || lastRow != row) && (col == 28)){
-                BD.Update(row+1, COLUMNA[col], dChanges.getSelectedItem());
-                lastCol = col;
-                lastRow = row;
-            }
-        });
-        DefaultCellEditor dceChanges= new DefaultCellEditor(dChanges);
-        table.getColumnModel().getColumn(28).setCellEditor(dceChanges);
-        
-        
-    }
     
     private void initHeader(JTable table){
         TableColumnModel cm = table.getColumnModel();
@@ -793,16 +596,6 @@ public final class Table extends JFrame{
         g_Course.add(cm.getColumn(29));
         g_Course.add(cm.getColumn(30));
 
-        ColumnGroup g_SailingConditions = new ColumnGroup("SAILING CONDITIONS");
-        g_SailingConditions.add(cm.getColumn(31));
-        g_SailingConditions.add(cm.getColumn(32));
-        g_SailingConditions.add(cm.getColumn(33));
-        g_SailingConditions.add(cm.getColumn(34));
-        g_SailingConditions.add(cm.getColumn(35));
-        g_SailingConditions.add(cm.getColumn(36));    
-        g_SailingConditions.add(cm.getColumn(37));
-        g_SailingConditions.add(cm.getColumn(38));
-
         GroupableTableHeader header = (GroupableTableHeader)table.getTableHeader();
         header.addColumnGroup(g_Races);
         header.addColumnGroup(g_Start);
@@ -810,7 +603,6 @@ public final class Table extends JFrame{
         header.addColumnGroup(g_Finish);
         header.addColumnGroup(g_DayEnd);
         header.addColumnGroup(g_Course);
-        header.addColumnGroup(g_SailingConditions);
         
         header.setFont(new Font("Arial", Font.BOLD ,15));
     }
@@ -920,21 +712,19 @@ public final class Table extends JFrame{
             modelo.setValueAt(r.getLegChanges(),i,28);
             modelo.setValueAt(r.getWindDir(),i,29);
             modelo.setValueAt(r.getWindSpeed(),i,30);
-            modelo.setValueAt(r.getWindDir25(),i,31);
-            modelo.setValueAt(r.getWindSpeed25(),i,32);
-            modelo.setValueAt(r.getWindDir50(),i,33);
-            modelo.setValueAt(r.getWindSpeed50(),i,34);
-            modelo.setValueAt(r.getWindDir75(),i,35);
-            modelo.setValueAt(r.getWindSpeed75(),i,36);
-            modelo.setValueAt(r.getWindDir100(),i,37);
-            modelo.setValueAt(r.getWindSpeed100(),i,38);
         }
         CheckGrid();
     }
     
     private void DataTable(){
         
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };
         modelo.setDataVector(new Object[][]{}, titulos);
         String [] fila = new String[titulos.length];
         BD.initBD();

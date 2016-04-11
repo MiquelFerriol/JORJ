@@ -9,11 +9,12 @@ import java.sql.SQLException;
 /////////////////////////////////////////
 
 public class ConectaBD {
-    public Connection getConnection(){
+    
+    public Connection getConnection(String ip){
         Connection cn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            cn=DriverManager.getConnection("jdbc:mysql://192.168.1.42:3306/olimp", "admin", "admin");
+            cn=DriverManager.getConnection("jdbc:mysql://"+ip+":3306/olimp", "admin", "admin");
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }catch(Exception e1){

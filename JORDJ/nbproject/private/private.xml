@@ -3,18 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Imagenes/1.jpg</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Imagenes/3.png</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Imagenes/6.png</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Imagenes/5.png</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Imagenes/4.png</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Table.java</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/BaseDatos/BaseDatos.java</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Imagenes/7.png</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/Imagenes/2.png</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Estructuras/Bolla.java</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/Vista/BollaTable.java</file>
-            <file>file:/C:/Users/Miquel%20Ferriol%20Galmé/Documents/JORDJ/trunk/JORDJ/src/conSql/ConectaBD.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/Imagenes/Viento/0.png</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/GroupableTableHeaderUI.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/FilterHeader.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Estructuras/Cjt_Bolla.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/conSql/ConectaBD.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/BollaTable.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/NewJFrame.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/Table.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/TableColumnAdjuster.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/Imagenes/YELLOW.JPG</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/XAMPP/racestatus.sql</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/GroupableTableHeader.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/BaseDatos/BaseDatos.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/ColumnGroup.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Estructuras/Bolla.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Estructuras/Regata.java</file>
+            <file>file:/C:/Users/Miquel%20Ferriol/Documents/NetBeansProjects/trunk/JORDJ/src/Vista/Imagenes/ZULU.JPG</file>
         </group>
     </open-files>
 </project-private>
