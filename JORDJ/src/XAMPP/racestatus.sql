@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2016 a las 20:45:01
+-- Tiempo de generación: 14-04-2016 a las 17:44:29
 -- Versión del servidor: 10.1.10-MariaDB
--- Versión de PHP: 7.0.3
+-- Versión de PHP: 7.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `olimp`
 --
+CREATE DATABASE IF NOT EXISTS `olimp` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `olimp`;
 
 -- --------------------------------------------------------
 
@@ -29,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `racestatus` (
   `id` int(11) NOT NULL,
   `Class` varchar(15) DEFAULT NULL,
+  `Grp` varchar(15) DEFAULT NULL,
   `Race` int(11) DEFAULT '-1',
   `ScheduledDate` varchar(40) DEFAULT NULL,
   `RealDate` varchar(40) DEFAULT NULL,
@@ -46,7 +49,7 @@ CREATE TABLE `racestatus` (
   `AP` int(11) DEFAULT '-1',
   `GR` int(11) DEFAULT '-1',
   `FinishTime` varchar(15) DEFAULT NULL,
-  `RaceTime` varchar(15) DEFAULT NULL,
+  `RaceTime` varchar(15) DEFAULT ' ',
   `BoatsFinished` int(11) DEFAULT '-1',
   `LastSignal` varchar(15) DEFAULT NULL,
   `LastSignalTime` varchar(15) DEFAULT NULL,
@@ -64,134 +67,147 @@ CREATE TABLE `racestatus` (
   `WindDir75` int(11) DEFAULT '-1',
   `WindSpeed75` int(11) DEFAULT '-1',
   `WindDir100` int(11) DEFAULT '-1',
-  `WindSpeed100` int(11) DEFAULT '-1'
+  `WindSpeed100` int(11) DEFAULT '-1',
+  `Mark1` varchar(35) DEFAULT ' ',
+  `Mark2` varchar(35) DEFAULT ' ',
+  `Mark3` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark4` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark5` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark6` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark7` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark8` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark9` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark10` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark11` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567',
+  `Mark12` varchar(35) NOT NULL DEFAULT ' RP-N-41-23.567-E-180-23.567'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `racestatus`
 --
 
-INSERT INTO `racestatus` (`id`, `Class`, `Race`, `ScheduledDate`, `RealDate`, `Entries`, `Area`, `Committee`, `RaceStatus`, `Signall`, `Time`, `ScheduledTime`, `StartingTime`, `BoatsStarted`, `PreparatorySignal`, `OCS_DSQ`, `AP`, `GR`, `FinishTime`, `RaceTime`, `BoatsFinished`, `LastSignal`, `LastSignalTime`, `Results`, `Course`, `Distance1stLeg`, `Bearing1stLeg`, `LegChanges`, `WindDir`, `WindSpeed`, `WindDir25`, `WindSpeed25`, `WindDir50`, `WindSpeed50`, `WindDir75`, `WindSpeed75`, `WindDir100`, `WindSpeed100`) VALUES
-(1, 'RS:X M', 1, '08/08/2016', '', -1, 'Päo Açucar', 'Christoph', 'SCHEDULED', 'DELTA', '', '13:00', '', -1, 'PAPA', -1, -1, -1, '', '', -1, '', '', 'PUBLISHED', '', -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(2, 'RS:X M', 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', 'POSTPONDMENT', 'N+A', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, '', NULL, -1, NULL, NULL, 'RECEIVED', NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(3, 'RS:X M', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', 'ON SEQUENCE', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'REVIEWING', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(4, 'RS:X M', 4, '09/08/2016', NULL, -1, 'Escola Naval', 'Luiggi', 'SAILING', 'Ap', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'INCIDENCE', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(5, 'RS:X M', 5, '09/08/2016', NULL, -1, 'Escola Naval', 'Sulis', 'ON TIME', 'n+a', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(6, 'RS:X M', 6, '09/08/2016', NULL, -1, 'Escola Naval', 'John', 'ABANDON', 'delta', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(7, 'RS:X M', 7, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'FINISHED', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'INCIDENCE', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(8, 'RS:X M', 8, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'POSTPONDMENT', 'DELTA', NULL, '13:00', NULL, -1, 'PAPA', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'REVIEWING', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(9, 'RS:X M', 9, '11/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'FINISHED', 'lima', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(10, 'RS:X M', 10, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'SCHEDULED', 'lima', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'PUBLISHED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(11, 'RS:X M', 11, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'POSTPONDMENT', 'n+a', NULL, '13:00', NULL, -1, 'BLACK - 30.3', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'REVIEWING', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(12, 'RS:X M', 12, '12/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'FINISHED', 'DELTA', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'RECEIVED', NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(13, 'RS:X M', -1, '14/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'ABANDON', 'lima', NULL, '13:00', NULL, -1, 'PAPA', -1, -1, -1, NULL, NULL, -1, NULL, NULL, 'RECEIVED', NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(14, 'RS:X W', 1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'SAILING', 'n+a', NULL, '13:00', NULL, -1, 'INDIA - 30.1', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(15, 'RS:X W', 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'ON SEQUENCE', 'DELTA', NULL, '13:00', NULL, -1, 'ZULU - 30.2', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(16, 'RS:X W', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Christoph', 'SEQUENCE', 'n+a', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(17, 'RS:X W', 4, '08/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'SCHEDULED', 'lima', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(18, 'RS:X W', 5, '08/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'ABANDON', 'Ap', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '-', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(19, 'RS:X W', 6, '08/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'SCHEDULED', 'DELTA', NULL, '13:00', NULL, -1, 'PAPA', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, '+', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(20, 'RS:X W', 7, '08/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'POSTPONDMENT', 'DELTA', NULL, '13:00', NULL, -1, 'OTHER', -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, 'c', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(21, 'RS:X W', 8, '08/08/2016', NULL, -1, 'Niteroi', 'Christoph', 'SCHEDULED', 'Ap', NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(22, 'RS:X W', 9, '08/08/2016', NULL, -1, 'Niteroi', 'Christoph', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(23, 'RS:X W', 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Christoph', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(24, 'RS:X W', 11, '08/08/2016', NULL, -1, 'Escola Naval', 'Christoph', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(25, 'RS:X W', 12, '08/08/2016', NULL, -1, 'Escola Naval', 'Christoph', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(26, 'RS:X W', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(27, 'LASER STD', 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(28, 'LASER STD', 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(29, 'LASER STD', 3, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(30, 'LASER STD', 4, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(31, 'LASER STD', 5, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(32, 'LASER STD', 6, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(33, 'LASER STD', 7, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(34, 'LASER STD', 8, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(35, 'LASER STD', 9, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(36, 'LASER STD', 10, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(37, 'LASER STD', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(38, 'LASER RAD', 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(39, 'LASER RAD', 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(40, 'LASER RAD', 3, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(41, 'LASER RAD', 4, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(42, 'LASER RAD', 5, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(43, 'LASER RAD', 6, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(44, 'LASER RAD', 7, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(45, 'LASER RAD', 8, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(46, 'LASER RAD', 9, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(47, 'LASER RAD', 10, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(48, 'LASER RAD', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(49, 'FINN', 1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(50, 'FINN', 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(51, 'FINN', 3, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(52, 'FINN', 4, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(53, 'FINN', 5, '08/08/2016', NULL, -1, 'Escola Naval', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(54, 'FINN', 6, '08/08/2016', NULL, -1, 'Escola Naval', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(55, 'FINN', 7, '08/08/2016', NULL, -1, 'Copacabana', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(56, 'FINN', 8, '08/08/2016', NULL, -1, 'Copacabana', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(57, 'FINN', 9, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(58, 'FINN', 10, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(59, 'FINN', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(60, '470 M', 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(61, '470 M', 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(62, '470 M', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(63, '470 M', 4, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(64, '470 M', 5, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(65, '470 M', 6, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(66, '470 M', 7, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(67, '470 M', 8, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(68, '470 M', 9, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(69, '470 M', 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(70, '470 M', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(71, '470 W', 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(72, '470 W', 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(73, '470 W', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(74, '470 W', 4, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(75, '470 W', 5, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(76, '470 W', 6, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(77, '470 W', 7, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(78, '470 W', 8, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(79, '470 W', 9, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(80, '470 W', 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(81, '470 W', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(82, '49er', 1, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(83, '49er', 2, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(84, '49er', 3, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(85, '49er', 4, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(86, '49er', 5, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(87, '49er', 6, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(88, '49er', 7, '08/08/2016', NULL, -1, 'Copacabana', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(89, '49er', 8, '08/08/2016', NULL, -1, 'Copacabana', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(90, '49er', 9, '08/08/2016', NULL, -1, 'Copacabana', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(91, '49er', 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(92, '49er', 11, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(93, '49er', 12, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(94, '49er', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(95, 'FX one', 1, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(96, 'FX one', 2, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(97, 'FX one', 3, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(98, 'FX one', 4, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(99, 'FX one', 5, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(100, 'FX one', 6, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(101, 'FX one', 7, '08/08/2016', NULL, -1, 'Niteroi', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(102, 'FX one', 8, '08/08/2016', NULL, -1, 'Niteroi', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(103, 'FX one', 9, '08/08/2016', NULL, -1, 'Niteroi', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(104, 'FX one', 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(105, 'FX one', 11, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(106, 'FX one', 12, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(107, 'FX one', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(108, 'NCRA', 1, '08/08/2016', NULL, -1, 'Päo Açucar', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(109, 'NCRA', 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(110, 'NCRA', 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(111, 'NCRA', 4, '08/08/2016', NULL, -1, 'Copacabana', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(112, 'NCRA', 5, '08/08/2016', NULL, -1, 'Copacabana', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(113, 'NCRA', 6, '08/08/2016', NULL, -1, 'Copacabana', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(114, 'NCRA', 7, '08/08/2016', NULL, -1, 'Ponte', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(115, 'NCRA', 8, '08/08/2016', NULL, -1, 'Ponte', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(116, 'NCRA', 9, '08/08/2016', NULL, -1, 'Ponte', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(117, 'NCRA', 10, '08/08/2016', NULL, -1, 'Escola Naval', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(118, 'NCRA', 11, '08/08/2016', NULL, -1, 'Escola Naval', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(119, 'NCRA', 12, '08/08/2016', NULL, -1, 'Escola Naval', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
-(120, 'NCRA', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, NULL, -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
+INSERT INTO `racestatus` (`id`, `Class`, `Grp`, `Race`, `ScheduledDate`, `RealDate`, `Entries`, `Area`, `Committee`, `RaceStatus`, `Signall`, `Time`, `ScheduledTime`, `StartingTime`, `BoatsStarted`, `PreparatorySignal`, `OCS_DSQ`, `AP`, `GR`, `FinishTime`, `RaceTime`, `BoatsFinished`, `LastSignal`, `LastSignalTime`, `Results`, `Course`, `Distance1stLeg`, `Bearing1stLeg`, `LegChanges`, `WindDir`, `WindSpeed`, `WindDir25`, `WindSpeed25`, `WindDir50`, `WindSpeed50`, `WindDir75`, `WindSpeed75`, `WindDir100`, `WindSpeed100`, `Mark1`, `Mark2`, `Mark3`, `Mark4`, `Mark5`, `Mark6`, `Mark7`, `Mark8`, `Mark9`, `Mark10`, `Mark11`, `Mark12`) VALUES
+(1, 'RS:X M', 'Yellow Q-series', 1, '08/08/2016', '08/08/2016', 12, 'Päo Açucar', 'Christoph', 'SCHEDULED', 'DELTA', '22:35', '13:00', '22:55:04', 5, 'BLACK - 30.3', 34, -1, -1, '22:55:08', '00:00:04', 2, 'LAST BOAT', '13:00', 'RECEIVED', '5', 5, 5, 'Starboard', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(2, 'RS:X M', 'Blue Q-series', 2, '08/08/2016', '08/08/2016', 3, 'Päo Açucar', 'Christoph', 'SCHEDULED', 'AP', '22:35', '13:00', '22:55:04', 8, 'PAPA', 12, -1, -1, '22:55:08', '00:00:04', 23, 'FINISH CLOSED', '13:00', 'RECEIVED', '2', 23, 123, 'Prt. Incr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(3, 'RS:X M', 'Red Q-series', 3, '08/08/2016', '08/08/2016', 98, 'Päo Açucar', 'Christoph', 'ON SEQUENCE', 'AP+A', '22:35', '13:00', '22:55:04', 9, 'BLACK - 30.3', 213, -1, -1, '22:55:08', '00:00:04', 123, 'N+A', '13:00', 'PUBLISHED', '3', 1, 3, 'Decreased', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(4, 'RS:X M', 'Yellow F-series', 4, '09/08/2016', '08/08/2016', 3, 'Päo Açucar', 'Christoph', 'SAILING', 'N+A', '22:35', '13:00', '22:55:04', 42, 'OTHER', 3, -1, -1, '22:55:08', '00:00:04', 123, 'AP+A', '13:00', 'PUBLISHED', '4', 2, 23, 'Stb. Incr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(5, 'RS:X M', 'Blue F-series', 5, '09/08/2016', '08/08/2016', 4, 'Escola Naval', 'Christoph', 'ON SEQUENCE', 'AP', '22:35', '13:00', '22:55:04', 2, 'OTHER', 13, -1, -1, '22:55:08', '00:00:04', 1, 'ONB PUBLICATION', '13:00', 'RECEIVED', '12', 3, 41, 'Prt. Incr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(6, 'RS:X M', 'Red F-series', 6, '09/08/2016', '08/08/2016', 1, 'Escola Naval', 'Christoph', 'ON TIME', 'delta', '22:35', '13:00', '22:55:04', 5, 'BLACK - 30.3', 3, -1, -1, '22:55:08', '00:00:04', 123, 'LAST BOAT', '13:00', 'REVIEWING', '43', 1, 234, 'Stb. Decr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(7, 'RS:X M', 'Gold', 7, '11/08/2016', '08/08/2016', 32, 'Escola Naval', 'Christoph', 'POSTPONDMENT', 'lima', '22:35', '13:00', '22:55:04', 7, 'ZULU - 30.2', 3, -1, -1, '22:55:08', '00:00:04', 43, 'AP+A', '13:00', 'REVIEWING', '13', 1, 12, 'Prt. Decr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(8, 'RS:X M', 'Silver', 8, '11/08/2016', '08/08/2016', 4, 'Niteroi', 'Christoph', 'ON SEQUENCE', 'DELTA', '22:35', '13:00', '22:55:04', 4, 'PAPA', 2, -1, -1, '22:55:08', '00:00:04', 56, 'LAST BOAT', '13:00', 'RECEIVED', '4', 2, 34, 'Port', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(9, 'RS:X M', 'Bronze', 9, '11/08/2016', '08/08/2016', 12, 'Niteroi', 'Christoph', 'SAILING', 'lima', '22:35', '13:00', '22:55:04', 5, 'ZULU - 30.2', 21, -1, -1, '22:55:08', '00:00:04', 5, 'LAST BOAT', '13:00', 'PUBLISHED', '3', 3, 12, 'Increased', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(10, 'RS:X M', 'Fleet', 10, '12/08/2016', '08/08/2016', 12, 'Escola Naval', 'Christoph', 'SCHEDULED', 'lima', '22:35', '13:00', '22:55:04', 7, 'INDIA - 30.1', 23, -1, -1, '22:55:08', '00:00:04', 87, 'FINISH CLOSED', '13:00', 'PUBLISHED', '2', 4, 3, 'Decreased', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(11, 'RS:X M', 'Medal Race', 11, '12/08/2016', '08/08/2016', 3, 'Escola Naval', 'Christoph', 'POSTPONDMENT', 'n+a', '22:35', '13:00', '22:55:04', 8, 'BLACK - 30.3', 34, -1, -1, '22:55:08', '00:00:04', 45, 'AP+A', '13:00', 'REVIEWING', '23', 3, 23, 'Stb. Incr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(12, 'RS:X M', 'Yellow F-series', 12, '12/08/2016', '08/08/2016', 4, 'Escola Naval', 'Christoph', 'POSTPONDMENT', 'DELTA', '22:35', '13:00', '22:55:04', 5, 'INDIA - 30.1', 3, -1, -1, '22:55:08', '00:00:04', 8, 'ONB PUBLICATION', '13:00', 'RECEIVED', '43', 12, 34, 'Prt. Incr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(13, 'RS:X M', 'Bronze', -1, '14/08/2016', '08/08/2016', 23, 'Päo Açucar', 'Christoph', 'ON SEQUENCE', 'AP+A', '22:35', '13:00', '22:55:04', 23, 'PAPA', 23, -1, -1, '22:55:08', '00:00:04', 3, 'FINISH CLOSED', '13:00', 'RECEIVED', '1', 2, 12, 'Prt. Incr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(14, 'RS:X W', 'Medal Race', 1, '08/08/2016', '08/08/2016', 43, 'Päo Açucar', 'Christoph', 'SAILING', 'n+a', '22:35', '13:00', '22:55:04', 4, 'INDIA - 30.1', 1, -1, -1, '22:55:08', '00:00:04', 32, 'N+A', '13:00', 'REVIEWING', '12', 3, 3, 'Stb. Decr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(15, 'RS:X W', 'Blue Q-series', 2, '08/08/2016', '08/08/2016', 234, 'Päo Açucar', 'Christoph', 'POSTPONDMENT', 'N+A', '22:35', '13:00', '22:55:04', 3, 'ZULU - 30.2', 312, -1, -1, '22:55:08', '00:00:04', 4, 'FINISH CLOSED', '13:00', 'PUBLISHED', '3', 1, 423, 'Stb. Incr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(16, 'RS:X W', 'Red F-series', 3, '08/08/2016', '08/08/2016', 32, 'Päo Açucar', 'Christoph', 'ABANDON', 'SCHEDULED', '22:35', '13:00', '22:55:04', 34, 'ZULU - 30.2', 123, -1, -1, '22:55:08', '00:00:04', 5, 'FINISH CLOSED', '13:00', 'REVIEWING', '3', 31, 4, 'Decreased', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(17, 'RS:X W', 'Gold', 4, '08/08/2016', '08/08/2016', 1, 'Escola Naval', 'Christoph', 'SCHEDULED', 'lima', '22:35', '13:00', '22:55:04', 8, 'OTHER', 123, -1, -1, '22:55:08', '00:00:04', 4, 'AP+A', '13:00', 'RECEIVED', '1', 41, 2, 'Increased', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(18, 'RS:X W', 'Yellow Q-series', 5, '08/08/2016', '08/08/2016', 1, 'Escola Naval', 'Christoph', 'ON SEQUENCE', 'LIMA', '22:35', '13:00', '22:55:04', 3, 'OTHER', 231, -1, -1, '22:55:08', '00:00:04', 3, 'N+A', '13:00', 'PUBLISHED', '12', 12, 1, 'Stb. Decr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(19, 'RS:X W', 'Blue Q-series', 6, '08/08/2016', '08/08/2016', 2, 'Escola Naval', 'Christoph', 'Port', 'AP+A', '22:35', '13:00', '22:55:04', 56, 'PAPA', 2341, -1, -1, '22:55:08', '00:00:04', 5, 'ONB PUBLICATION', '13:00', 'REVIEWING', '3', 3, 4, 'Prt. Decr.', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(20, 'RS:X W', 'Red Q-series', 7, '08/08/2016', '08/08/2016', 3, 'Niteroi', 'Christoph', 'ABANDON', 'DELTA', '22:35', '13:00', '22:55:04', 45, 'OTHER', 234, -1, -1, '22:55:08', '00:00:04', 6, 'FINISH CLOSED', '13:00', 'RECEIVED', '142', 2, 32, 'Decreased', 5, 5, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(21, 'RS:X W', 'Red F-series', 8, '08/08/2016', '08/08/2016', 1, 'Niteroi', 'Christoph', 'SCHEDULED', 'AP', '22:35', '13:00', '22:55:04', 4, 'BLACK - 30.3', 234, -1, -1, '22:55:08', '00:00:04', 2, 'AP+A', '13:00', 'RECEIVED', '12', 5, 2, 'Prt. Incr.', 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(22, 'RS:X W', 'Yellow F-series', 9, '08/08/2016', NULL, 2, 'Niteroi', 'Christoph', 'SCHEDULED', 'AP', '22:35', '13:00', NULL, 764, 'INDIA - 30.1', 234, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(23, 'RS:X W', 'Red Q-series', 10, '08/08/2016', NULL, 3, 'Escola Naval', 'Christoph', 'POSTPONDMENT', 'N+A', '22:35', '13:00', NULL, 4, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(24, 'RS:X W', 'Red Q-series', 11, '08/08/2016', NULL, 34, 'Escola Naval', 'Christoph', 'FINISHED', 'AP+A', '22:35', '13:00', NULL, 6, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(25, 'RS:X W', 'Red F-series', 12, '08/08/2016', NULL, -1, 'Escola Naval', 'Christoph', 'ON SEQUENCE', 'AP+A', NULL, '13:00', NULL, 4, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(26, 'RS:X W', 'Red Q-series', -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, 3, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(27, 'LASER STD', NULL, 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, 5, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(28, 'LASER STD', NULL, 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, 6, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(29, 'LASER STD', NULL, 3, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(30, 'LASER STD', NULL, 4, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(31, 'LASER STD', NULL, 5, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(32, 'LASER STD', NULL, 6, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(33, 'LASER STD', NULL, 7, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(34, 'LASER STD', NULL, 8, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(35, 'LASER STD', NULL, 9, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(36, 'LASER STD', NULL, 10, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(37, 'LASER STD', NULL, -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(38, 'LASER RAD', NULL, 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(39, 'LASER RAD', NULL, 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(40, 'LASER RAD', NULL, 3, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(41, 'LASER RAD', NULL, 4, '08/08/2016', NULL, -1, 'Ponte', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(42, 'LASER RAD', NULL, 5, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(43, 'LASER RAD', NULL, 6, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(44, 'LASER RAD', NULL, 7, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(45, 'LASER RAD', NULL, 8, '08/08/2016', NULL, -1, 'Copacabana', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(46, 'LASER RAD', NULL, 9, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(47, 'LASER RAD', NULL, 10, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(48, 'LASER RAD', NULL, -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Maria', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(49, 'FINN', NULL, 1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(50, 'FINN', NULL, 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(51, 'FINN', NULL, 3, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(52, 'FINN', NULL, 4, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(53, 'FINN', NULL, 5, '08/08/2016', NULL, -1, 'Escola Naval', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(54, 'FINN', NULL, 6, '08/08/2016', NULL, -1, 'Escola Naval', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(55, 'FINN', NULL, 7, '08/08/2016', NULL, -1, 'Copacabana', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(56, 'FINN', NULL, 8, '08/08/2016', NULL, -1, 'Copacabana', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(57, 'FINN', NULL, 9, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(58, 'FINN', NULL, 10, '08/08/2016', NULL, -1, 'Niteroi', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(59, 'FINN', NULL, -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Luigi', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(60, '470 M', NULL, 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(61, '470 M', NULL, 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(62, '470 M', NULL, 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(63, '470 M', NULL, 4, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(64, '470 M', NULL, 5, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(65, '470 M', NULL, 6, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(66, '470 M', NULL, 7, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(67, '470 M', NULL, 8, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(68, '470 M', NULL, 9, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(69, '470 M', NULL, 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(70, '470 M', NULL, -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(71, '470 W', NULL, 1, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(72, '470 W', NULL, 2, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(73, '470 W', NULL, 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(74, '470 W', NULL, 4, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(75, '470 W', NULL, 5, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(76, '470 W', NULL, 6, '08/08/2016', NULL, -1, 'Niteroi', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(77, '470 W', NULL, 7, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(78, '470 W', NULL, 8, '08/08/2016', NULL, -1, 'Copacabana', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(79, '470 W', NULL, 9, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(80, '470 W', NULL, 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567');
+INSERT INTO `racestatus` (`id`, `Class`, `Grp`, `Race`, `ScheduledDate`, `RealDate`, `Entries`, `Area`, `Committee`, `RaceStatus`, `Signall`, `Time`, `ScheduledTime`, `StartingTime`, `BoatsStarted`, `PreparatorySignal`, `OCS_DSQ`, `AP`, `GR`, `FinishTime`, `RaceTime`, `BoatsFinished`, `LastSignal`, `LastSignalTime`, `Results`, `Course`, `Distance1stLeg`, `Bearing1stLeg`, `LegChanges`, `WindDir`, `WindSpeed`, `WindDir25`, `WindSpeed25`, `WindDir50`, `WindSpeed50`, `WindDir75`, `WindSpeed75`, `WindDir100`, `WindSpeed100`, `Mark1`, `Mark2`, `Mark3`, `Mark4`, `Mark5`, `Mark6`, `Mark7`, `Mark8`, `Mark9`, `Mark10`, `Mark11`, `Mark12`) VALUES
+(81, '470 W', NULL, -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Stogg', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(82, '49er', NULL, 1, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(83, '49er', NULL, 2, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(84, '49er', NULL, 3, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(85, '49er', NULL, 4, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(86, '49er', NULL, 5, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(87, '49er', NULL, 6, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(88, '49er', NULL, 7, '08/08/2016', NULL, -1, 'Copacabana', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(89, '49er', NULL, 8, '08/08/2016', NULL, -1, 'Copacabana', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(90, '49er', NULL, 9, '08/08/2016', NULL, -1, 'Copacabana', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(91, '49er', NULL, 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(92, '49er', NULL, 11, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(93, '49er', NULL, 12, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(94, '49er', NULL, -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(95, 'FX one', NULL, 1, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(96, 'FX one', NULL, 2, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(97, 'FX one', NULL, 3, '08/08/2016', NULL, -1, 'Pao/Ponte', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(98, 'FX one', NULL, 4, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(99, 'FX one', NULL, 5, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(100, 'FX one', NULL, 6, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(101, 'FX one', NULL, 7, '08/08/2016', NULL, -1, 'Niteroi', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(102, 'FX one', NULL, 8, '08/08/2016', NULL, -1, 'Niteroi', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(103, 'FX one', NULL, 9, '08/08/2016', NULL, -1, 'Niteroi', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(104, 'FX one', NULL, 10, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(105, 'FX one', NULL, 11, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(106, 'FX one', NULL, 12, '08/08/2016', NULL, -1, 'Escola Naval', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(107, 'FX one', NULL, -1, '08/08/2016', NULL, -1, 'Päo Açucar', 'Sulis', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(108, 'NCRA', NULL, 1, '08/08/2016', NULL, -1, 'Päo Açucar', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(109, 'NCRA', NULL, 2, '08/08/2016', NULL, -1, 'Päo Açucar', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(110, 'NCRA', NULL, 3, '08/08/2016', NULL, -1, 'Päo Açucar', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(111, 'NCRA', NULL, 4, '08/08/2016', NULL, -1, 'Copacabana', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(112, 'NCRA', NULL, 5, '08/08/2016', NULL, -1, 'Copacabana', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(113, 'NCRA', NULL, 6, '08/08/2016', NULL, -1, 'Copacabana', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(114, 'NCRA', NULL, 7, '08/08/2016', NULL, -1, 'Ponte', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(115, 'NCRA', NULL, 8, '08/08/2016', NULL, -1, 'Ponte', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(116, 'NCRA', NULL, 9, '08/08/2016', NULL, -1, 'Ponte', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(117, 'NCRA', NULL, 10, '08/08/2016', NULL, -1, 'Escola Naval', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(118, 'NCRA', NULL, 11, '08/08/2016', NULL, -1, 'Escola Naval', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(119, 'NCRA', NULL, 12, '08/08/2016', NULL, -1, 'Escola Naval', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567'),
+(120, 'NCRA', NULL, -1, '08/08/2016', NULL, -1, 'Aeroport', 'John', NULL, NULL, NULL, '13:00', NULL, -1, NULL, -1, -1, -1, NULL, '', -1, NULL, NULL, NULL, NULL, -1, -1, NULL, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567', 'RP-N-41-23.567-E-180-23.567');
 
 --
 -- Índices para tablas volcadas
@@ -202,6 +218,742 @@ INSERT INTO `racestatus` (`id`, `Class`, `Race`, `ScheduledDate`, `RealDate`, `E
 --
 ALTER TABLE `racestatus`
   ADD PRIMARY KEY (`id`);
+--
+-- Base de datos: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__bookmark`
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(11) NOT NULL,
+  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `query` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__central_columns`
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_length` text COLLATE utf8_bin,
+  `col_collation` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `col_default` text COLLATE utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__column_info`
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `column_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__designer_settings`
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `settings_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__export_templates`
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `export_type` varchar(10) COLLATE utf8_bin NOT NULL,
+  `template_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `template_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+--
+-- Volcado de datos para la tabla `pma__export_templates`
+--
+
+INSERT INTO `pma__export_templates` (`id`, `username`, `export_type`, `template_name`, `template_data`) VALUES
+(1, 'root', 'table', 'RaceStatus', '{"quick_or_custom":"quick","what":"sql","allrows":"1","output_format":"sendit","filename_template":"@TABLE@","remember_template":"on","charset":"utf-8","compression":"none","maxsize":"","codegen_structure_or_data":"data","codegen_format":"0","csv_separator":",","csv_enclosed":"\\"","csv_escaped":"\\"","csv_terminated":"AUTO","csv_null":"NULL","csv_structure_or_data":"data","excel_null":"NULL","excel_edition":"win","excel_structure_or_data":"data","htmlword_structure_or_data":"structure_and_data","htmlword_null":"NULL","json_structure_or_data":"data","latex_caption":"something","latex_structure_or_data":"structure_and_data","latex_structure_caption":"Estructura de la tabla @TABLE@","latex_structure_continued_caption":"Estructura de la tabla @TABLE@ (continÃºa)","latex_structure_label":"tab:@TABLE@-structure","latex_relation":"something","latex_comments":"something","latex_mime":"something","latex_columns":"something","latex_data_caption":"Contenido de la tabla @TABLE@","latex_data_continued_caption":"Contenido de la tabla @TABLE@ (continÃºa)","latex_data_label":"tab:@TABLE@-data","latex_null":"\\\\textit{NULL}","mediawiki_structure_or_data":"data","mediawiki_caption":"something","mediawiki_headers":"something","ods_null":"NULL","ods_structure_or_data":"data","odt_structure_or_data":"structure_and_data","odt_relation":"something","odt_comments":"something","odt_mime":"something","odt_columns":"something","odt_null":"NULL","pdf_report_title":"","pdf_structure_or_data":"data","phparray_structure_or_data":"data","sql_include_comments":"something","sql_header_comment":"","sql_compatibility":"NONE","sql_structure_or_data":"structure_and_data","sql_create_table":"something","sql_auto_increment":"something","sql_create_view":"something","sql_procedure_function":"something","sql_create_trigger":"something","sql_backquotes":"something","sql_type":"INSERT","sql_insert_syntax":"both","sql_max_query_size":"50000","sql_hex_for_binary":"something","sql_utc_time":"something","texytext_structure_or_data":"structure_and_data","texytext_null":"NULL","xml_structure_or_data":"data","xml_export_events":"something","xml_export_functions":"something","xml_export_procedures":"something","xml_export_tables":"something","xml_export_triggers":"something","xml_export_views":"something","xml_export_contents":"something","yaml_structure_or_data":"data","":null,"lock_tables":null,"csv_removeCRLF":null,"csv_columns":null,"excel_removeCRLF":null,"excel_columns":null,"htmlword_columns":null,"json_pretty_print":null,"ods_columns":null,"sql_dates":null,"sql_relation":null,"sql_mime":null,"sql_use_transaction":null,"sql_disable_fk":null,"sql_views_as_tables":null,"sql_metadata":null,"sql_drop_table":null,"sql_if_not_exists":null,"sql_truncate":null,"sql_delayed":null,"sql_ignore":null,"texytext_columns":null}'),
+(2, 'root', 'database', 'RaceStatus', '{"quick_or_custom":"quick","what":"sql","structure_or_data_forced":"0","table_select[]":"racestatus","table_structure[]":"racestatus","table_data[]":"racestatus","output_format":"sendit","filename_template":"@DATABASE@","remember_template":"on","charset":"utf-8","compression":"none","maxsize":"","codegen_structure_or_data":"data","codegen_format":"0","csv_separator":",","csv_enclosed":"\\"","csv_escaped":"\\"","csv_terminated":"AUTO","csv_null":"NULL","csv_structure_or_data":"data","excel_null":"NULL","excel_edition":"win","excel_structure_or_data":"data","htmlword_structure_or_data":"structure_and_data","htmlword_null":"NULL","json_structure_or_data":"data","latex_caption":"something","latex_structure_or_data":"structure_and_data","latex_structure_caption":"Estructura de la tabla @TABLE@","latex_structure_continued_caption":"Estructura de la tabla @TABLE@ (continÃºa)","latex_structure_label":"tab:@TABLE@-structure","latex_relation":"something","latex_comments":"something","latex_mime":"something","latex_columns":"something","latex_data_caption":"Contenido de la tabla @TABLE@","latex_data_continued_caption":"Contenido de la tabla @TABLE@ (continÃºa)","latex_data_label":"tab:@TABLE@-data","latex_null":"\\\\textit{NULL}","mediawiki_structure_or_data":"structure_and_data","mediawiki_caption":"something","mediawiki_headers":"something","ods_null":"NULL","ods_structure_or_data":"data","odt_structure_or_data":"structure_and_data","odt_relation":"something","odt_comments":"something","odt_mime":"something","odt_columns":"something","odt_null":"NULL","pdf_report_title":"","pdf_structure_or_data":"structure_and_data","phparray_structure_or_data":"data","sql_include_comments":"something","sql_header_comment":"","sql_compatibility":"NONE","sql_structure_or_data":"structure_and_data","sql_create_table":"something","sql_auto_increment":"something","sql_create_view":"something","sql_procedure_function":"something","sql_create_trigger":"something","sql_backquotes":"something","sql_type":"INSERT","sql_insert_syntax":"both","sql_max_query_size":"50000","sql_hex_for_binary":"something","sql_utc_time":"something","texytext_structure_or_data":"structure_and_data","texytext_null":"NULL","xml_structure_or_data":"data","xml_export_events":"something","xml_export_functions":"something","xml_export_procedures":"something","xml_export_tables":"something","xml_export_triggers":"something","xml_export_views":"something","xml_export_contents":"something","yaml_structure_or_data":"data","":null,"lock_tables":null,"as_separate_files":null,"csv_removeCRLF":null,"csv_columns":null,"excel_removeCRLF":null,"excel_columns":null,"htmlword_columns":null,"json_pretty_print":null,"ods_columns":null,"sql_dates":null,"sql_relation":null,"sql_mime":null,"sql_use_transaction":null,"sql_disable_fk":null,"sql_views_as_tables":null,"sql_metadata":null,"sql_create_database":null,"sql_drop_table":null,"sql_if_not_exists":null,"sql_truncate":null,"sql_delayed":null,"sql_ignore":null,"texytext_columns":null}'),
+(3, 'root', 'table', 'racestatus', '{"quick_or_custom":"quick","what":"sql","allrows":"1","output_format":"sendit","filename_template":"@TABLE@","remember_template":"on","charset":"utf-8","compression":"none","maxsize":"","codegen_structure_or_data":"data","codegen_format":"0","csv_separator":",","csv_enclosed":"\\"","csv_escaped":"\\"","csv_terminated":"AUTO","csv_null":"NULL","csv_structure_or_data":"data","excel_null":"NULL","excel_edition":"win","excel_structure_or_data":"data","htmlword_structure_or_data":"structure_and_data","htmlword_null":"NULL","json_structure_or_data":"data","latex_caption":"something","latex_structure_or_data":"structure_and_data","latex_structure_caption":"Estructura de la tabla @TABLE@","latex_structure_continued_caption":"Estructura de la tabla @TABLE@ (continÃºa)","latex_structure_label":"tab:@TABLE@-structure","latex_relation":"something","latex_comments":"something","latex_mime":"something","latex_columns":"something","latex_data_caption":"Contenido de la tabla @TABLE@","latex_data_continued_caption":"Contenido de la tabla @TABLE@ (continÃºa)","latex_data_label":"tab:@TABLE@-data","latex_null":"\\\\textit{NULL}","mediawiki_structure_or_data":"data","mediawiki_caption":"something","mediawiki_headers":"something","ods_null":"NULL","ods_structure_or_data":"data","odt_structure_or_data":"structure_and_data","odt_relation":"something","odt_comments":"something","odt_mime":"something","odt_columns":"something","odt_null":"NULL","pdf_report_title":"","pdf_structure_or_data":"data","phparray_structure_or_data":"data","sql_include_comments":"something","sql_header_comment":"","sql_compatibility":"NONE","sql_structure_or_data":"structure_and_data","sql_create_table":"something","sql_auto_increment":"something","sql_create_view":"something","sql_procedure_function":"something","sql_create_trigger":"something","sql_backquotes":"something","sql_type":"INSERT","sql_insert_syntax":"both","sql_max_query_size":"50000","sql_hex_for_binary":"something","sql_utc_time":"something","texytext_structure_or_data":"structure_and_data","texytext_null":"NULL","xml_structure_or_data":"data","xml_export_events":"something","xml_export_functions":"something","xml_export_procedures":"something","xml_export_tables":"something","xml_export_triggers":"something","xml_export_views":"something","xml_export_contents":"something","yaml_structure_or_data":"data","":null,"lock_tables":null,"csv_removeCRLF":null,"csv_columns":null,"excel_removeCRLF":null,"excel_columns":null,"htmlword_columns":null,"json_pretty_print":null,"ods_columns":null,"sql_dates":null,"sql_relation":null,"sql_mime":null,"sql_use_transaction":null,"sql_disable_fk":null,"sql_views_as_tables":null,"sql_metadata":null,"sql_drop_table":null,"sql_if_not_exists":null,"sql_truncate":null,"sql_delayed":null,"sql_ignore":null,"texytext_columns":null}'),
+(4, 'root', 'server', 'racestatus', '{"quick_or_custom":"quick","what":"sql","db_select[]":["olimp","phpmyadmin","prueba","siscont","test"],"output_format":"sendit","filename_template":"@SERVER@","remember_template":"on","charset":"utf-8","compression":"none","maxsize":"","codegen_structure_or_data":"data","codegen_format":"0","csv_separator":",","csv_enclosed":"\\"","csv_escaped":"\\"","csv_terminated":"AUTO","csv_null":"NULL","csv_structure_or_data":"data","excel_null":"NULL","excel_edition":"win","excel_structure_or_data":"data","htmlword_structure_or_data":"structure_and_data","htmlword_null":"NULL","json_structure_or_data":"data","latex_caption":"something","latex_structure_or_data":"structure_and_data","latex_structure_caption":"Estructura de la tabla @TABLE@","latex_structure_continued_caption":"Estructura de la tabla @TABLE@ (continÃºa)","latex_structure_label":"tab:@TABLE@-structure","latex_relation":"something","latex_comments":"something","latex_mime":"something","latex_columns":"something","latex_data_caption":"Contenido de la tabla @TABLE@","latex_data_continued_caption":"Contenido de la tabla @TABLE@ (continÃºa)","latex_data_label":"tab:@TABLE@-data","latex_null":"\\\\textit{NULL}","mediawiki_structure_or_data":"data","mediawiki_caption":"something","mediawiki_headers":"something","ods_null":"NULL","ods_structure_or_data":"data","odt_structure_or_data":"structure_and_data","odt_relation":"something","odt_comments":"something","odt_mime":"something","odt_columns":"something","odt_null":"NULL","pdf_report_title":"","pdf_structure_or_data":"data","phparray_structure_or_data":"data","sql_include_comments":"something","sql_header_comment":"","sql_compatibility":"NONE","sql_structure_or_data":"structure_and_data","sql_create_table":"something","sql_auto_increment":"something","sql_create_view":"something","sql_procedure_function":"something","sql_create_trigger":"something","sql_backquotes":"something","sql_type":"INSERT","sql_insert_syntax":"both","sql_max_query_size":"50000","sql_hex_for_binary":"something","sql_utc_time":"something","texytext_structure_or_data":"structure_and_data","texytext_null":"NULL","yaml_structure_or_data":"data","":null,"as_separate_files":null,"csv_removeCRLF":null,"csv_columns":null,"excel_removeCRLF":null,"excel_columns":null,"htmlword_columns":null,"json_pretty_print":null,"ods_columns":null,"sql_dates":null,"sql_relation":null,"sql_mime":null,"sql_use_transaction":null,"sql_disable_fk":null,"sql_views_as_tables":null,"sql_metadata":null,"sql_drop_database":null,"sql_drop_table":null,"sql_if_not_exists":null,"sql_truncate":null,"sql_delayed":null,"sql_ignore":null,"texytext_columns":null}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__favorite`
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__history`
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `sqlquery` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__navigationhiding`
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__pdf_pages`
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__recent`
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Volcado de datos para la tabla `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{"db":"olimp","table":"racestatus"},{"db":"siscont","table":"login"},{"db":"racestatus","table":"racestatus"},{"db":"racestatus","table":"RaceStatus"},{"db":"prueba","table":"prueba"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__relation`
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__savedsearches`
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_coords`
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT '0',
+  `x` float UNSIGNED NOT NULL DEFAULT '0',
+  `y` float UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_info`
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `display_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_uiprefs`
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `prefs` text COLLATE utf8_bin NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+--
+-- Volcado de datos para la tabla `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'olimp', 'racestatus', '{"sorted_col":"`racestatus`.`id` ASC"}', '2016-03-18 00:26:20');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__tracking`
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text COLLATE utf8_bin NOT NULL,
+  `schema_sql` text COLLATE utf8_bin,
+  `data_sql` longtext COLLATE utf8_bin,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') COLLATE utf8_bin DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__userconfig`
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `config_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Volcado de datos para la tabla `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2016-02-18 22:21:37', '{"lang":"es","collation_connection":"utf8mb4_unicode_ci"}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__usergroups`
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tab` varchar(64) COLLATE utf8_bin NOT NULL,
+  `allowed` enum('Y','N') COLLATE utf8_bin NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__users`
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Indices de la tabla `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Indices de la tabla `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Indices de la tabla `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Indices de la tabla `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Indices de la tabla `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Indices de la tabla `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Indices de la tabla `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Indices de la tabla `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Indices de la tabla `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Indices de la tabla `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;--
+-- Base de datos: `prueba`
+--
+CREATE DATABASE IF NOT EXISTS `prueba` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `prueba`;
+--
+-- Base de datos: `siscont`
+--
+CREATE DATABASE IF NOT EXISTS `siscont` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `siscont`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `abonos`
+--
+
+CREATE TABLE `abonos` (
+  `IdVenta` char(8) COLLATE latin1_spanish_ci NOT NULL,
+  `Fecha` varchar(10) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `IdArticulo` char(4) COLLATE latin1_spanish_ci NOT NULL,
+  `NombreArti` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `IdCliente` char(4) COLLATE latin1_spanish_ci NOT NULL,
+  `NombreClie` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `TotalDeVenta` varchar(10) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `Restante` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `Abono` varchar(10) COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `abonos`
+--
+
+INSERT INTO `abonos` (`IdVenta`, `Fecha`, `IdArticulo`, `NombreArti`, `IdCliente`, `NombreClie`, `TotalDeVenta`, `Restante`, `Abono`) VALUES
+('00000002', '31/03/2016', '10O2', 'Compu', '01q2', 'Larry Luis Leaños', '640', '600', '40'),
+('00000002', '31/03/2016', '02we', 'Ropero', '01q2', 'Larry Luis Leaños', '640', '600', '40'),
+('00000004', '31/03/2016', '02we', 'Ropero', '1234', 'Laura Coutiño Gallardo', '600', '300', '300');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `articulo`
+--
+
+CREATE TABLE `articulo` (
+  `IdArticulo` char(4) COLLATE latin1_spanish_ci NOT NULL,
+  `NombreArti` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `Descripcion` varchar(200) COLLATE latin1_spanish_ci NOT NULL,
+  `Precio` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `Cantidad` varchar(10) COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `articulo`
+--
+
+INSERT INTO `articulo` (`IdArticulo`, `NombreArti`, `Descripcion`, `Precio`, `Cantidad`) VALUES
+('', '', '', '', ''),
+('02we', 'Ropero', 'jaujayaujaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaa\r\naaa\r\naaa', '300', '743'),
+('10O2', 'Compu', 'Hp color blanca', '10', '6901'),
+('111w', 'refri', 'blanco', '1000', '867'),
+('1234', '', '', '', ''),
+('123d', 'ddd', 'dddddd', '3', '927'),
+('12e4', 'ggg', 'gggg', '1000', '8'),
+('4r5t', 'Juego De Mesa De Centro', 'Juego de Mesa de Centro formado por una mesa de centro y una mesa de esquina de madera y marmol.\r\n', '100', '10'),
+('5', '5', '5', '55', '5'),
+('k8j7', 'mmmmm', 'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn	', '12', '1'),
+('w5vb', 'Dalton Juego de Mesas', 'Incluye: Mesa de centro y 2 Mesas laterales, color cristal', '11', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `IdCliente` char(4) COLLATE latin1_spanish_ci NOT NULL,
+  `NombreClie` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `ApellidoPaterno` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `ApellidoMaterno` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `Direccion` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `NumeroEx` int(5) DEFAULT NULL,
+  `NumeroInt` int(5) DEFAULT NULL,
+  `Telefono` varchar(12) COLLATE latin1_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`IdCliente`, `NombreClie`, `ApellidoPaterno`, `ApellidoMaterno`, `Direccion`, `NumeroEx`, `NumeroInt`, `Telefono`) VALUES
+('01q2', 'Larry', 'Luis', 'Leaños', 'callejon chapultepec', 205, 0, ''),
+('1234', 'Laura', 'Coutiño', 'Gallardo', 'De La Rosaa', 300, 0, '123456789'),
+('3E4R', 'LEWIS', 'LUIS', 'LEAÑOS', 'CALLEJIN CHAPULTEPEC', 205, NULL, '1234567890'),
+('9o91', 'jjj', 'jjj', 'jj', 'jj', 9, NULL, '77777'),
+('9OQ2', 'Luis', 'LUIS', 'Luis', 'jajajaja', 0, 0, '99999999');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleventa`
+--
+
+CREATE TABLE `detalleventa` (
+  `IdVenta` char(8) COLLATE latin1_spanish_ci NOT NULL,
+  `Fecha` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `IdCliente` char(4) COLLATE latin1_spanish_ci NOT NULL,
+  `NombreClie` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `IdArticulo` char(4) COLLATE latin1_spanish_ci NOT NULL,
+  `NombreArti` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `Cantidad` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `Precio` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `PrecioVendido` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `TipoDeVenta` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `detalleventa`
+--
+
+INSERT INTO `detalleventa` (`IdVenta`, `Fecha`, `IdCliente`, `NombreClie`, `IdArticulo`, `NombreArti`, `Cantidad`, `Precio`, `PrecioVendido`, `TipoDeVenta`) VALUES
+('00000001', '31/03/2016', '01q2', 'Larry Luis Leaños', '02we', 'Ropero', '1', '300', '300', 1),
+('00000002', '31/03/2016', '01q2', 'Larry Luis Leaños', '10O2', 'Compu', '4', '10', '40', 2),
+('00000002', '31/03/2016', '01q2', 'Larry Luis Leaños', '02we', 'Ropero', '2', '300', '600', 2),
+('00000003', '31/03/2016', '1234', 'Laura Coutiño Gallardo', '111w', 'refri', '1', '1000', '1000', 1),
+('00000003', '31/03/2016', '1234', 'Laura Coutiño Gallardo', '10O2', 'Compu', '1', '10', '10', 1),
+('00000004', '31/03/2016', '1234', 'Laura Coutiño Gallardo', '02we', 'Ropero', '2', '300', '600', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `login`
+--
+
+CREATE TABLE `login` (
+  `IdUser` int(11) NOT NULL,
+  `Usuario` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `Password` varchar(30) COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `login`
+--
+
+INSERT INTO `login` (`IdUser`, `Usuario`, `Password`) VALUES
+(1, 'admin', 'siscontin');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipodeventa`
+--
+
+CREATE TABLE `tipodeventa` (
+  `TipoDeVenta` int(1) NOT NULL,
+  `Descripcion` varchar(30) COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tipodeventa`
+--
+
+INSERT INTO `tipodeventa` (`TipoDeVenta`, `Descripcion`) VALUES
+(1, 'Contado'),
+(2, 'Credito');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `venta`
+--
+
+CREATE TABLE `venta` (
+  `IdVenta` char(8) COLLATE latin1_spanish_ci NOT NULL,
+  `Fecha` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `IdCliente` char(4) COLLATE latin1_spanish_ci NOT NULL,
+  `NombreClie` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
+  `PrecioDeVenta` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
+  `TipoDeVenta` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`IdVenta`, `Fecha`, `IdCliente`, `NombreClie`, `PrecioDeVenta`, `TipoDeVenta`) VALUES
+('00000001', '31/03/2016', '01q2', 'Larry Luis Leaños', '300', 1),
+('00000002', '31/03/2016', '01q2', 'Larry Luis Leaños', '640', 2),
+('00000003', '31/03/2016', '1234', 'Laura Coutiño Gallardo', '1010', 1),
+('00000004', '31/03/2016', '1234', 'Laura Coutiño Gallardo', '600', 2);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `abonos`
+--
+ALTER TABLE `abonos`
+  ADD KEY `IdVenta_idx` (`IdVenta`);
+
+--
+-- Indices de la tabla `articulo`
+--
+ALTER TABLE `articulo`
+  ADD PRIMARY KEY (`IdArticulo`);
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`IdCliente`);
+
+--
+-- Indices de la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  ADD KEY `IdVenta` (`IdVenta`,`IdCliente`,`IdArticulo`),
+  ADD KEY `TipoDeVenta` (`TipoDeVenta`);
+
+--
+-- Indices de la tabla `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`IdUser`);
+
+--
+-- Indices de la tabla `tipodeventa`
+--
+ALTER TABLE `tipodeventa`
+  ADD PRIMARY KEY (`TipoDeVenta`);
+
+--
+-- Indices de la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD PRIMARY KEY (`IdVenta`),
+  ADD KEY `IdCliente_idx` (`IdCliente`),
+  ADD KEY `TipoDeVenta` (`TipoDeVenta`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `login`
+--
+ALTER TABLE `login`
+  MODIFY `IdUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tipodeventa`
+--
+ALTER TABLE `tipodeventa`
+  MODIFY `TipoDeVenta` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `abonos`
+--
+ALTER TABLE `abonos`
+  ADD CONSTRAINT `abonos_ibfk_1` FOREIGN KEY (`IdVenta`) REFERENCES `venta` (`IdVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  ADD CONSTRAINT `detalleventa_ibfk_2` FOREIGN KEY (`TipoDeVenta`) REFERENCES `tipodeventa` (`TipoDeVenta`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD CONSTRAINT `venta_ibfk_3` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `venta_ibfk_5` FOREIGN KEY (`TipoDeVenta`) REFERENCES `tipodeventa` (`TipoDeVenta`) ON DELETE CASCADE ON UPDATE CASCADE;
+--
+-- Base de datos: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
