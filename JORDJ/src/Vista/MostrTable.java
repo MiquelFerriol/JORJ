@@ -472,7 +472,7 @@ public class MostrTable extends JFrame{
     public MostrTable(BaseDatos BD) {
         super("");
         this.BD = BD;
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
+        //setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
         DataTable();
         JTable table = new JTable(modelo){
           @Override
@@ -525,7 +525,7 @@ public class MostrTable extends JFrame{
             }
         );
         
-        displayTimer = new Timer(1000, listener);
+        displayTimer = new Timer(500, listener);
         displayTimer.start();
 
         TableColumnAdjuster tca = new TableColumnAdjuster(table);

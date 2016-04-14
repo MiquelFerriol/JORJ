@@ -476,7 +476,7 @@ public final class Table extends JFrame{
     public Table(BaseDatos BD) {
         super("");
         this.BD = BD;
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
+        //setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
         DataTable();
         JTable table = new JTable(modelo){
           @Override

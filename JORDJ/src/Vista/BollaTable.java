@@ -45,7 +45,7 @@ public class BollaTable extends JFrame{
     public BollaTable(BaseDatos BD) {
         super("");
         this.BD = BD;
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/SAILING.JPG")).getImage());
+        //setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/SAILING.JPG")).getImage());
         DataTable();
         JTable bTable = new JTable(modelo){
           @Override
