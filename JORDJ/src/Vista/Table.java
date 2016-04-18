@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.util.*;
 import BaseDatos.BaseDatos;
 import Estructuras.Regata;
+import Estructuras.*;
 import java.awt.Color;
 import javax.swing.table.*;
 import java.awt.Component;
@@ -55,8 +56,8 @@ import javax.swing.SwingUtilities;
 public final class Table extends JFrame{
     
     private Timer displayTimer;        
-    private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","WindDir75", "WindSpeed75","WindDir100", "WindSpeed100"};
-    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.", "Wind Speed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%"};
+    private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","WindDir75", "WindSpeed75","WindDir100", "WindSpeed100","Visible"};
+    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.", "Wind Speed","Wind Dir. 25%", "WindSpeed 25%","Wind Dir. 50%", "WindSpeed 50%","Wind Dir. 75%", "WindSpeed 75%","Wind Dir. 100%", "WindSpeed 100%","Visible"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     private String IP;
@@ -347,7 +348,9 @@ public final class Table extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                //System.out.println(e.getMessage());
+                lbl.setHorizontalAlignment(JLabel.CENTER);
+                lbl.setVerticalAlignment(JLabel.CENTER);
+                lbl.add(new JCheckBox());
                 return lbl;
             }
         }
@@ -420,6 +423,10 @@ public final class Table extends JFrame{
             }
         }*/
         
+        else if(column == 39){
+            return new JCheckBox();
+        }
+        
         else {
             //System.out.println("WTF ESTA PASSANT " + column);
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
@@ -483,6 +490,16 @@ public final class Table extends JFrame{
           protected JTableHeader createDefaultTableHeader() {
               return new GroupableTableHeader(columnModel);
           }
+          
+          @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 39:
+                        return Boolean.class;
+                    default:
+                        return String.class;
+                }
+            }
         };
         TableRenderer r = new TableRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
@@ -502,14 +519,14 @@ public final class Table extends JFrame{
             new CellEditorListener() {
                 @Override
                 public void editingCanceled(ChangeEvent e) {
-                    //System.out.println("editingCanceled");
+                    System.out.println("editingCanceled");
                 }
 
                 @Override
                 public void editingStopped(ChangeEvent e) {
                     
                     //.out.println("editingStopped: apply additional action");
-                    //System.out.println(table.getSelectedColumn());
+                    System.out.println(table.getSelectedColumn());
                     int column = table.getSelectedColumn();
                     int row = table.getSelectedRow();
                     lastCol = column;
@@ -528,6 +545,29 @@ public final class Table extends JFrame{
                                 finishTime(row,column);
                         }
                     }
+                }
+            }
+        );
+        
+        table.getDefaultEditor(Boolean.class).addCellEditorListener(
+            new CellEditorListener() {
+                @Override
+                public void editingCanceled(ChangeEvent e) {
+                    System.out.println("editingCanceled");
+                }
+
+                @Override
+                public void editingStopped(ChangeEvent e) {
+                    
+                    System.out.println("editingStopped: apply additional action");
+                    //System.out.println(table.getSelectedColumn());
+                    int column = table.getSelectedColumn();
+                    int row = table.getSelectedRow();
+                    lastCol = column;
+                    lastRow = row;
+                    Object data = modelo.getValueAt(row, column);
+                    if((boolean)data) BD.Update(row+1, COLUMNA[column], 1);
+                    else BD.Update(row+1, COLUMNA[column], 0);
                 }
             }
         );
@@ -579,7 +619,7 @@ public final class Table extends JFrame{
     int lastRow = -1;
     
     private void initDesplegable(JTable table){
-        Desplegable dClass = new Desplegable(1,new String[] {"RS:X M", "RS:X W","LASER STD","LASER RAD", "470 M", "470 W","FINN",	"49ER",	"FX ONE","NACRA"});
+        Desplegable dClass = new Desplegable(1,GlobalVariable.CLASS.toArray(new String[GlobalVariable.CLASS.size()]));
         dClass.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -595,7 +635,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dceClass= new DefaultCellEditor(dClass);
         table.getColumnModel().getColumn(1).setCellEditor(dceClass);
         
-        Desplegable dArea = new Desplegable(1,new String[] {"Päo Açucar", "Escola Naval","Niteroi","Ponte", "Copacabana", "Pai","Aeroport"});
+        Desplegable dArea = new Desplegable(1,GlobalVariable.AREA.toArray(new String[GlobalVariable.AREA.size()]));
         dArea.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -610,8 +650,7 @@ public final class Table extends JFrame{
         });
         DefaultCellEditor dceArea= new DefaultCellEditor(dArea);
         table.getColumnModel().getColumn(7).setCellEditor(dceArea);
-        
-        Desplegable dCommittee = new Desplegable(1,new String[] {"Christoph", "Maria","Stogg","Luiggi", "Sulis", "John","Other"});
+        Desplegable dCommittee = new Desplegable(1,GlobalVariable.COMMITEE.toArray(new String[GlobalVariable.COMMITEE.size()]));
         dCommittee.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -627,7 +666,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dceCommittee= new DefaultCellEditor(dCommittee);
         table.getColumnModel().getColumn(8).setCellEditor(dceCommittee);
         
-        Desplegable dRaceStatus = new Desplegable(1,new String[] {"SCHEDULED", "POSTPONDMENT","ON SEQUENCE","SAILING", "FINISHED", "ABANDON","ON TIME"});
+        Desplegable dRaceStatus = new Desplegable(1,GlobalVariable.RACE_STATUS.toArray(new String[GlobalVariable.RACE_STATUS.size()]));
         dRaceStatus.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -643,7 +682,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dceRaceStatus= new DefaultCellEditor(dRaceStatus);
         table.getColumnModel().getColumn(9).setCellEditor(dceRaceStatus);
         
-        Desplegable dSignal = new Desplegable(1,new String[] {"DELTA", "AP","AP+A","N+A", "LIMA"});
+        Desplegable dSignal = new Desplegable(1,GlobalVariable.SIGNAL.toArray(new String[GlobalVariable.SIGNAL.size()]));
         dSignal.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -659,7 +698,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dceSignal= new DefaultCellEditor(dSignal);
         table.getColumnModel().getColumn(10).setCellEditor(dceSignal);
         
-        Desplegable dPrepSig = new Desplegable(1,new String[] {"PAPA", "INDIA - 30.1","ZULU - 30.2","BLACK - 30.3", "OTHER"});
+        Desplegable dPrepSig = new Desplegable(1,GlobalVariable.PREP_SIG.toArray(new String[GlobalVariable.PREP_SIG.size()]));
         dPrepSig.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -678,7 +717,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dcePrepSig= new DefaultCellEditor(dPrepSig);
         table.getColumnModel().getColumn(15).setCellEditor(dcePrepSig);
         
-        Desplegable dLastSig = new Desplegable(1,new String[] {"LAST BOAT", "FINISH CLOSED","AP+A","N+A", "ONB PUBLICATION"});
+        Desplegable dLastSig = new Desplegable(1,GlobalVariable.LAST_SIG.toArray(new String[GlobalVariable.LAST_SIG.size()]));
         dLastSig.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -694,7 +733,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dceLastSig= new DefaultCellEditor(dLastSig);
         table.getColumnModel().getColumn(22).setCellEditor(dceLastSig);
         
-        Desplegable dResults = new Desplegable(1,new String[] {"RECEIVED", "REVIEWING","PUBLISHED"});
+        Desplegable dResults = new Desplegable(1,GlobalVariable.RESULTS.toArray(new String[GlobalVariable.RESULTS.size()]));
         dResults.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -710,7 +749,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dceResults= new DefaultCellEditor(dResults);
         table.getColumnModel().getColumn(24).setCellEditor(dceResults);
         
-        Desplegable dGroup = new Desplegable(1,new String[] {"Yellow Q-series", "Blue Q-series","Red Q-series","Yellow F-series","Blue F-series","Red F-series","Gold","Silver","Bronze","Fleet","Medal Race"});
+        Desplegable dGroup = new Desplegable(1,GlobalVariable.GROUP.toArray(new String[GlobalVariable.GROUP.size()]));
         dGroup.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -726,7 +765,7 @@ public final class Table extends JFrame{
         DefaultCellEditor dceGroup= new DefaultCellEditor(dGroup);
         table.getColumnModel().getColumn(2).setCellEditor(dceGroup);
         
-        Desplegable dChanges = new Desplegable(1,new String[] {"Starboard", "Port","Increased","Decreased","Stb. Incr.","Prt. Incr.","Stb. Decr.","Prt. Decr."});
+        Desplegable dChanges = new Desplegable(1,GlobalVariable.CHANGES.toArray(new String[GlobalVariable.CHANGES.size()]));
         dChanges.addItemListener ((ItemEvent itemEvent) -> {
             int state1 = itemEvent.getStateChange();
             TableModel model = table.getModel();
@@ -928,6 +967,7 @@ public final class Table extends JFrame{
             modelo.setValueAt(r.getWindSpeed75(),i,36);
             modelo.setValueAt(r.getWindDir100(),i,37);
             modelo.setValueAt(r.getWindSpeed100(),i,38);
+            modelo.setValueAt(r.isVisible(),i,39);
         }
         CheckGrid();
     }

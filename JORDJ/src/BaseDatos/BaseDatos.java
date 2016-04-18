@@ -80,6 +80,7 @@ public class BaseDatos {
                 r.setWindSpeed75(rs.getInt(37));
                 r.setWindDir100(rs.getInt(38));
                 r.setWindSpeed100(rs.getInt(39));
+                r.setVisible(rs.getBoolean(52));
                 Bolla b1 = new Bolla(rs.getString(40));
                 Bolla b2 = new Bolla(rs.getString(41));
                 Bolla b3 = new Bolla(rs.getString(42));

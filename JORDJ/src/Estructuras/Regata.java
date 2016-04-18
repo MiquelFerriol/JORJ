@@ -52,6 +52,9 @@ public class Regata {
     private int WindSpeed75;
     private int WindDir100;
     private int WindSpeed100;
+    private boolean Visible;
+
+    
 
     public Regata(){
     }
@@ -413,7 +416,13 @@ public class Regata {
         this.WindSpeed100 = WindSpeed100;
     }
     
-    
+    public boolean isVisible() {
+        return Visible;
+    }
+
+    public void setVisible(boolean Visible) {
+        this.Visible = Visible;
+    }
    
     
 }

@@ -14,6 +14,7 @@ import java.util.*;
 import BaseDatos.BaseDatos;
 import Estructuras.Regata;
 import java.awt.Color;
+import javax.swing.RowFilter;
 import javax.swing.table.*;
 import java.awt.Component;
 import javax.swing.*;
@@ -43,7 +44,7 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 import javax.swing.border.Border;
 import javax.swing.table.*;
-import javax.swing.SwingUtilities;
+import javax.swing.RowFilter;
 
 /**
  *
@@ -51,11 +52,64 @@ import javax.swing.SwingUtilities;
  */
 public class MostrTable extends JFrame{
     private Timer displayTimer;        
-    private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir","WindSpeed"};
-    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed"};
+    //private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir","WindSpeed"};
+    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed","Visible"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     private String IP;
+    
+    public MostrTable(BaseDatos BD) {
+        super("");
+        this.BD = BD;
+        //setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
+        
+        DataTable();
+        JTable table = new JTable(modelo){
+          @Override
+          protected JTableHeader createDefaultTableHeader() {
+              return new GroupableTableHeader(columnModel);
+          }
+        };
+        table.setAutoCreateRowSorter(true);
+        TableRowSorter sorter = new TableRowSorter<>(modelo);
+        table.setRowSorter(sorter);
+        RowFilter<DefaultTableModel, Object> rf = RowFilter.regexFilter("true",31);
+        sorter.setRowFilter(rf);
+        TableRenderer r = new TableRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, r);
+
+        //add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        setExtendedState( getExtendedState()|JFrame.MAXIMIZED_BOTH );
+
+        ActionListener listener = (ActionEvent event) -> {
+            printTable();
+            sorter.setRowFilter(rf);
+            displayTimer.restart();
+        };
+        
+        displayTimer = new Timer(500, listener);
+        displayTimer.start();
+
+        TableColumnAdjuster tca = new TableColumnAdjuster(table);
+        tca.adjustColumns();
+
+        table.setRowHeight(51);
+
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
+        
+        initHeader(table);
+    
+        add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+        TableColumnModel tcm = table.getColumnModel();
+        tcm.removeColumn( tcm.getColumn(31) );
+        
+        pack();
+        setVisible(true);
+    }
     
     public class TableRenderer extends DefaultTableCellRenderer { 
         @Override
@@ -64,7 +118,12 @@ public class MostrTable extends JFrame{
         //System.out.println("COLUMN: " + column);
         if(column == 10 || column == 15){
             try{
-                String s =  modelo.getValueAt(row, column).toString();
+                int aux = 0;
+                for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
+                }
+                //System.out.println(row+aux);
+                String s =  modelo.getValueAt(row+aux, column).toString();
                 if(s.equals("OTHER")){
                     s = "UNIFORM";
                 }
@@ -83,7 +142,12 @@ public class MostrTable extends JFrame{
         }
         else if(column == 9){
             try{
-                String s =  modelo.getValueAt(row, column).toString();
+                int aux = 0;
+                for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
+                }
+                //System.out.println(row+aux);
+                String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
                 switch (s) {
@@ -136,7 +200,12 @@ public class MostrTable extends JFrame{
         }
         else if(column == 24){
             try{
-                String s =  modelo.getValueAt(row, column).toString();
+                int aux = 0;
+                for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
+                }
+                //System.out.println(row+aux);
+                String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
                 switch (s) {
@@ -177,7 +246,12 @@ public class MostrTable extends JFrame{
         }
         else if(column == 22){
             try{
-                String s =  modelo.getValueAt(row, column).toString();
+                int aux = 0;
+                for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
+                }
+                //System.out.println(row+aux);
+                String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
                 switch (s) {
@@ -222,7 +296,12 @@ public class MostrTable extends JFrame{
         }
         else if(column == 28){
             try{
-                String s =  modelo.getValueAt(row, column).toString();
+                int aux = 0;
+                for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
+                }
+                //System.out.println(row+aux);
+                String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
                 switch (s) {
@@ -279,7 +358,12 @@ public class MostrTable extends JFrame{
         //
         else if(column == 2){
             try{
-                String s =  modelo.getValueAt(row, column).toString();
+                int aux = 0;
+                for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
+                }
+                //System.out.println(row+aux);
+                String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
                 switch (s) {
@@ -415,7 +499,6 @@ public class MostrTable extends JFrame{
                 return lbl;
             }
         }*/
-        
         else {
             //System.out.println("WTF ESTA PASSANT " + column);
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
@@ -468,85 +551,6 @@ public class MostrTable extends JFrame{
             }
         }       
     }    
-    
-    public MostrTable(BaseDatos BD) {
-        super("");
-        this.BD = BD;
-        //setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
-        DataTable();
-        JTable table = new JTable(modelo){
-          @Override
-          protected JTableHeader createDefaultTableHeader() {
-              return new GroupableTableHeader(columnModel);
-          }
-        };
-        TableRenderer r = new TableRenderer();
-        r.setHorizontalAlignment(JLabel.CENTER);
-        table.setDefaultRenderer(Object.class, r);
-
-        //add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        setExtendedState( getExtendedState()|JFrame.MAXIMIZED_BOTH );
-
-        ActionListener listener = (ActionEvent event) -> {
-            printTable();
-            displayTimer.restart();
-        };
-
-        table.getDefaultEditor(String.class).addCellEditorListener(
-            new CellEditorListener() {
-                @Override
-                public void editingCanceled(ChangeEvent e) {
-                    //System.out.println("editingCanceled");
-                }
-
-                @Override
-                public void editingStopped(ChangeEvent e) {
-                    int column = table.getSelectedColumn();
-                    int row = table.getSelectedRow();
-                    lastCol = column;
-                    lastRow = row;
-                    if(row != -1 && column != -1){
-                        Object data = modelo.getValueAt(row, column);
-                        
-                        if(correctValue(column, data.toString())){
-                                BD.Update(row+1, COLUMNA[column], data);
-                            }
-                        else if (!"".equals(data.toString())){
-                            modelo.setValueAt("", row, column);
-                        }
-
-                        if(column == 13 || column == 19){
-                                finishTime(row,column);
-                        }
-                    }
-                }
-            }
-        );
-        
-        displayTimer = new Timer(500, listener);
-        displayTimer.start();
-
-        TableColumnAdjuster tca = new TableColumnAdjuster(table);
-        tca.adjustColumns();
-
-        table.setRowHeight(51);
-
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
-        
-        initHeader(table);
-    
-        add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-
-        pack();
-        setVisible(true);
-    }
-    int lRow;
-    boolean cont = false;
-    int lastCol = -1;
-    int lastRow = -1;
-    
     
     private void initHeader(JTable table){
         TableColumnModel cm = table.getColumnModel();
@@ -625,15 +629,10 @@ public class MostrTable extends JFrame{
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
                     //System.out.println(modelo.getValueAt(row, 19).toString());
                         modelo.setValueAt(hms, row, 20);
-                        BD.Update(row+1, COLUMNA[20], hms);
             } catch (Exception es) {
                 System.out.println(es.getMessage());
                 es.printStackTrace();
             }
-        }
-        else{
-            modelo.setValueAt("", row, 20);
-            BD.Update(row+1, COLUMNA[20], "");
         }
     }
     
@@ -681,37 +680,38 @@ public class MostrTable extends JFrame{
         BD.initBD();
         for(int i = 0; i < BD.getBD().size(); ++i ){
             Regata r = BD.getBD().get(i);
-            modelo.setValueAt(r.getId(),i,0);
-            modelo.setValueAt(r.getClas(),i,1);
-            modelo.setValueAt(r.getGroup(),i,2);
-            modelo.setValueAt(r.getRace(),i,3);
-            modelo.setValueAt(r.getScheduledDate(),i,4);
-            modelo.setValueAt(r.getRealDate(),i,5);
-            modelo.setValueAt(r.getEntries(),i,6);
-            modelo.setValueAt(r.getArea(),i,7);
-            modelo.setValueAt(r.getCommittee(),i,8);
-            modelo.setValueAt(r.getRaceStatus(),i,9);
-            modelo.setValueAt(r.getSignal(),i,10);
-            modelo.setValueAt(r.getTime(),i,11);
-            modelo.setValueAt(r.getScheduledTime(),i,12);
-            modelo.setValueAt(r.getStartingTime(),i,13);
-            modelo.setValueAt(r.getBoatsStarted(),i,14);
-            modelo.setValueAt(r.getPreparatorySignal(),i,15);
-            modelo.setValueAt(r.getOCS_DSQ(),i,16);
-            modelo.setValueAt(r.getAP(),i,17);
-            modelo.setValueAt(r.getGR(),i,18);
-            modelo.setValueAt(r.getFinishTime(),i,19);
-            modelo.setValueAt(r.getRaceTime(),i,20);
-            modelo.setValueAt(r.getBoatsFinished(),i,21);
-            modelo.setValueAt(r.getLastSignal(), i, 22);
-            modelo.setValueAt(r.getLastSignalTime(), i, 23);
-            modelo.setValueAt(r.getResults(), i, 24);
-            modelo.setValueAt(r.getCourse(),i,25);
-            modelo.setValueAt(r.getDistance1stLeg(),i,26);
-            modelo.setValueAt(r.getBearing1stLeg(),i,27);
-            modelo.setValueAt(r.getLegChanges(),i,28);
-            modelo.setValueAt(r.getWindDir(),i,29);
-            modelo.setValueAt(r.getWindSpeed(),i,30);
+                modelo.setValueAt(r.getId(),i,0);
+                modelo.setValueAt(r.getClas(),i,1);
+                modelo.setValueAt(r.getGroup(),i,2);
+                modelo.setValueAt(r.getRace(),i,3);
+                modelo.setValueAt(r.getScheduledDate(),i,4);
+                modelo.setValueAt(r.getRealDate(),i,5);
+                modelo.setValueAt(r.getEntries(),i,6);
+                modelo.setValueAt(r.getArea(),i,7);
+                modelo.setValueAt(r.getCommittee(),i,8);
+                modelo.setValueAt(r.getRaceStatus(),i,9);
+                modelo.setValueAt(r.getSignal(),i,10);
+                modelo.setValueAt(r.getTime(),i,11);
+                modelo.setValueAt(r.getScheduledTime(),i,12);
+                modelo.setValueAt(r.getStartingTime(),i,13);
+                modelo.setValueAt(r.getBoatsStarted(),i,14);
+                modelo.setValueAt(r.getPreparatorySignal(),i,15);
+                modelo.setValueAt(r.getOCS_DSQ(),i,16);
+                modelo.setValueAt(r.getAP(),i,17);
+                modelo.setValueAt(r.getGR(),i,18);
+                modelo.setValueAt(r.getFinishTime(),i,19);
+                modelo.setValueAt(r.getRaceTime(),i,20);
+                modelo.setValueAt(r.getBoatsFinished(),i,21);
+                modelo.setValueAt(r.getLastSignal(), i, 22);
+                modelo.setValueAt(r.getLastSignalTime(), i, 23);
+                modelo.setValueAt(r.getResults(), i, 24);
+                modelo.setValueAt(r.getCourse(),i,25);
+                modelo.setValueAt(r.getDistance1stLeg(),i,26);
+                modelo.setValueAt(r.getBearing1stLeg(),i,27);
+                modelo.setValueAt(r.getLegChanges(),i,28);
+                modelo.setValueAt(r.getWindDir(),i,29);
+                modelo.setValueAt(r.getWindSpeed(),i,30);
+                modelo.setValueAt(r.isVisible(),i,31);
         }
         CheckGrid();
     }
@@ -725,16 +725,18 @@ public class MostrTable extends JFrame{
                return false;
             }
         };
+        
         modelo.setDataVector(new Object[][]{}, titulos);
         String [] fila = new String[titulos.length];
         BD.initBD();
-        int size = BD.getBD().size();
         
-        for(int i = 0; i < size; ++i){
-            modelo.addRow(fila);
+        for(int i = 0; i < BD.getBD().size(); ++i){
+            //if(BD.getBD().get(i).isVisible()){
+                modelo.addRow(fila);
+            //}
         }
-        
         printTable();
+        
     }
     
     private void CheckGrid(){
@@ -744,7 +746,7 @@ public class MostrTable extends JFrame{
             for (int j = 0; j < col; j++) {
                 Object ob = modelo.getValueAt(i, j);
                 if (ob  == null ) {
-                    if(j == 12 && i == 0) System.out.println("BORRAMOS" + (ob  == null));
+                    //if(j == 12 && i == 0) System.out.println("BORRAMOS" + (ob  == null));
                 }
                 else if(ob.toString().equals("-1") || ob.toString().equals("-1.0") || ob.toString().isEmpty()) modelo.setValueAt("", i, j);
                 
