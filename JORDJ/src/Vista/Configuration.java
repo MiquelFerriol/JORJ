@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Estructuras.GlobalVariable;
+import java.awt.Color;
+
 /**
  *
  * @author Miquel Ferriol
@@ -89,7 +92,29 @@ public class Configuration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Color col = Color.WHITE;
+        String s = (String)jComboBox2.getSelectedItem();
+        switch(s){
+            case "Yellow":
+                col = Color.YELLOW;
+                break;
+            case "Red":
+                col = Color.RED;
+                break;
+            case "Green":
+                col = Color.GREEN;
+                break;
+            case "Orange":
+                col = Color.ORANGE;
+                break;
+            case "Blue":
+                col = Color.BLUE;
+                break;
+            case "Pink":
+                col = Color.PINK;
+                break;
+        }
+        GlobalVariable.COLOR.set(jComboBox4.getSelectedIndex(),col);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed

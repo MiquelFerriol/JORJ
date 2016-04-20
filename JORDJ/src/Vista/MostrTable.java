@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import java.awt.GridLayout;
 import java.util.*;
 import BaseDatos.BaseDatos;
+import Estructuras.GlobalVariable;
 import Estructuras.Regata;
 import java.awt.Color;
 import javax.swing.RowFilter;
@@ -438,31 +439,7 @@ public class MostrTable extends JFrame{
             try{
                 Color col;
                 String s = modelo.getValueAt(row, column).toString();
-                switch(s){
-                    case "Päo Açucar":
-                        col = Color.red;
-                        break;
-                    case "Escola Naval":
-                        col = Color.green;
-                        break;
-                    case "Ponte":
-                        col = Color.yellow;
-                        break;
-                    case "Copacabana":
-                        col = Color.orange;
-                        break;
-                    case "Niteroi":
-                        col = Color.cyan;
-                        break;    
-                    case "Pai":
-                        col = Color.pink;
-                        break;    
-                    case "Aeroport":
-                        col = Color.gray;
-                        break;
-                    default:
-                        col = Color.WHITE;
-                }
+                col = GlobalVariable.COLOR.get(GlobalVariable.AREA.indexOf(s));
                 c.setBackground(col);
                 return c;
             }

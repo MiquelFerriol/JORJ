@@ -44,6 +44,7 @@ public final class GlobalVariable {
         add("Escola Naval");
         add("Copacabana");
         add("Niteroi");
+        add("Ponte");
         add("Aeroport");
         add("Alpha");
         add("Bravo");
@@ -58,6 +59,7 @@ public final class GlobalVariable {
         add(Color.ORANGE);
         add(Color.BLUE);
         add(Color.PINK);
+        add(Color.GRAY);
         add(Color.RED);
         add(Color.GREEN);
         add(Color.ORANGE);
