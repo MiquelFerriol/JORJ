@@ -8,6 +8,7 @@ package BaseDatos;
 import java.util.ArrayList;
 import Estructuras.*;
 import conSql.ConectaBD;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -110,8 +111,42 @@ public class BaseDatos {
                 BD.add(r);
             }
             cn.close();
+            
+            cn = db.getConnection(ip);
+            String sql1 = "select * from areas";
+            PreparedStatement st = cn.prepareStatement(sql1);
+            ResultSet rs1 = st.executeQuery();
+            int i = 0;
+            while(rs1.next()){
+                String s = rs1.getString(2);
+                Color col;
+                switch(s){
+                    case "Yellow":
+                        col = Color.YELLOW;
+                        break;
+                    case "Red":
+                        col = Color.RED;
+                        break;
+                    case "Green":
+                        col = Color.GREEN;
+                        break;
+                    case "Orange":
+                        col = Color.ORANGE;
+                        break;
+                    case "Blue":
+                        col = Color.BLUE;
+                        break;
+                    case "Pink":
+                        col = Color.PINK;
+                        break;
+                    default:
+                        col = Color.WHITE;
+                }
+                GlobalVariable.COLOR.set(GlobalVariable.AREA.indexOf(rs1.getString(1)),col); 
+            }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     

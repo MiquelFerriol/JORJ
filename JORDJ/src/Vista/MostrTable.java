@@ -53,7 +53,7 @@ import javax.swing.RowFilter;
  */
 public class MostrTable extends JFrame{
     private Timer displayTimer;        
-    private String [] titulos ={"Class","Group","Race", "Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "OCS", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed","Visible","id"};
+    private String [] titulos ={"Class","Group","Race", "Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "OCS", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing 1stLeg", "Leg Changes","Wind Dir.","Wind Speed","Visible","id"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     private String IP;
@@ -91,6 +91,7 @@ public class MostrTable extends JFrame{
             table.setDefaultRenderer(Object.class, r);
             printTable();
             table.repaint();
+            
             displayTimer.restart();
         };
         
