@@ -7,6 +7,47 @@ package Estructuras;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.GridLayout;
+import java.util.*;
+import BaseDatos.BaseDatos;
+import Estructuras.Regata;
+import Estructuras.*;
+import java.awt.Color;
+import javax.swing.table.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import javax.swing.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.table.DefaultTableModel;
+
+import java.text.SimpleDateFormat;
+import javax.swing.Timer;
+import java.awt.event.*;
+import java.awt.Font;
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
+import javax.swing.table.*;
+import java.awt.Graphics2D;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import javax.swing.*;
+import java.awt.Component;
+import java.awt.Color;
+import javax.swing.*;
+import javax.swing.plaf.UIResource;
+import javax.swing.border.Border;
+import javax.swing.table.*;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author Miquel Ferriol
@@ -14,6 +55,8 @@ import java.util.ArrayList;
 public final class GlobalVariable {
     
     public static int LETTER_SIZE = 13;
+    
+    public static String DATE = "all";
     
     public static ArrayList<String> CLASS = new ArrayList<String>(){{
         add("RS:X M");

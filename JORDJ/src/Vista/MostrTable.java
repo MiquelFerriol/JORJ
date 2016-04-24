@@ -89,6 +89,7 @@ public class MostrTable extends JFrame{
             sorter.setRowFilter(rf);
             r.setHorizontalAlignment(JLabel.CENTER);
             table.setDefaultRenderer(Object.class, r);
+            printTable();
             table.repaint();
             displayTimer.restart();
         };
@@ -108,7 +109,8 @@ public class MostrTable extends JFrame{
         add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
         TableColumnModel tcm = table.getColumnModel();
-        tcm.removeColumn( tcm.getColumn(29) );
+        tcm.removeColumn(tcm.getColumn(29));
+        tcm.removeColumn(tcm.getColumn(29));
         pack();
         setVisible(true);
     }
@@ -457,10 +459,18 @@ public class MostrTable extends JFrame{
         }
         else {
             //System.out.println("WTF ESTA PASSANT " + column);
-            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,GlobalVariable.LETTER_SIZE));
-            c.setBackground(Color.white);
-            return c;
+            //Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            //c = new JLabel();
+            //c.
+            JLabel lbl = new JLabel();
+            lbl.setHorizontalAlignment(JLabel.CENTER);
+            lbl.setVerticalAlignment(JLabel.CENTER);
+            lbl.setHorizontalTextPosition(JLabel.CENTER);
+            lbl.setVerticalTextPosition(JLabel.CENTER);
+            if(modelo.getValueAt(row, column) != null)lbl.setText(modelo.getValueAt(row, column).toString());
+            lbl.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,GlobalVariable.LETTER_SIZE));
+            lbl.setBackground(Color.white);
+            return lbl;
         }
     } 
         
