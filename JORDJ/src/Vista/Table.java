@@ -58,7 +58,7 @@ public final class Table extends JFrame{
     
     private Timer displayTimer;        
     private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir", "WindSpeed","WindDir25", "WindSpeed25","WindDir50", "WindSpeed50","WindDir75", "WindSpeed75","WindDir100", "WindSpeed100","Visible"};
-    private String [] titulos ={"Id", "Class", "Group","Race",  "Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.", "Wind Speed","Wind Dir. 1", "WindSpeed 1","Wind Dir. 2", "WindSpeed 2","Wind Dir. 3", "WindSpeed 3","Wind Dir. 4", "WindSpeed 4","Visible"};
+    private String [] titulos ={"Id", "Class", "Group","Race",  "Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "OCS", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.", "Wind Speed","Wind Dir. 1", "WindSpeed 1","Wind Dir. 2", "WindSpeed 2","Wind Dir. 3", "WindSpeed 3","Wind Dir. 4", "WindSpeed 4","Visible"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     private String IP;
@@ -431,7 +431,7 @@ public final class Table extends JFrame{
     public Table(BaseDatos BD) {
         super("");
         this.BD = BD;
-        //setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
         DataTable();
         JTable table = new JTable(modelo){
           @Override

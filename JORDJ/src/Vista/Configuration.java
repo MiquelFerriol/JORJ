@@ -7,6 +7,7 @@ package Vista;
 
 import Estructuras.GlobalVariable;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Configuration extends javax.swing.JFrame {
      * Creates new form Configuration
      */
     public Configuration() {
+        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
         initComponents();
     }
 

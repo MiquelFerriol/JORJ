@@ -53,7 +53,7 @@ import javax.swing.RowFilter;
  */
 public class MostrTable extends JFrame{
     private Timer displayTimer;        
-    private String [] titulos ={"Class","Group","Race", "Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed","Visible","id"};
+    private String [] titulos ={"Class","Group","Race", "Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "OCS", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed","Visible","id"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     private String IP;
@@ -61,7 +61,7 @@ public class MostrTable extends JFrame{
     public MostrTable(BaseDatos BD) {
         super("");
         this.BD = BD;
-        //setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/+.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
         
         DataTable();
         JTable table = new JTable(modelo){
@@ -70,11 +70,11 @@ public class MostrTable extends JFrame{
               return new GroupableTableHeader(columnModel);
           }
         };
-        table.setAutoCreateRowSorter(true);
+        /*table.setAutoCreateRowSorter(true);
         TableRowSorter sorter = new TableRowSorter<>(modelo);
         table.setRowSorter(sorter);
         RowFilter<DefaultTableModel, Object> rf = RowFilter.regexFilter("true",29);
-        sorter.setRowFilter(rf);
+        sorter.setRowFilter(rf);*/
         TableRenderer r = new TableRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, r);
@@ -86,7 +86,7 @@ public class MostrTable extends JFrame{
 
         ActionListener listener = (ActionEvent event) -> {
             DataTable();
-            sorter.setRowFilter(rf);
+            //sorter.setRowFilter(rf);
             r.setHorizontalAlignment(JLabel.CENTER);
             table.setDefaultRenderer(Object.class, r);
             printTable();
@@ -119,14 +119,14 @@ public class MostrTable extends JFrame{
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
-        //System.out.println("COLUMN: " + column);
+        ////System.out.println("COLUMN: " + column);
         if(column == 8 || column == 13){
             try{
                 int aux = 0;
                 /*for(int i = 0; i <= row; ++i){
                     if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
                 }*/
-                //System.out.println(row+aux);
+                ////System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 if(s.equals("OTHER")){
                     s = "UNIFORM";
@@ -150,7 +150,7 @@ public class MostrTable extends JFrame{
                 /*for(int i = 0; i <= row; ++i){
                     if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
                 }*/
-                //System.out.println(row+aux);
+                ////System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
@@ -208,7 +208,7 @@ public class MostrTable extends JFrame{
                 /*for(int i = 0; i <= row; ++i){
                     if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
                 }*/
-                //System.out.println(row+aux);
+                ////System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
@@ -244,7 +244,7 @@ public class MostrTable extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                //System.out.println(e.getMessage());
+                ////System.out.println(e.getMessage());
                 return lbl;
             }
         }
@@ -254,7 +254,7 @@ public class MostrTable extends JFrame{
                 /*for(int i = 0; i <= row; ++i){
                     if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
                 }*/
-                //System.out.println(row+aux);
+                ////System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
@@ -294,7 +294,7 @@ public class MostrTable extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                //System.out.println(e.getMessage());
+                ////System.out.println(e.getMessage());
                 return lbl;
             }
         }
@@ -304,7 +304,7 @@ public class MostrTable extends JFrame{
                 /*for(int i = 0; i <= row; ++i){
                     if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
                 }*/
-                //System.out.println(row+aux);
+                ////System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
@@ -355,7 +355,7 @@ public class MostrTable extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                //System.out.println("COLUMN 28 " + e.getMessage());
+                ////System.out.println("COLUMN 28 " + e.getMessage());
                 return lbl;
             }
         } 
@@ -366,7 +366,7 @@ public class MostrTable extends JFrame{
                 /*for(int i = 0; i <= row; ++i){
                     if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
                 }*/
-                //System.out.println(row+aux);
+                ////System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
                 ImageIcon icon; 
@@ -431,14 +431,14 @@ public class MostrTable extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                //System.out.println(e.getMessage());
+                ////System.out.println(e.getMessage());
                 return lbl;
             }
         }
         
         else if (column == 5){
             int aux = 0;
-            /*if(row == 2) System.out.println((Integer)modelo.getValueAt(row, 30));
+            /*if(row == 2) //System.out.println((Integer)modelo.getValueAt(row, 30));
             for(int i = 0; i <=  row; ++i){
                 if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
             }*/
@@ -448,7 +448,7 @@ public class MostrTable extends JFrame{
                 Color col;
                 String s = modelo.getValueAt(row+aux, column).toString();
                 col = GlobalVariable.COLOR.get(GlobalVariable.AREA.indexOf(s));
-                if(row == 2)System.out.println("row " + (row+aux) + " color " + col + " area " + s);
+                if(row == 2)//System.out.println("row " + (row+aux) + " color " + col + " area " + s);
                 
                 c.setBackground(col);
                 return c;
@@ -458,7 +458,7 @@ public class MostrTable extends JFrame{
             }
         }
         else {
-            //System.out.println("WTF ESTA PASSANT " + column);
+            ////System.out.println("WTF ESTA PASSANT " + column);
             //Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             //c = new JLabel();
             //c.
@@ -577,12 +577,12 @@ public class MostrTable extends JFrame{
     }
     
     private void finishTime(int row, int column){
-        System.out.println("FINISH TIME");
+        //System.out.println("FINISH TIME");
         if((modelo.getValueAt(row, 13) != "") && (modelo.getValueAt(row, 19) != "") ){
             SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm:ss");
             try{
                     Date date1 = timerformat.parse(modelo.getValueAt(row, 13).toString());
-                    System.out.println("DATA: " + modelo.getValueAt(row, 19).toString());
+                    //System.out.println("DATA: " + modelo.getValueAt(row, 19).toString());
                     Date date2 = timerformat.parse(modelo.getValueAt(row, 19).toString());
                     Date date = new Date();
                     long millis = date2.getTime()-date1.getTime();
@@ -592,10 +592,10 @@ public class MostrTable extends JFrame{
                     TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
                     TimeUnit.MILLISECONDS.toSeconds(millis) - 
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-                    //System.out.println(modelo.getValueAt(row, 19).toString());
+                    ////System.out.println(modelo.getValueAt(row, 19).toString());
                         modelo.setValueAt(hms, row, 20);
             } catch (Exception es) {
-                System.out.println(es.getMessage());
+                //System.out.println(es.getMessage());
                 es.printStackTrace();
             }
         }
@@ -641,7 +641,7 @@ public class MostrTable extends JFrame{
     
     
     private void printTable(){
-        System.out.println("DATA");
+        ////System.out.println("DATA");
         BD.initBD();
         int rem = 0;
         for(int i = 0; i < BD.getBD().size(); ++i ){
@@ -706,7 +706,7 @@ public class MostrTable extends JFrame{
             if(!r.isVisible())++rem;
         }
         for(int i = 0; i <= BD.getBD().size()-rem; ++i){
-            //System.out.println("FILA");
+            ////System.out.println("FILA");
             modelo.addRow(fila);
         }
         printTable();
@@ -720,7 +720,7 @@ public class MostrTable extends JFrame{
             for (int j = 0; j < col; j++) {
                 Object ob = modelo.getValueAt(i, j);
                 if (ob  == null ) {
-                    //if(j == 12 && i == 0) System.out.println("BORRAMOS" + (ob  == null));
+                    //if(j == 12 && i == 0) //System.out.println("BORRAMOS" + (ob  == null));
                 }
                 else if(ob.toString().equals("-1") || ob.toString().equals("-1.0") || ob.toString().isEmpty()) modelo.setValueAt("", i, j);
                 

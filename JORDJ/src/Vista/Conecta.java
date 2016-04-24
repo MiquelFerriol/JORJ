@@ -7,6 +7,7 @@ package Vista;
 
 import javax.swing.JFrame;
 import BaseDatos.BaseDatos;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Miquel Ferriol
@@ -17,6 +18,7 @@ public class Conecta extends JFrame {
      * Creates new form NewJFrame
      */
     public Conecta() {
+        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
         initComponents();
     }
 

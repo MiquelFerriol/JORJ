@@ -6,6 +6,7 @@
 package Vista;
 
 import BaseDatos.BaseDatos;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Miquel Ferriol
@@ -18,6 +19,7 @@ public class Menu extends javax.swing.JFrame {
     BaseDatos BD;
     public Menu(BaseDatos BD) {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
         this.BD = BD;
     }
 
