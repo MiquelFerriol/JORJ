@@ -695,6 +695,20 @@ public class MostrTable extends JFrame{
                //all cells false
                return false;
             }
+            
+            @Override
+            public String getColumnName(int column) {
+                String tittle = titulos[column];
+                String ret = "<html>";
+                for(int i = 0; i < tittle.length(); ++i){
+                    char c = tittle.charAt(i);
+                    if(c == ' ') ret+= "<br>";
+                    else ret+= c;
+                }
+                System.out.println(ret);
+                return ret;
+            }
+
         };
         
         modelo.setDataVector(new Object[][]{}, titulos);

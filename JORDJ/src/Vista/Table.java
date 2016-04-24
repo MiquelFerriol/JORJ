@@ -448,6 +448,19 @@ public final class Table extends JFrame{
                         return String.class;
                 }
             }
+            
+            @Override
+            public String getColumnName(int column) {
+                String tittle = titulos[column];
+                String ret = "<html>";
+                for(int i = 0; i < tittle.length(); ++i){
+                    char c = tittle.charAt(i);
+                    if(c == ' ') ret+= "<br>";
+                    else ret+= c;
+                }
+                System.out.println(ret);
+                return ret;
+            }
         };
         TableRenderer r = new TableRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
@@ -928,7 +941,20 @@ public final class Table extends JFrame{
     
     private void DataTable(){
         
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel(){
+            @Override
+            public String getColumnName(int column) {
+                String tittle = titulos[column];
+                String ret = "<html>";
+                for(int i = 0; i < tittle.length(); ++i){
+                    char c = tittle.charAt(i);
+                    if(c == ' ') ret+= "<br>";
+                    else ret+= c;
+                }
+                System.out.println(ret);
+                return ret;
+            }
+        };
         modelo.setDataVector(new Object[][]{}, titulos);
         String [] fila = new String[titulos.length];
         BD.initBD();
