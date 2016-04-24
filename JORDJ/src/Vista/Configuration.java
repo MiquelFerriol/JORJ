@@ -8,17 +8,23 @@ package Vista;
 import Estructuras.GlobalVariable;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import BaseDatos.BaseDatos;
+
 
 /**
  *
  * @author Miquel Ferriol
  */
+
 public class Configuration extends javax.swing.JFrame {
+    
+    private BaseDatos BD;
 
     /**
      * Creates new form Configuration
      */
-    public Configuration() {
+    public Configuration(BaseDatos BD) {
+        this.BD = BD;
         setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
         initComponents();
     }
@@ -57,7 +63,7 @@ public class Configuration extends javax.swing.JFrame {
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Päo Açucar", "Escola Naval", "Copacabana", "Niteroi", "Aeroport", "Allpha", "Bravo", "Charlie", "Delta", "Echo" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Päo Açucar", "Escola Naval", "Copacabana", "Niteroi", "Aeroport", "Alpha", "Bravo", "Charlie", "Delta", "Echo" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -173,6 +179,10 @@ public class Configuration extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Color col = Color.WHITE;
         String s = (String)jComboBox2.getSelectedItem();
+        String area = (String)jComboBox4.getSelectedItem();
+        System.out.println("s: " + s);
+        System.out.println("area: " + area);
+        BD.UpdateColors(area, s);
         switch(s){
             case "Yellow":
                 col = Color.YELLOW;
@@ -245,11 +255,7 @@ public class Configuration extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Configuration().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
