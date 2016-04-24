@@ -25,7 +25,12 @@ public class Configuration extends javax.swing.JFrame {
      */
     public Configuration(BaseDatos BD) {
         this.BD = BD;
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("Imagenes/IMAGE1.PNG")).getImage());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         initComponents();
     }
 

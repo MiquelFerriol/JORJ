@@ -18,7 +18,12 @@ public class Conecta extends JFrame {
      * Creates new form NewJFrame
      */
     public Conecta() {
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("Imagenes/IMAGE1.PNG")).getImage());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         initComponents();
     }
 

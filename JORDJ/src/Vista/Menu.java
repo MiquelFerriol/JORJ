@@ -19,7 +19,12 @@ public class Menu extends javax.swing.JFrame {
     BaseDatos BD;
     public Menu(BaseDatos BD) {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("Imagenes/IMAGE1.PNG")).getImage());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         this.BD = BD;
     }
 

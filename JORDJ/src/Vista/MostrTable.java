@@ -61,7 +61,12 @@ public class MostrTable extends JFrame{
     public MostrTable(BaseDatos BD) {
         super("");
         this.BD = BD;
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("Imagenes/IMAGE1.PNG")).getImage());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         
         DataTable();
         JTable table = new JTable(modelo){

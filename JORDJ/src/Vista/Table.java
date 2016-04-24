@@ -435,7 +435,12 @@ public final class Table extends JFrame{
     public Table(BaseDatos BD) {
         super("");
         this.BD = BD;
-        setIconImage(new ImageIcon(getClass().getResource("../Vista/Imagenes/Imagen1.png")).getImage());
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("Imagenes/IMAGE1.PNG")).getImage());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         DataTable();
         JTable table = new JTable(modelo){
           @Override
