@@ -67,7 +67,7 @@ public final class Table extends JFrame{
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
-        ////System.out.println("COLUMN: " + column);
+        //////System.out.println("COLUMN: " + column);
         if(column == 9 || column == 14){
             try{
                 String s =  modelo.getValueAt(row, column).toString();
@@ -177,7 +177,7 @@ public final class Table extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                ////System.out.println(e.getMessage());
+                //////System.out.println(e.getMessage());
                 return lbl;
             }
         }
@@ -222,7 +222,7 @@ public final class Table extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                ////System.out.println(e.getMessage());
+                //////System.out.println(e.getMessage());
                 return lbl;
             }
         }
@@ -278,7 +278,7 @@ public final class Table extends JFrame{
             }
             catch(Exception e){
                 JLabel lbl = new JLabel();
-                ////System.out.println("COLUMN 28 " + e.getMessage());
+                //////System.out.println("COLUMN 28 " + e.getMessage());
                 return lbl;
             }
         } 
@@ -360,9 +360,13 @@ public final class Table extends JFrame{
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
             c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,GlobalVariable.LETTER_SIZE));
             try{
-                Color col;
+                Color col = Color.WHITE;
                 String s = modelo.getValueAt(row, column).toString();
-                col = GlobalVariable.COLOR.get(GlobalVariable.AREA.indexOf(s));
+                System.out.println(s);
+                int index = GlobalVariable.AREA.indexOf(s);
+                
+                if(index >= 0) col = GlobalVariable.COLOR.get(index);
+                col = GlobalVariable.COLOR.get(index);
                 c.setBackground(col);
                 return c;
             }
@@ -458,7 +462,7 @@ public final class Table extends JFrame{
                     if(c == ' ') ret+= "<br>";
                     else ret+= c;
                 }
-                System.out.println(ret);
+                //System.out.println(ret);
                 return ret;
             }
         };
@@ -480,14 +484,14 @@ public final class Table extends JFrame{
             new CellEditorListener() {
                 @Override
                 public void editingCanceled(ChangeEvent e) {
-                    //System.out.println("editingCanceled");
+                    ////System.out.println("editingCanceled");
                 }
 
                 @Override
                 public void editingStopped(ChangeEvent e) {
                     
                     //.out.println("editingStopped: apply additional action");
-                    //System.out.println(table.getSelectedColumn());
+                    ////System.out.println(table.getSelectedColumn());
                     int column = table.getSelectedColumn();
                     int row = table.getSelectedRow();
                     lastCol = column;
@@ -514,14 +518,14 @@ public final class Table extends JFrame{
             new CellEditorListener() {
                 @Override
                 public void editingCanceled(ChangeEvent e) {
-                    //System.out.println("editingCanceled");
+                    ////System.out.println("editingCanceled");
                 }
 
                 @Override
                 public void editingStopped(ChangeEvent e) {
                     
-                    //System.out.println("editingStopped: apply additional action");
-                    ////System.out.println(table.getSelectedColumn());
+                    ////System.out.println("editingStopped: apply additional action");
+                    //////System.out.println(table.getSelectedColumn());
                     int column = table.getSelectedColumn();
                     int row = table.getSelectedRow();
                     lastCol = column;
@@ -666,14 +670,14 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            ////System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            //////System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
             if((lastCol != col || lastRow != row) && (col == 14)){
                 BD.Update((Integer)modelo.getValueAt(row, 0), COLUMNA[col], dPrepSig.getSelectedItem());
                 lastCol = col;
                 lastRow = row;
             }
             else{
-                ////System.out.println("ASDASDA");
+                //////System.out.println("ASDASDA");
             }
         });
         DefaultCellEditor dcePrepSig= new DefaultCellEditor(dPrepSig);
@@ -685,7 +689,7 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            ////System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            //////System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
             if((lastCol != col || lastRow != row) && (col == 21)){
                 BD.Update((Integer)modelo.getValueAt(row, 0), COLUMNA[col], dLastSig.getSelectedItem());
                 lastCol = col;
@@ -701,7 +705,7 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            ////System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
             if((lastCol != col || lastRow != row) && (col == 23)){
                 BD.Update((Integer)modelo.getValueAt(row, 0), COLUMNA[col], dResults.getSelectedItem());
                 lastCol = col;
@@ -717,7 +721,7 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            ////System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
             if((lastCol != col || lastRow != row) && (col == 2)){
                 BD.Update((Integer)modelo.getValueAt(row, 0), COLUMNA[col], dGroup.getSelectedItem());
                 lastCol = col;
@@ -733,7 +737,7 @@ public final class Table extends JFrame{
             TableModel model = table.getModel();
             int col = table.getSelectedColumn();
             int row = table.getSelectedRow();
-            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            ////System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
             if((lastCol != col || lastRow != row) && (col == 27)){
                 BD.Update((Integer)modelo.getValueAt(row, 0), COLUMNA[col], dChanges.getSelectedItem());
                 lastCol = col;
@@ -816,12 +820,12 @@ public final class Table extends JFrame{
     }
     
     private void finishTime(int row, int column){
-        //System.out.println("FINISH TIME");
+        ////System.out.println("FINISH TIME");
         if((modelo.getValueAt(row, 12) != "") && (modelo.getValueAt(row, 18) != "") ){
             SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm:ss");
             try{
                     Date date1 = timerformat.parse(modelo.getValueAt(row, 12).toString());
-                    //System.out.println("DATA: " + modelo.getValueAt(row, 18).toString());
+                    ////System.out.println("DATA: " + modelo.getValueAt(row, 18).toString());
                     Date date2 = timerformat.parse(modelo.getValueAt(row, 18).toString());
                     Date date = new Date();
                     long millis = date2.getTime()-date1.getTime();
@@ -831,11 +835,11 @@ public final class Table extends JFrame{
                     TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
                     TimeUnit.MILLISECONDS.toSeconds(millis) - 
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-                    ////System.out.println(modelo.getValueAt(row, 19).toString());
+                    //////System.out.println(modelo.getValueAt(row, 19).toString());
                         modelo.setValueAt(hms, row, 19);
                         BD.Update((Integer)modelo.getValueAt(row, 0), COLUMNA[19], hms);
             } catch (Exception es) {
-                //System.out.println(es.getMessage());
+                ////System.out.println(es.getMessage());
                 es.printStackTrace();
             }
         }
@@ -890,7 +894,7 @@ public final class Table extends JFrame{
         for(int i = 0; i < BD.getBD().size(); ++i ){
             Regata r = BD.getBD().get(i);
             if(GlobalVariable.DATE.equals(r.getScheduledDate()) || GlobalVariable.DATE.equals("all")){
-                //System.out.println(i-rem);
+                ////System.out.println(i-rem);
                 modelo.setValueAt(r.getId(),i-rem,0);
                 modelo.setValueAt(r.getClas(),i-rem,1);
                 modelo.setValueAt(r.getGroup(),i-rem,2);
@@ -951,7 +955,7 @@ public final class Table extends JFrame{
                     if(c == ' ') ret+= "<br>";
                     else ret+= c;
                 }
-                System.out.println(ret);
+                //System.out.println(ret);
                 return ret;
             }
         };
@@ -970,9 +974,9 @@ public final class Table extends JFrame{
             }
         }
         for(int i = 0; i < BD.getBD().size()-rem; ++i){
-            ////System.out.println("FILA");
+            //////System.out.println("FILA");
             modelo.addRow(fila);
-                ////System.out.println("LAST " + i);
+                //////System.out.println("LAST " + i);
         }
         
         printTable();
@@ -985,7 +989,7 @@ public final class Table extends JFrame{
             for (int j = 0; j < col; j++) {
                 Object ob = modelo.getValueAt(i, j);
                 if (ob  == null ) {
-                    //if(j == 12 && i == 0) //System.out.println("BORRAMOS" + (ob  == null));
+                    //if(j == 12 && i == 0) ////System.out.println("BORRAMOS" + (ob  == null));
                 }
                 else if(ob.toString().equals("-1") || ob.toString().equals("-1.0") || ob.toString().isEmpty()) modelo.setValueAt("", i, j);
                 
