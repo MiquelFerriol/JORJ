@@ -53,8 +53,7 @@ import javax.swing.RowFilter;
  */
 public class MostrTable extends JFrame{
     private Timer displayTimer;        
-    //private String[] COLUMNA = {"id", "Class","Grp", "Race", "ScheduledDate", "RealDate", "Entries", "Area", "Committee", "RaceStatus", "Signall", "Time","ScheduledTime", "StartingTime", "BoatsStarted", "PreparatorySignal", "OCS_DSQ", "AP", "GR", "FinishTime", "RaceTime" ,  "BoatsFinished", "LastSignal", "LastSignalTime", "Results", "Course", "Distance1stLeg", "Bearing1stLeg", "LegChanges", "WindDir","WindSpeed"};
-    private String [] titulos ={"Id", "Class", "Group","Race",  "Scheduled Date", "Real Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed","Visible"};
+    private String [] titulos ={"Class","Group","Race", "Date", "Entries", "Area", "Committee", "RACE STATUS", "Signal", "Time","Scheduled Time", "Starting Time", "Boats Started", "Preparatory Signal", "Nr.OCS/DSQ", "AP", "GR", "Finish Time", "Race Time" ,  "Boats Finished", "Last Signal", "Last Signal Time", "Results", "Course", "Distance 1stLeg", "Bearing1stLeg", "LegChanges","Wind Dir.","Wind Speed","Visible","id"};
     private DefaultTableModel modelo;
     private BaseDatos BD;
     private String IP;
@@ -74,7 +73,7 @@ public class MostrTable extends JFrame{
         table.setAutoCreateRowSorter(true);
         TableRowSorter sorter = new TableRowSorter<>(modelo);
         table.setRowSorter(sorter);
-        RowFilter<DefaultTableModel, Object> rf = RowFilter.regexFilter("true",31);
+        RowFilter<DefaultTableModel, Object> rf = RowFilter.regexFilter("true",29);
         sorter.setRowFilter(rf);
         TableRenderer r = new TableRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
@@ -86,8 +85,11 @@ public class MostrTable extends JFrame{
         setExtendedState( getExtendedState()|JFrame.MAXIMIZED_BOTH );
 
         ActionListener listener = (ActionEvent event) -> {
-            printTable();
+            DataTable();
             sorter.setRowFilter(rf);
+            r.setHorizontalAlignment(JLabel.CENTER);
+            table.setDefaultRenderer(Object.class, r);
+            table.repaint();
             displayTimer.restart();
         };
         
@@ -99,15 +101,14 @@ public class MostrTable extends JFrame{
 
         table.setRowHeight(51);
 
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,15));
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD ,GlobalVariable.LETTER_SIZE-5));
         
         initHeader(table);
     
         add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
         TableColumnModel tcm = table.getColumnModel();
-        tcm.removeColumn( tcm.getColumn(31) );
-        
+        tcm.removeColumn( tcm.getColumn(29) );
         pack();
         setVisible(true);
     }
@@ -117,12 +118,12 @@ public class MostrTable extends JFrame{
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
         //System.out.println("COLUMN: " + column);
-        if(column == 10 || column == 15){
+        if(column == 8 || column == 13){
             try{
                 int aux = 0;
-                for(int i = 0; i <= row; ++i){
-                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
-                }
+                /*for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
+                }*/
                 //System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 if(s.equals("OTHER")){
@@ -141,12 +142,12 @@ public class MostrTable extends JFrame{
                 return lbl;
             }
         }
-        else if(column == 9){
+        else if(column == 7){
             try{
                 int aux = 0;
-                for(int i = 0; i <= row; ++i){
-                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
-                }
+                /*for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
+                }*/
                 //System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
@@ -199,12 +200,12 @@ public class MostrTable extends JFrame{
                 return lbl;
             }
         }
-        else if(column == 24){
+        else if(column == 22){
             try{
                 int aux = 0;
-                for(int i = 0; i <= row; ++i){
-                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
-                }
+                /*for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
+                }*/
                 //System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
@@ -245,12 +246,12 @@ public class MostrTable extends JFrame{
                 return lbl;
             }
         }
-        else if(column == 22){
+        else if(column == 20){
             try{
                 int aux = 0;
-                for(int i = 0; i <= row; ++i){
-                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
-                }
+                /*for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
+                }*/
                 //System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
@@ -295,12 +296,12 @@ public class MostrTable extends JFrame{
                 return lbl;
             }
         }
-        else if(column == 28){
+        else if(column == 26){
             try{
                 int aux = 0;
-                for(int i = 0; i <= row; ++i){
-                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
-                }
+                /*for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
+                }*/
                 //System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
@@ -357,12 +358,12 @@ public class MostrTable extends JFrame{
             }
         } 
         //
-        else if(column == 2){
+        else if(column == 1){
             try{
                 int aux = 0;
-                for(int i = 0; i <= row; ++i){
-                    if(!(boolean)modelo.getValueAt(i, 31)) ++aux;
-                }
+                /*for(int i = 0; i <= row; ++i){
+                    if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
+                }*/
                 //System.out.println(row+aux);
                 String s =  modelo.getValueAt(row+aux, column).toString();
                 JLabel lbl = new JLabel();
@@ -433,13 +434,20 @@ public class MostrTable extends JFrame{
             }
         }
         
-        else if (column == 7){
+        else if (column == 5){
+            int aux = 0;
+            /*if(row == 2) System.out.println((Integer)modelo.getValueAt(row, 30));
+            for(int i = 0; i <=  row; ++i){
+                if(!(boolean)modelo.getValueAt(i, 29)) ++aux;
+            }*/
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
+            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,GlobalVariable.LETTER_SIZE));
             try{
                 Color col;
-                String s = modelo.getValueAt(row, column).toString();
+                String s = modelo.getValueAt(row+aux, column).toString();
                 col = GlobalVariable.COLOR.get(GlobalVariable.AREA.indexOf(s));
+                if(row == 2)System.out.println("row " + (row+aux) + " color " + col + " area " + s);
+                
                 c.setBackground(col);
                 return c;
             }
@@ -447,39 +455,10 @@ public class MostrTable extends JFrame{
                 return c;
             }
         }
-        /*else if(column == 29){
-            //System.out.println("KAPPA");
-            try{
-                
-            int g = Integer.parseInt(modelo.getValueAt(row, 30).toString());
-            System.out.println("Graus: " + g );
-            int s = Integer.parseInt(modelo.getValueAt(row, 31).toString());
-            JLabel lbl = new JLabel();
-            ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/1.jpg"));
-            int w = icon.getIconWidth();
-            int h = icon.getIconHeight();
-            int type = BufferedImage.OPAQUE;  // other options, see api
-            BufferedImage image = new BufferedImage(h, w, type);
-            Graphics2D g2 = image.createGraphics();
-            g2.rotate(Math.toRadians(g), w, h);
-            g2.drawImage(icon.getImage(), 0,0,Color.WHITE, lbl);
-            
-            g2.dispose();
-            icon = new ImageIcon(image);
-            lbl.setIcon(icon);
-            lbl.setHorizontalAlignment(JLabel.CENTER);
-            lbl.setVerticalAlignment(JLabel.CENTER);
-            return lbl;
-            }
-            catch(Exception e){
-                JLabel lbl = new JLabel();
-                return lbl;
-            }
-        }*/
         else {
             //System.out.println("WTF ESTA PASSANT " + column);
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
+            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,GlobalVariable.LETTER_SIZE));
             c.setBackground(Color.white);
             return c;
         }
@@ -492,7 +471,7 @@ public class MostrTable extends JFrame{
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) 
     { 
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,15));
+            c.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT ,GlobalVariable.LETTER_SIZE - 5));
             try{
                 Color col;
                 switch(column){
@@ -532,50 +511,49 @@ public class MostrTable extends JFrame{
     private void initHeader(JTable table){
         TableColumnModel cm = table.getColumnModel();
         ColumnGroup g_StartsAbandoned = new ColumnGroup("Starts Abandoned");
-        g_StartsAbandoned.add(cm.getColumn(17));
-        g_StartsAbandoned.add(cm.getColumn(18));
+        g_StartsAbandoned.add(cm.getColumn(15));
+        g_StartsAbandoned.add(cm.getColumn(16));
 
 
         ColumnGroup g_Races = new ColumnGroup("RACES");
+        g_Races.add(cm.getColumn(0));
         g_Races.add(cm.getColumn(1));
         g_Races.add(cm.getColumn(2));
         g_Races.add(cm.getColumn(3));
         g_Races.add(cm.getColumn(4));
         g_Races.add(cm.getColumn(5));
         g_Races.add(cm.getColumn(6));
-        g_Races.add(cm.getColumn(7));
-        g_Races.add(cm.getColumn(8));
 
         ColumnGroup g_AshoreSignal = new ColumnGroup("Ashore Signals");
-        g_AshoreSignal.add(cm.getColumn(10));
-        g_AshoreSignal.add(cm.getColumn(11));
+        g_AshoreSignal.add(cm.getColumn(8));
+        g_AshoreSignal.add(cm.getColumn(9));
 
         ColumnGroup g_Start = new ColumnGroup("START");
+        g_Start.add(cm.getColumn(10));
+        g_Start.add(cm.getColumn(11));
         g_Start.add(cm.getColumn(12));
         g_Start.add(cm.getColumn(13));
         g_Start.add(cm.getColumn(14));
-        g_Start.add(cm.getColumn(15));
-        g_Start.add(cm.getColumn(16));
         g_Start.add(g_AshoreSignal);
         g_Start.add(g_StartsAbandoned);
 
         ColumnGroup g_Finish = new ColumnGroup("FINISH");
+        g_Finish.add(cm.getColumn(17));
+        g_Finish.add(cm.getColumn(18));
         g_Finish.add(cm.getColumn(19));
-        g_Finish.add(cm.getColumn(20));
-        g_Finish.add(cm.getColumn(21));
 
         ColumnGroup g_DayEnd = new ColumnGroup("DAY END");
+        g_DayEnd.add(cm.getColumn(20));
+        g_DayEnd.add(cm.getColumn(21));
         g_DayEnd.add(cm.getColumn(22));
-        g_DayEnd.add(cm.getColumn(23));
-        g_DayEnd.add(cm.getColumn(24));
 
         ColumnGroup g_Course = new ColumnGroup("COURSE");
+        g_Course.add(cm.getColumn(23));
+        g_Course.add(cm.getColumn(24));
         g_Course.add(cm.getColumn(25));
         g_Course.add(cm.getColumn(26));
         g_Course.add(cm.getColumn(27));
         g_Course.add(cm.getColumn(28));
-        g_Course.add(cm.getColumn(29));
-        g_Course.add(cm.getColumn(30));
 
         GroupableTableHeader header = (GroupableTableHeader)table.getTableHeader();
         header.addColumnGroup(g_Races);
@@ -585,7 +563,7 @@ public class MostrTable extends JFrame{
         header.addColumnGroup(g_DayEnd);
         header.addColumnGroup(g_Course);
         
-        header.setFont(new Font("Arial", Font.BOLD ,15));
+        header.setFont(new Font("Arial", Font.BOLD ,GlobalVariable.LETTER_SIZE));
     }
     
     private void finishTime(int row, int column){
@@ -616,8 +594,7 @@ public class MostrTable extends JFrame{
     private boolean correctValue(int c, String val){
         if(!val.equals("")){
             switch(c){               
-                case 4:
-                case 5:
+                case 3:
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     try {
                         Date date = formatter.parse(val);
@@ -625,9 +602,9 @@ public class MostrTable extends JFrame{
                     } catch (Exception e) {
                         return false;
                     }
-                case 11:
-                case 12:
-                case 23:
+                case 9:
+                case 10:
+                case 21:
                     SimpleDateFormat timerformat = new SimpleDateFormat("HH:mm");
                         try {
                             Date date = timerformat.parse(val);
@@ -635,9 +612,9 @@ public class MostrTable extends JFrame{
                         } catch (Exception e) {
                             return false;
                         }
-                case 13:
-                case 19:
-                case 20:
+                case 11:
+                case 17:
+                case 18:
                     SimpleDateFormat timerformat1 = new SimpleDateFormat("HH:mm:ss");
                         try {
                             timerformat1.parse(val).getTime();
@@ -654,41 +631,48 @@ public class MostrTable extends JFrame{
     
     
     private void printTable(){
+        System.out.println("DATA");
         BD.initBD();
+        int rem = 0;
         for(int i = 0; i < BD.getBD().size(); ++i ){
-            Regata r = BD.getBD().get(i);
-                modelo.setValueAt(r.getId(),i,0);
-                modelo.setValueAt(r.getClas(),i,1);
-                modelo.setValueAt(r.getGroup(),i,2);
-                modelo.setValueAt(r.getRace(),i,3);
-                modelo.setValueAt(r.getScheduledDate(),i,4);
-                modelo.setValueAt(r.getRealDate(),i,5);
-                modelo.setValueAt(r.getEntries(),i,6);
-                modelo.setValueAt(r.getArea(),i,7);
-                modelo.setValueAt(r.getCommittee(),i,8);
-                modelo.setValueAt(r.getRaceStatus(),i,9);
-                modelo.setValueAt(r.getSignal(),i,10);
-                modelo.setValueAt(r.getTime(),i,11);
-                modelo.setValueAt(r.getScheduledTime(),i,12);
-                modelo.setValueAt(r.getStartingTime(),i,13);
-                modelo.setValueAt(r.getBoatsStarted(),i,14);
-                modelo.setValueAt(r.getPreparatorySignal(),i,15);
-                modelo.setValueAt(r.getOCS_DSQ(),i,16);
-                modelo.setValueAt(r.getAP(),i,17);
-                modelo.setValueAt(r.getGR(),i,18);
-                modelo.setValueAt(r.getFinishTime(),i,19);
-                modelo.setValueAt(r.getRaceTime(),i,20);
-                modelo.setValueAt(r.getBoatsFinished(),i,21);
-                modelo.setValueAt(r.getLastSignal(), i, 22);
-                modelo.setValueAt(r.getLastSignalTime(), i, 23);
-                modelo.setValueAt(r.getResults(), i, 24);
-                modelo.setValueAt(r.getCourse(),i,25);
-                modelo.setValueAt(r.getDistance1stLeg(),i,26);
-                modelo.setValueAt(r.getBearing1stLeg(),i,27);
-                modelo.setValueAt(r.getLegChanges(),i,28);
-                modelo.setValueAt(r.getWindDir(),i,29);
-                modelo.setValueAt(r.getWindSpeed(),i,30);
-                modelo.setValueAt(r.isVisible(),i,31);
+                Regata r = BD.getBD().get(i);
+                if(r.isVisible()){
+                    modelo.setValueAt(r.getClas(),i-rem,0);
+                    modelo.setValueAt(r.getGroup(),i-rem,1);
+                    modelo.setValueAt(r.getRace(),i-rem,2);
+                    modelo.setValueAt(r.getScheduledDate(),i-rem,3);
+                    modelo.setValueAt(r.getEntries(),i-rem,4);
+                    modelo.setValueAt(r.getArea(),i-rem,5);
+                    modelo.setValueAt(r.getCommittee(),i-rem,6);
+                    modelo.setValueAt(r.getRaceStatus(),i-rem,7);
+                    modelo.setValueAt(r.getSignal(),i-rem,8);
+                    modelo.setValueAt(r.getTime(),i-rem,9);
+                    modelo.setValueAt(r.getScheduledTime(),i-rem,10);
+                    modelo.setValueAt(r.getStartingTime(),i-rem,11);
+                    modelo.setValueAt(r.getBoatsStarted(),i-rem,12);
+                    modelo.setValueAt(r.getPreparatorySignal(),i-rem,13);
+                    modelo.setValueAt(r.getOCS_DSQ(),i-rem,14);
+                    modelo.setValueAt(r.getAP(),i-rem,15);
+                    modelo.setValueAt(r.getGR(),i-rem,16);
+                    modelo.setValueAt(r.getFinishTime(),i-rem,17);
+                    modelo.setValueAt(r.getRaceTime(),i-rem,18);
+                    modelo.setValueAt(r.getBoatsFinished(),i-rem,19);
+                    modelo.setValueAt(r.getLastSignal(), i-rem, 20);
+                    modelo.setValueAt(r.getLastSignalTime(), i-rem, 21);
+                    modelo.setValueAt(r.getResults(), i-rem, 22);
+                    modelo.setValueAt(r.getCourse(),i-rem,23);
+                    modelo.setValueAt(r.getDistance1stLeg(),i-rem,24);
+                    modelo.setValueAt(r.getBearing1stLeg(),i-rem,25);
+                    modelo.setValueAt(r.getLegChanges(),i-rem,26);
+                    modelo.setValueAt(r.getWindDir(),i-rem,27);
+                    modelo.setValueAt(r.getWindSpeed(),i-rem,28);
+                    modelo.setValueAt(r.isVisible(),i-rem,29);
+                    modelo.setValueAt(r.getId(),i-rem,30);
+                }
+                else{
+                    //modelo.removeRow(BD.getBD().size()-1-rem);
+                    ++rem;
+                }
         }
         CheckGrid();
     }
@@ -706,11 +690,14 @@ public class MostrTable extends JFrame{
         modelo.setDataVector(new Object[][]{}, titulos);
         String [] fila = new String[titulos.length];
         BD.initBD();
-        
-        for(int i = 0; i < BD.getBD().size(); ++i){
-            //if(BD.getBD().get(i).isVisible()){
-                modelo.addRow(fila);
-            //}
+        int rem = 0;
+        for(int i = 0; i < BD.getBD().size(); ++i ){
+            Regata r = BD.getBD().get(i);
+            if(!r.isVisible())++rem;
+        }
+        for(int i = 0; i <= BD.getBD().size()-rem; ++i){
+            //System.out.println("FILA");
+            modelo.addRow(fila);
         }
         printTable();
         

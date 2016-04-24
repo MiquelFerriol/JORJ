@@ -42,14 +42,14 @@ public class FilterHeader extends JPanel {
         add( header, BorderLayout.CENTER);
 
         // append filter components to header
-        if( columnIndex == 3) {
+       /* if( columnIndex == 3) {
 
             JComboBox cb = new JComboBox();
             cb.setBackground(Color.yellow);
             cb.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
             cb.setBorder(new EmptyBorder(0, 0, 0, 0));
             cb.setForeground(table.getTableHeader().getForeground());
-            cb.setPreferredSize(new Dimension(0,table.getRowHeight() + 4));
+            cb.setPreferredSize(new Dimension(0,table.getRowHeight()));
 
             //add( cb, BorderLayout.SOUTH);
 
@@ -63,14 +63,8 @@ public class FilterHeader extends JPanel {
 
             //add( tf, BorderLayout.SOUTH);
 
-            tf.addMouseListener(new MouseAdapter() {
-
-                 @Override
-                 public void  mouseClicked(MouseEvent e) {
-                     System.out.println("textfield clicked"); // doesn't work
-                 }
-             });
-        }
+            
+        }*/
 
 
     }

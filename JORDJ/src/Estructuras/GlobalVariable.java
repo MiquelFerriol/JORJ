@@ -12,6 +12,9 @@ import java.util.ArrayList;
  * @author Miquel Ferriol
  */
 public final class GlobalVariable {
+    
+    public static int LETTER_SIZE = 13;
+    
     public static ArrayList<String> CLASS = new ArrayList<String>(){{
         add("RS:X M");
         add("RS:X W");
