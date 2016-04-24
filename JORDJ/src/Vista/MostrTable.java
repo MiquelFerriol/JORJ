@@ -448,7 +448,7 @@ public class MostrTable extends JFrame{
                 Color col;
                 String s = modelo.getValueAt(row+aux, column).toString();
                 col = GlobalVariable.COLOR.get(GlobalVariable.AREA.indexOf(s));
-                if(row == 2)//System.out.println("row " + (row+aux) + " color " + col + " area " + s);
+                if(row == 2)System.out.println("row " + (row+aux) + " color " + col + " area " + s);
                 
                 c.setBackground(col);
                 return c;
@@ -705,7 +705,7 @@ public class MostrTable extends JFrame{
             Regata r = BD.getBD().get(i);
             if(!r.isVisible())++rem;
         }
-        for(int i = 0; i <= BD.getBD().size()-rem; ++i){
+        for(int i = 0; i < BD.getBD().size()-rem; ++i){
             ////System.out.println("FILA");
             modelo.addRow(fila);
         }
