@@ -183,4 +183,32 @@ public class BaseDatos {
             }
     }
     
+        public void UpdateColors(String area, String color){
+        cn = db.getConnection(ip);
+        System.out.println("AREA: " + area + " COLOR " + color);
+        try {
+            //String sql = "UPDATE usuario SET P_Nombre='"+txtNombres.getText()+"',S_Nombre=' "+txtSgnNombre.getText()+"',P_Apellido='"+txtApellidos.getText()+"',S_Apellido=' "+ txtSgnApellido.getText()+"',Telefono='"+txtTelefono.getText()+"'WHERE N_Documento='"+txtnDocumento"';";
+            String sql = "UPDATE areas " + "SET " + "Color" + " = '" + color + "' WHERE area = '" + area + "';";
+            System.out.println(sql);
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.executeUpdate();
+            cn.close();
+        } catch (SQLException e) {
+            try {
+            String sql = "UPDATE areas " + "SET " + "Color" + " = 'White' WHERE area = '" + area + "';";
+            System.out.println(sql);
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.executeUpdate();
+            cn.close();
+            
+            } catch (SQLException q) {
+            
+                System.out.println("Error: " + q.getMessage());
+            }
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        
+    }
+    
 }
