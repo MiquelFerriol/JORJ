@@ -51,7 +51,7 @@ public class Conecta extends JFrame {
         });
 
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("10.200.10.163");
+        jTextField1.setText("192.168.0.104");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
