@@ -9,6 +9,9 @@ import Estructuras.GlobalVariable;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import BaseDatos.BaseDatos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -187,7 +190,11 @@ public class Configuration extends javax.swing.JFrame {
         String area = (String)jComboBox4.getSelectedItem();
         System.out.println("s: " + s);
         System.out.println("area: " + area);
-        BD.UpdateColors(area, s);
+        try {
+            BD.UpdateColors(area, s);
+        } catch (SQLException ex) {
+            Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
+        }
         switch(s){
             case "Yellow":
                 col = Color.YELLOW;

@@ -39,21 +39,29 @@ public class Regata {
     private String LastSignalTime;
     private String Results;
     private String Course;
-    private float Distance1stLeg;
+    private double Distance1stLeg;
     private int Bearing1stLeg;
     private String LegChanges;
     private int WindDir;
-    private int WindSpeed;
+    private double WindSpeed;
     private int WindDir25;
-    private int WindSpeed25;
+    private double WindSpeed25;
     private int WindDir50;
-    private int WindSpeed50;
+    private double WindSpeed50;
     private int WindDir75;
-    private int WindSpeed75;
+    private double WindSpeed75;
     private int WindDir100;
-    private int WindSpeed100;
+    private double WindSpeed100;
     private boolean Visible;
+    private boolean Visible1;
 
+    public boolean isVisible1() {
+        return Visible1;
+    }
+
+    public void setVisible1(boolean Visible1) {
+        this.Visible1 = Visible1;
+    }
     
 
     public Regata(){
@@ -240,7 +248,7 @@ public class Regata {
         return Course;
     }
 
-    public float getDistance1stLeg() {
+    public double getDistance1stLeg() {
         return Distance1stLeg;
     }
 
@@ -256,7 +264,7 @@ public class Regata {
         return WindDir;
     }
 
-    public int getWindSpeed() {
+    public double getWindSpeed() {
         return WindSpeed;
     }
 
@@ -264,7 +272,7 @@ public class Regata {
         return WindDir25;
     }
 
-    public int getWindSpeed25() {
+    public double getWindSpeed25() {
         return WindSpeed25;
     }
 
@@ -272,7 +280,7 @@ public class Regata {
         return WindDir50;
     }
 
-    public int getWindSpeed50() {
+    public double getWindSpeed50() {
         return WindSpeed50;
     }
 
@@ -280,7 +288,7 @@ public class Regata {
         return WindDir75;
     }
 
-    public int getWindSpeed75() {
+    public double getWindSpeed75() {
         return WindSpeed75;
     }
 
@@ -288,7 +296,7 @@ public class Regata {
         return WindDir100;
     }
 
-    public int getWindSpeed100() {
+    public double getWindSpeed100() {
         return WindSpeed100;
     }
 
@@ -364,7 +372,7 @@ public class Regata {
         this.Course = Course;
     }
 
-    public void setDistance1stLeg(float Distance1stLeg) {
+    public void setDistance1stLeg(double Distance1stLeg) {
         this.Distance1stLeg = Distance1stLeg;
     }
 
@@ -380,7 +388,7 @@ public class Regata {
         this.WindDir = WindDir;
     }
 
-    public void setWindSpeed(int WindSpeed) {
+    public void setWindSpeed(double WindSpeed) {
         this.WindSpeed = WindSpeed;
     }
 
@@ -388,7 +396,7 @@ public class Regata {
         this.WindDir25 = WindDir25;
     }
 
-    public void setWindSpeed25(int WindSpeed25) {
+    public void setWindSpeed25(double WindSpeed25) {
         this.WindSpeed25 = WindSpeed25;
     }
 
@@ -396,7 +404,7 @@ public class Regata {
         this.WindDir50 = WindDir50;
     }
 
-    public void setWindSpeed50(int WindSpeed50) {
+    public void setWindSpeed50(double WindSpeed50) {
         this.WindSpeed50 = WindSpeed50;
     }
 
@@ -404,7 +412,7 @@ public class Regata {
         this.WindDir75 = WindDir75;
     }
 
-    public void setWindSpeed75(int WindSpeed75) {
+    public void setWindSpeed75(double WindSpeed75) {
         this.WindSpeed75 = WindSpeed75;
     }
 
@@ -412,7 +420,7 @@ public class Regata {
         this.WindDir100 = WindDir100;
     }
 
-    public void setWindSpeed100(int WindSpeed100) {
+    public void setWindSpeed100(double WindSpeed100) {
         this.WindSpeed100 = WindSpeed100;
     }
     

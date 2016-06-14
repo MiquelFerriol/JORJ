@@ -68,20 +68,21 @@ public class BaseDatos {
                 r.setLastSignalTime(rs.getString(24));
                 r.setResults(rs.getString(25));
                 r.setCourse(rs.getString(26));
-                r.setDistance1stLeg(rs.getFloat(27));
+                r.setDistance1stLeg(Double.parseDouble(rs.getString(27)));
                 r.setBearing1stLeg(rs.getInt(28));
                 r.setLegChanges(rs.getString(29));
                 r.setWindDir(rs.getInt(30));
-                r.setWindSpeed(rs.getInt(31));
+                r.setWindSpeed(Double.parseDouble(rs.getString(31)));
                 r.setWindDir25(rs.getInt(32));
-                r.setWindSpeed25(rs.getInt(33));
+                r.setWindSpeed25(Double.parseDouble(rs.getString(33)));
                 r.setWindDir50(rs.getInt(34));
-                r.setWindSpeed50(rs.getInt(35));
+                r.setWindSpeed50(Double.parseDouble(rs.getString(35)));
                 r.setWindDir75(rs.getInt(36));
-                r.setWindSpeed75(rs.getInt(37));
+                r.setWindSpeed75(Double.parseDouble(rs.getString(37)));
                 r.setWindDir100(rs.getInt(38));
-                r.setWindSpeed100(rs.getInt(39));
+                r.setWindSpeed100(Double.parseDouble(rs.getString(39)));
                 r.setVisible(rs.getBoolean(52));
+                r.setVisible1(rs.getBoolean(53));
                 Bolla b1 = new Bolla(rs.getString(40));
                 Bolla b2 = new Bolla(rs.getString(41));
                 Bolla b3 = new Bolla(rs.getString(42));
@@ -144,6 +145,7 @@ public class BaseDatos {
                 }
                 GlobalVariable.COLOR.set(GlobalVariable.AREA.indexOf(rs1.getString(1)),col); 
             }
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
@@ -185,7 +187,7 @@ public class BaseDatos {
         
     }
     
-    public void Insert(){
+    public void Insert() throws SQLException{
         cn = db.getConnection(ip);
         try {
             
@@ -194,13 +196,15 @@ public class BaseDatos {
             PreparedStatement st = cn.prepareStatement(sql);
             st.executeUpdate();
         }
-            cn.close();
         } catch (SQLException e) {
             
         }
+            finally{
+                cn.close();
+            }
     }
     
-    public void UpdateBT(){
+    public void UpdateBT() throws SQLException{
         for(int i = 0; i <= 120; ++i){
         cn = db.getConnection(ip);
         try {
@@ -210,15 +214,18 @@ public class BaseDatos {
                 System.out.println(sql);
                 PreparedStatement st = cn.prepareStatement(sql);
                 st.executeUpdate();
-            cn.close();
         } catch (SQLException e) {
              e.printStackTrace();
         }
+            finally{
+                cn.close();
+                
+            }
         
             }
     }
     
-        public void UpdateColors(String area, String color){
+        public void UpdateColors(String area, String color) throws SQLException{
         cn = db.getConnection(ip);
         System.out.println("AREA: " + area + " COLOR " + color);
         try {
@@ -227,18 +234,19 @@ public class BaseDatos {
             System.out.println(sql);
             PreparedStatement st = cn.prepareStatement(sql);
             st.executeUpdate();
-            cn.close();
         } catch (SQLException e) {
             try {
             String sql = "UPDATE areas " + "SET " + "Color" + " = 'White' WHERE area = '" + area + "';";
             System.out.println(sql);
             PreparedStatement st = cn.prepareStatement(sql);
             st.executeUpdate();
-            cn.close();
             
             } catch (SQLException q) {
             
                 System.out.println("Error: " + q.getMessage());
+            }
+            finally{
+                cn.close();
             }
             System.out.println("Error: " + e.getMessage());
         }

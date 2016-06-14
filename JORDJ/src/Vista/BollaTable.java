@@ -77,14 +77,14 @@ public class BollaTable extends JFrame{
             new CellEditorListener() {
                 @Override
                 public void editingCanceled(ChangeEvent e) {
-                    //System.out.println("editingCanceled");
+                    ////System.out.println("editingCanceled");
                 }
 
                 @Override
                 public void editingStopped(ChangeEvent e) {
                     
-                    System.out.println("editingStopped: apply additional action");
-                    //System.out.println(bTable.getSelectedColumn());
+                    //System.out.println("editingStopped: apply additional action");
+                    ////System.out.println(bTable.getSelectedColumn());
                     int column = bTable.getSelectedColumn();
                     int row = bTable.getSelectedRow();
                     lastCol = column;
@@ -94,10 +94,10 @@ public class BollaTable extends JFrame{
 
                         if(correctValue(column, data.toString())){
                             BD.Update(row+1, COLUMNA[(column-3)/7 + 3], createVal(row,column,data.toString()));
-                            System.out.println(createVal(row,column,data.toString())+ " " + COLUMNA[(column-3)/7 + 3]);
+                            //System.out.println(createVal(row,column,data.toString())+ " " + COLUMNA[(column-3)/7 + 3]);
                         }
                         else if (!"".equals(data.toString())){
-                            System.out.println("INCORRECT");
+                            //System.out.println("INCORRECT");
                             modelo.setValueAt("", row, column);
                         }
                     }
@@ -225,7 +225,7 @@ public class BollaTable extends JFrame{
     public void itemStateChanged(ItemEvent e, Desplegable d, int r, int c) {
         if ((e.getStateChange() == ItemEvent.SELECTED)) {
             int selection = d.getSelectedIndex();
-                System.out.println("CAMBIADO");
+                //System.out.println("CAMBIADO");
             
         }
     }
@@ -241,7 +241,7 @@ public class BollaTable extends JFrame{
             TableModel model = bTable.getModel();
             int col = bTable.getSelectedColumn();
             int row = bTable.getSelectedRow();
-            System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
+            //System.out.println("row: " + row + " col: " + col + " race: " + dClass.getSelectedItem());
             if(lastCol != col || lastRow != row && (col == 1)){
                 BD.Update(row+1, COLUMNA[col], dClass.getSelectedItem());
                 lastCol = col;
@@ -374,7 +374,7 @@ public class BollaTable extends JFrame{
             Regata r = BD.getBD().get(i);
             modelo.setValueAt(r.getId(),i,0);
             modelo.setValueAt(r.getClas(),i,1);
-            //System.out.println("RACE:" + r.getRace());
+            ////System.out.println("RACE:" + r.getRace());
             modelo.setValueAt(r.getRace(), i, 2);
             for(int j = 0; j < 12; ++j){
                 modelo.setValueAt(cjt.getI(j).getName(),i,3+7*j);

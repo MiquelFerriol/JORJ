@@ -55,34 +55,74 @@ import javax.swing.SwingUtilities;
 public final class GlobalVariable {
     
     public static int LETTER_SIZE = 13;
-    
+    public static int LETTER_SIZE_T = 10;
     public static String DATE = "all";
     
     public static ArrayList<String> CLASS = new ArrayList<String>(){{
-        add("RS:X M");
-        add("RS:X W");
+        add("RI");
+        add("OPIS");
+        add("OPI1");
+        add("OPI2");
+        add("OPI3");
+        add("J80");
+        add("EUROPE");
+        add("CATAS");
+        add("29ER");
+        add("RSX M");
+        add("RSX W");
         add("LASER STD");
         add("LASER RAD");
+        add("4-7");
         add("470 M");
         add("470 W");
         add("FINN");
         add("49ER");
         add("FX ONE");
         add("NACRA");
+        add("420 M");
+        add("420 W");
     }}; 
     
     public static ArrayList<String> GROUP = new ArrayList<String>(){{
-        add("Yellow Q-series");
-        add("Blue Q-series");
-        add("Red Q-series");
-        add("Yellow F-series");
-        add("Blue F-series");
-        add("Red F-series");
+        add("YellowQ");
+        add("BlueQ");
+        add("RedQ");
+        add("YellowF");
+        add("BlueF");
+        add("RedF");
         add("Gold");
         add("Silver");
         add("Bronze");
         add("Fleet");
-        add("Medal Race");
+        add("MR");
+    }};
+    
+    public static ArrayList<String> LABEL_GROUP_TEXT = new ArrayList<String>(){{
+        add("Q");
+        add("Q");
+        add("Q");
+        add("F");
+        add("F");
+        add("F");
+        add("G");
+        add("S");
+        add("B");
+        add("F");
+        add("MR");
+    }}; 
+    
+    public static ArrayList<Color> LABEL_GROUP_COLOR = new ArrayList<Color>(){{
+        add(Color.YELLOW);
+        add(Color.BLUE);
+        add(Color.RED);
+        add(Color.YELLOW);
+        add(Color.BLUE);
+        add(Color.RED);
+        add(Color.YELLOW);
+        add(Color.BLUE);
+        add(Color.RED);
+        add(Color.GREEN);
+        add(Color.ORANGE);
     }}; 
     //new String[] {"Yellow Q-series", "Blue Q-series","Red Q-series","Yellow F-series","Blue F-series","Red F-series","Gold","Silver","Bronze","Fleet","Medal Race"}
     public static ArrayList<String> AREA = new ArrayList<String>(){{
@@ -92,6 +132,8 @@ public final class GlobalVariable {
         add("Niteroi");
         add("Ponte");
         add("Aeroport");
+        add("Pai");
+        add("Ponte");
         add("Alpha");
         add("Bravo");
         add("Charlie");
@@ -106,6 +148,8 @@ public final class GlobalVariable {
         add(Color.BLUE);
         add(Color.PINK);
         add(Color.GRAY);
+        add(Color.PINK);
+        add(Color.YELLOW);
         add(Color.RED);
         add(Color.GREEN);
         add(Color.ORANGE);
@@ -132,6 +176,7 @@ public final class GlobalVariable {
         add("FINISHED");
         add("ABANDON");
         add("ON TIME");
+        add("GENERAL RECALL");
     }}; 
     
     public static ArrayList<String> SIGNAL = new ArrayList<String>(){{
@@ -147,31 +192,34 @@ public final class GlobalVariable {
         add("INDIA - 30.1");
         add("ZULU - 30.2");
         add("BLACK - 30.3");
-        add("OTHER");
+        add("UNIFORM");
     }}; 
     
+    
+    
     public static ArrayList<String> LAST_SIG = new ArrayList<String>(){{
-        add("LAST BOAT");
-        add("FINISH CLOSED");
+        add("LAST BOAT"); //LAST
+        add("FINISH CLOSED"); //CLOSED
         add("AP+A");
         add("N+A");
-        add("ONB PUBLICATION");
+        add("ONB PUBLICATION"); //ONB
     }}; 
     //new String[] {"RECEIVED", "REVIEWING","PUBLISHED"}
     public static ArrayList<String> RESULTS = new ArrayList<String>(){{
-        add("RECEIVED");
-        add("REVIEWING");
-        add("PUBLISHED");
+        add("RECEIVED");    //R
+        add("REVIEWING");   //?
+        add("PUBLISHED");   //L
+        add("INCIDENCE");
     }}; 
     
     public static ArrayList<String> CHANGES = new ArrayList<String>(){{
-        add("Starboard");
-        add("Port");
-        add("Increased");
-        add("Decreased");
-        add("Stb. Incr.");
-        add("Prt. Incr.");
-        add("Stb. Decr.");
-        add("Prt. Decr.");
+        add("Starboard");   //STB
+        add("Port");        //PRT
+        add("Increased");   //+
+        add("Decreased");   //-
+        add("Stb. Incr.");  //STB+
+        add("Prt. Incr.");  //PRT+
+        add("Stb. Decr.");  //STB-
+        add("Prt. Decr.");  //STB-
     }};
 }
